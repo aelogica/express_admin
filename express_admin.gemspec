@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.1.1"
 
-  s.add_development_dependency "sqlite3"
   s.add_dependency "haml-rails"
   s.add_dependency "resque", '1.25.2'
   s.add_dependency "message_bus"
