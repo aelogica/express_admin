@@ -1,4 +1,5 @@
 require 'haml-rails'
+require 'ostruct'
 module ExpressAdmin
   class Engine < ::Rails::Engine
     isolate_namespace ExpressAdmin
@@ -14,6 +15,12 @@ module ExpressAdmin
     end
 
     config.autoload_paths += Dir[ExpressAdmin::Engine.root.join('app', 'jobs')]
+
+
+    def self.express_admin_menu
+      OpenStruct.new(name: 'Admin', items:
+        [OpenStruct.new(name: 'Dashboard', path: "express_admin.root_path")])
+    end
 
   end
 end
