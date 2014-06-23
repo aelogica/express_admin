@@ -11,5 +11,4 @@ class ExpressAdmin::InstallGenerator < Rails::Generators::Base
     git commit: "'-m [express_admin] install express_admin'"
   end
 
-  end
 end
