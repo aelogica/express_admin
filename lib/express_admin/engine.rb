@@ -16,6 +16,7 @@ module ExpressAdmin
 
     config.autoload_paths += Dir[ExpressAdmin::Engine.root.join('app', 'jobs')]
 
+    config.mount_point = '/admin'
 
     def self.express_admin_menu
       OpenStruct.new(name: 'Admin', items:
