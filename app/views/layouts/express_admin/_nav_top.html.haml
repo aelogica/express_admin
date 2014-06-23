@@ -1,0 +1,16 @@
+-# navigation styled for Zurb Foundation 5
+-# the syntax for data-topbar may need to change for Zurb Foundation 5
+%nav.top-bar{"data-topbar" => true}
+  %ul.title-area
+    %li.name
+      = render title_partial
+
+  .top-bar-section{style: 'float: right; margin-right: 3em;'}
+    %ul
+      %li
+        %a Sign in
+
+  #flash-messages
+    #nav-js-alert.hide
+      .nav-alert.alert-box.radius{data: {alert: ''}}
+    = render 'layouts/express_admin/messages'

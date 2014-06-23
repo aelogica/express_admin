@@ -1,0 +1,5 @@
+- unless flash.empty?
+  - flash.each do |name, message|
+    .flash.nav-alert.alert-box.radius{class: flash_class(name), data: {alert: ''}}
+      = message
+      %a.close{:href => "#"} &times;

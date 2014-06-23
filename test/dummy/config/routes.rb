@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
 
-  mount ExpressAdmin::Engine => "/express_admin"
+  mount ExpressAdmin::Engine => "/admin"
 end
