@@ -25,7 +25,10 @@
       :javascript
         $(function() {
           tinyMCE.init({
-            selector: 'textarea.tinymce'
+            selector: 'textarea.tinymce',
+            menubar: false,
+            width: 905,
+            height: 360
           });
         });
     = yield(:page_javascript)
