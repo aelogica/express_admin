@@ -1,1 +1,4 @@
-%h1 Dashboard#show
+%h1= Rails.application.class.parent_name.underscore.titleize
+%h2 Dashboard
+
+= link_to 'Check for updates', app_express.updates_path
