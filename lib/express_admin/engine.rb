@@ -15,6 +15,9 @@ module ExpressAdmin
       if Kernel.const_defined?('AppExpress::Engine')
         Rails.application.config.assets.precompile += %w( message-bus.js )
       end
+      if Kernel.const_defined?('ExpressBlog::Engine')
+        Rails.application.config.assets.precompile += %w( tinymce-jquery.js )
+      end
     end
 
     config.autoload_paths += Dir[ExpressAdmin::Engine.root.join('app', 'jobs')]
