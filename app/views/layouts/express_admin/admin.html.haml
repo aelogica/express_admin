@@ -18,4 +18,6 @@
         = render 'layouts/express_admin/nav_side'
       .admin-body
         = yield
+    - if Kernel.const_defined?('AppExpress::Engine')
+      = javascript_include_tag 'message-bus'
     = yield(:page_javascript)

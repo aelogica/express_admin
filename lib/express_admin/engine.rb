@@ -12,6 +12,9 @@ module ExpressAdmin
       all_assets.each {|path| path.gsub!("#{engine_assets_path}/javascripts/", '')}
       all_assets.each {|path| path.gsub!(/.(scss|coffee)$/, '')}
       Rails.application.config.assets.precompile += all_assets
+      if Kernel.const_defined?('AppExpress::Engine')
+        Rails.application.config.assets.precompile += %w( message-bus.js )
+      end
     end
 
     config.autoload_paths += Dir[ExpressAdmin::Engine.root.join('app', 'jobs')]

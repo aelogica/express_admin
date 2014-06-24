@@ -3,7 +3,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require message-bus
 
 $(function() {
   $(document).foundation();
