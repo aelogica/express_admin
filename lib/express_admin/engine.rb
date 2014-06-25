@@ -1,5 +1,7 @@
 require 'haml-rails'
 require 'ostruct'
+require 'select2-rails'
+
 module ExpressAdmin
   class Engine < ::Rails::Engine
     isolate_namespace ExpressAdmin
