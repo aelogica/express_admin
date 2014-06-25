@@ -28,10 +28,5 @@ module ExpressAdmin
 
     config.admin_mount_point = '/admin'
 
-    def self.express_admin_menu
-      OpenStruct.new(name: 'Admin', items:
-        [OpenStruct.new(name: 'Dashboard', path: "express_admin.root_path")])
-    end
-
   end
 end

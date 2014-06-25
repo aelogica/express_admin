@@ -8,10 +8,11 @@
   .top-bar-section{style: 'float: right; margin-right: 3em;'}
     %ul
       %li
-        - if user_signed_in?
-          = link_to 'Sign out', Rails.application.routes.url_helpers.destroy_user_session_path, method: :delete
-        - else
-          = link_to 'Sign in', Rails.application.routes.url_helpers.user_omniauth_authorize_path(:appexpress)
+        - if self.respond_to?(:user_signed_in?)
+          - if user_signed_in?
+            = link_to 'Sign out', Rails.application.routes.url_helpers.destroy_user_session_path, method: :delete
+          - else
+            = link_to 'Sign in', Rails.application.routes.url_helpers.user_omniauth_authorize_path(:appexpress)
 
   #flash-messages
     #nav-js-alert.hide
