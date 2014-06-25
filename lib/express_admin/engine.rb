@@ -1,6 +1,8 @@
 require 'haml-rails'
 require 'ostruct'
 require 'select2-rails'
+require 'underscore-rails'
+require 'underscore-string-rails'
 
 module ExpressAdmin
   class Engine < ::Rails::Engine
