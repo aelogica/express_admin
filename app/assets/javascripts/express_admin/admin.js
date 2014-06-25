@@ -4,8 +4,11 @@
 //= require jquery_ujs
 //= require foundation
 //= require select2
+//= require underscore
+//= require underscore.string
 
 $(function() {
+  _.mixin(_.str.exports());
   $(document).foundation();
 
   window.startAnimateProgress = function(message) {
