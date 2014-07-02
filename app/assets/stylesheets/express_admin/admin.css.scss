@@ -56,6 +56,10 @@ nav.top-bar {
   padding-left: 0.9375rem;
   margin-left: 125px;
 
+  .row {
+    max-width: none;
+  }
+
   overflow: scroll;
 
   ul.gallery {
