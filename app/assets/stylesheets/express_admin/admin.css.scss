@@ -123,3 +123,36 @@ nav.top-bar {
 .category-slug {
   margin-left: -4px;
 }
+
+.themes {
+  margin: 0;
+
+  .theme {
+    color: #333;
+    display: block;
+    padding: 20px;
+    border: 2px solid #ccc;
+    height: 100%;
+
+    &:hover {
+      border: 2px solid #888;
+    }
+
+    &.selected {
+      border: 2px solid #43ac6a;
+      pointer-events: none;
+
+      &::before {
+        content: "Current Theme";
+        position: absolute;
+        bottom: 0px;
+        right: 15px;
+        font-weight: bold;
+        display: block;
+        padding: 10px;
+        color: #fff;
+        background-color: #43ac6a;
+      }
+    }
+  }
+}
