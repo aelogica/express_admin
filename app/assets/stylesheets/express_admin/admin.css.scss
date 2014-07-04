@@ -161,3 +161,14 @@ nav.top-bar {
   width: 150px;
 }
 
+.admin-side-nav {
+  li a:not(.button) {
+    color: #ccc;
+
+    &:hover {
+      color: #fff;
+      background-color: #222;
+    }
+  }
+}
+
