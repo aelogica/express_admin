@@ -5,7 +5,7 @@
     %li.name
       = render title_partial
 
-  .top-bar-section{style: 'float: right; margin-right: 3em;'}
+  .top-bar-section.right
     %ul
       %li
         - if self.respond_to?(:user_signed_in?)
@@ -14,7 +14,3 @@
           - else
             = link_to 'Sign in', main_app.user_session_path
 
-  #flash-messages
-    #nav-js-alert.hide
-      .nav-alert.alert-box.radius{data: {alert: ''}}
-    = render 'layouts/express_admin/messages'
