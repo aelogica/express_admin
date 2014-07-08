@@ -1,12 +1,41 @@
 -# navigation styled for Zurb Foundation 5
 -# the syntax for data-topbar may need to change for Zurb Foundation 5
-%nav.top-bar{"data-topbar" => true}
-  %ul.title-area
-    %li.name
-      = render title_partial
+%nav.top-bar{"data-topbar" => true, "data-options" => "is_hover:false"}
+  = render title_partial
 
-  .top-bar-section.right
+  .top-bar-section
     %ul
+      %li.divider
+      %li.has-dropdown.megamenu
+        %a{href: '#'}Manage Your App
+        %ul.dropdown.dropdown-wrapper
+          %li.megamenu-overlay
+            .megamenu-container
+              .medium-4.columns.manage-links
+                %h4
+                  Manage Your App
+                %hr
+                - if admin_menus.map(&:name).include?('AppExpress')
+                  - admin_menus.select {|menu| menu.name.eql?('AppExpress')}.first.items.each do |item|
+                    = link_to item.name, eval(item.path)
+
+              .medium-8.columns
+                - if addon_menus.any?
+                  %ul.small-block-grid-3
+                    - addon_menus.each do |menu|
+                      %li
+                        = link_to menu.name, eval(menu.items.first.path)
+                - else
+                  .empty-state-wrapper
+                    %h2.text-center
+                      No Addons installed
+                    %p.lead.text-center.text-muted
+                      You don't have any addons installed yet.
+                    %p.text-center
+                      = link_to app_express.addons_path, class: 'button success radius' do
+                        %i.icon.ion-plus
+                        Install Addon
+    %ul.right
       %li
         - if self.respond_to?(:user_signed_in?)
           - if user_signed_in?
