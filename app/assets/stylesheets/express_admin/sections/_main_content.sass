@@ -1,6 +1,9 @@
 .main-container
+  @include clearfix
+
   > .row,
-  > .page-header .row
+  > .page-header .row,
+  > .content-body > .row
     max-width: 100%
 
   padding-bottom: 62px
@@ -16,5 +19,11 @@
   h2
     font-size: rem-calc(28)
 
-  margin-bottom: 2rem
+  margin: 1.5rem 0 2rem
 
+.content-body
+  position: relative
+  width: 100%
+  padding-left: 206px
+  float: left
+  display: block

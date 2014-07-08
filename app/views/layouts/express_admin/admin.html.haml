@@ -14,14 +14,9 @@
     = render 'shared/express_admin/messages'
     %header#header
       = render 'shared/express_admin/navigation_bar'
-    .page-header
-      .small-12.columns
-        = yield :page_header
     %main.main-container{role: "main"}
-      -# .side-nav
-      -#   = render 'layouts/express_admin/nav_side'
-      -# .admin-body
-      = yield
+      = content_for?(:content) ? yield(:content) : yield
+    = render 'shared/express_admin/footer'
     - if Kernel.const_defined?('AppExpress::Engine')
       = javascript_include_tag 'message-bus'
     - if Kernel.const_defined?('ExpressBlog::Engine')

@@ -2,7 +2,7 @@ module ExpressAdmin
   module AdminHelper
 
     def title_partial
-      (ExpressAdmin::Engine.config.title_partial rescue nil) || 'layouts/express_admin/title'
+      (ExpressAdmin::Engine.config.title_partial rescue nil) || 'shared/express_admin/title'
     end
 
     def admin_menus
