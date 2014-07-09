@@ -125,7 +125,7 @@ $global-radius: 3px;
 $header-font-weight: 500;
 // $header-font-style: normal;
 // $header-font-color: #222;
-$header-line-height: 1.1;
+$header-line-height: 1.4;
 // $header-top-margin: .2rem;
 // $header-bottom-margin: .5rem;
 // $header-text-rendering: optimizeLegibility;
@@ -141,7 +141,7 @@ $h5-font-size: rem-calc(16);
 // These control how subheaders are styled.
 // $subheader-line-height: 1.4;
 // $subheader-font-color: scale-color($header-font-color, $lightness: 35%);
-// $subheader-font-weight: $font-weight-normal;
+$subheader-font-weight: 400;
 // $subheader-top-margin: .2rem;
 // $subheader-bottom-margin: .5rem;
 
@@ -194,7 +194,7 @@ $h5-font-size: rem-calc(16);
 // We use these to style blockquotes
 // $blockquote-font-color: scale-color($header-font-color, $lightness: 35%);
 // $blockquote-padding: rem-calc(9 20 0 19);
-// $blockquote-border: 1px solid #ddd;
+$blockquote-border: 5px solid #AAA;
 // $blockquote-cite-font-size: rem-calc(13);
 // $blockquote-cite-font-color: scale-color($header-font-color, $lightness: 23%);
 // $blockquote-cite-link-color: $blockquote-cite-font-color;
