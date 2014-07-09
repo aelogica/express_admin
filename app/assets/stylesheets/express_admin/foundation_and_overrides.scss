@@ -57,15 +57,15 @@ $font-smoothing: antialiased;
 
 // We use these as default colors throughout
 // $primary-color: #008CBA;
-$primary-color: #0074D9;
+$primary-color: #26ADE4;
 // $secondary-color: #e7e7e7;
-// $alert-color: #f04124;
-// $success-color: #43AC6A;
+$alert-color: #FF0000;
+$success-color: #8FBE00;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;
 
 // We use these to make sure border radius matches unless we want it different.
-// $global-radius: 3px;
+$global-radius: 3px;
 // $global-rounded: 1000px;
 
 // We use these to control inset shadow shiny edges and depressions.
