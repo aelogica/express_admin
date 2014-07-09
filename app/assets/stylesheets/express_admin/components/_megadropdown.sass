@@ -8,9 +8,12 @@
 .top-bar-section .dropdown li
   .megamenu-container
     padding: 20px
-    @include grid-row
     max-width: 100%
     background-color: #fff
+    border:
+      left: 2px solid $border-color
+      right: 2px solid $border-color
+      bottom: 2px solid $border-color
 
     a:not(.button)
       font-size: rem-calc(16)
@@ -34,10 +37,13 @@
         &:hover
           background-color: darken($success-color, 10%)
 
-    border:
-      left: 2px solid $border-color
-      right: 2px solid $border-color
-      bottom: 2px solid $border-color
+    .addons
+      background-color: transparent
+
+      a:not(.button)
+        background-color: transparent
+        color: darken($blue-color, 10%)
+
 
 @media #{$small-up}
   .dropdown-wrapper
