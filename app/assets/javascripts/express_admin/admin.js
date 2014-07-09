@@ -11,6 +11,15 @@ $(function() {
   _.mixin(_.str.exports());
   $(document).foundation();
 
+  $(".megamenu").mouseenter(function(){
+    if($(window).width()>641){
+      $(".dropdown-wrapper").offset({left: 0});
+      $(".dropdown-wrapper").css("width",$(window).width());
+    }else{
+      $(".dropdown-wrapper").css("width",auto);
+    }
+  });
+
   window.startAnimateProgress = function(message) {
     var numberOfDots = 3;
     var dots = numberOfDots - 1;
@@ -45,7 +54,7 @@ $(function() {
   e.preventDefault();
   });
 
-  $("a.addon-cancel").click(function(e) {
+  $("a.modal-cancel").click(function(e) {
     e.preventDefault();
     $('a.close-reveal-modal').trigger('click');
   });

@@ -2,7 +2,7 @@ module ExpressAdmin
   module AdminHelper
 
     def title_partial
-      (ExpressAdmin::Engine.config.title_partial rescue nil) || 'layouts/express_admin/title'
+      (ExpressAdmin::Engine.config.title_partial rescue nil) || 'shared/express_admin/title'
     end
 
     def admin_menus
@@ -10,6 +10,10 @@ module ExpressAdmin
       ::Rails::Engine.descendants.
         select {|engine| engine.methods.include?(:express_admin_menu) }.
         map {|engine| engine.express_admin_menu}
+    end
+
+    def addon_menus
+      admin_menus.reject { |menu| menu.name == 'AppExpress' }
     end
 
     def menu_item(name, path)
