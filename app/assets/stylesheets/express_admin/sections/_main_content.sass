@@ -1,21 +1,22 @@
 .main-container
+  padding-bottom: 52px
   @include clearfix
 
   > .row,
-  > .page-header .row,
+  .page-header > .row,
   > .content-body > .row
     max-width: 100%
 
-  padding-bottom: 62px
 
 .page-header
   @include clearfix
 
-  margin: 1.5rem 0 2rem
+  margin: 0.5rem 0 2rem
 
 .content-body
-  position: relative
   width: 100%
+  background-color: #fff
+  position: relative
   padding-left: 206px
   float: left
   display: block

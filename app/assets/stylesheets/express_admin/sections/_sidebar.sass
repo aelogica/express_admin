@@ -1,15 +1,27 @@
-.sidebar
+.sidebar-wrapper
+  position: fixed
+  z-index: 49
   background: $block-alt-bg-color
-  padding: 1.5rem 10px
   display: block
   width: 206px
-  position: absolute
-  left: 0
-  top: 0
-  padding-top: 75px
   height: 100%
+  top: 0
+  left: 0
+
+.sidebar
+  display: block
+  position: absolute
+  overflow: scroll
+  background: transparent
+  width: 206px
+  padding-top: 75px
+  top: 0
+  left: 0
   z-index: 50
 
   .title
-    padding: 0 15px
+    padding: 0 1.5rem
+
+  .side-nav li a:not(.button)
+    padding: 0.5rem 1.5rem
 
