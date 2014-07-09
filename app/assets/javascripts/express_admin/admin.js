@@ -54,7 +54,7 @@ $(function() {
   e.preventDefault();
   });
 
-  $("a.addon-cancel").click(function(e) {
+  $("a.modal-cancel").click(function(e) {
     e.preventDefault();
     $('a.close-reveal-modal').trigger('click');
   });
