@@ -1,6 +1,0 @@
-%ul.side-nav.admin-side-nav
-  - admin_menus.each do |menu|
-    %li.group= menu.name
-    - menu.items.each do |item|
-      %li
-        = link_to item.name, eval(item.path)

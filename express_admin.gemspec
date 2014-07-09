@@ -21,6 +21,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency "haml-rails"
   s.add_dependency "resque", '1.25.2'
+  s.add_dependency "sass-rails", "~> 4.0.3"
+  s.add_dependency "bourbon", "~> 3.2"
   s.add_dependency 'select2-rails'
   s.add_dependency 'underscore-rails'
   s.add_dependency 'underscore-string-rails'
