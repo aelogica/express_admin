@@ -5,17 +5,19 @@
     %title= content_for?(:title) ? yield(:title) : Rails.application.class.parent_name.underscore.titleize
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Testapp'}"}
     %meta{:name => "viewport", :content => "width=device-width", "initial-scale" => 1.0}
-    = stylesheet_link_tag 'express_admin/application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'express_admin/admin', media: 'all', 'data-turbolinks-track' => true
     -# Modernizr is required for Zurb Foundation
     = javascript_include_tag 'vendor/modernizr'
-    = javascript_include_tag 'express_admin/application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'express_admin/admin', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = render 'shared/express_admin/messages'
-    %header#header
-      = render 'shared/express_admin/navigation_bar'
-    = content_for?(:content) ? yield(:content) : yield
-    = render 'shared/express_admin/footer'
+    %header
+      = render 'layouts/express_admin/nav_top'
+    %main{role: "main", class: "admin"}
+      .side-nav
+        = render 'layouts/express_admin/nav_side'
+      .admin-body
+        = yield
     - if Kernel.const_defined?('AppExpress::Engine')
       = javascript_include_tag 'message-bus'
     - if Kernel.const_defined?('ExpressBlog::Engine')
