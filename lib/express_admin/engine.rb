@@ -4,21 +4,9 @@ require 'select2-rails'
 require 'underscore-rails'
 require 'underscore-string-rails'
 
-def gem_path(gem)
-  Gem::Specification.find_by_name(gem).gem_dir
-end
-
-def stylesheets_path(gem)
-  File.join(gem_path(gem), 'app', 'assets', 'stylesheets')
-end
-
 module ExpressAdmin
   class Engine < ::Rails::Engine
     isolate_namespace ExpressAdmin
-
-    initializer "bourbon" do
-      Sass.load_paths << stylesheets_path("bourbon")
-    end
 
     initializer :assets do |config|
       engine_assets_path = File.join(File.dirname(__FILE__), '..', '..', 'app', 'assets')
