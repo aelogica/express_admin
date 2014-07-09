@@ -1,0 +1,12 @@
+- content_for :content do
+  %main.main-container{role: "main"}
+    = render 'shared/express_admin/messages'
+    - if content_for?(:page_header)
+      .page-header
+        .row
+          .small-12.columns
+            = yield :page_header
+    .row
+      = yield
+
+= render template: 'layouts/express_admin/admin'
