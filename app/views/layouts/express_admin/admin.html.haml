@@ -9,6 +9,7 @@
     -# Modernizr is required for Zurb Foundation
     = javascript_include_tag 'vendor/modernizr'
     = javascript_include_tag 'express_admin/application', 'data-turbolinks-track' => true
+    = yield(:page_css)
     = csrf_meta_tags
   %body
     %header#header
