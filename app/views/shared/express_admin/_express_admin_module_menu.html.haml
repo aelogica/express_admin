@@ -1,0 +1,7 @@
+- if admin_menus.any?
+  .medium-8.columns
+    %h4 Modules
+    .row.addons
+      - admin_menus.each do |menu|
+        .small-6.columns
+          = link_to menu.name, eval(menu.items.first.path)

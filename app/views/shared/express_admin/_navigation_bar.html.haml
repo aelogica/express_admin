@@ -7,35 +7,21 @@
     %ul
       %li.divider
       %li.has-dropdown.megamenu
-        %a{href: '#'}Manage Your App
+        %a{href: '#'} Manage
         %ul.dropdown.dropdown-wrapper
           %li.megamenu-overlay
             .megamenu-container
               .row
-                - if admin_menus.map(&:name).include?('AppExpress')
-                  .medium-4.columns.manage-links
-                    %h4
-                      Manage Your App
-                    - admin_menus.select {|menu| menu.name.eql?('AppExpress')}.first.items.each do |item|
-                      = link_to item.name, eval(item.path)
+                = render partial: 'shared/express_admin/express_admin_module_menu'
+                / Any module wishing to provide an extra menu may do here.
+                = render partial: 'shared/express_admin/express_admin_extra_menu' #rescue nil
 
-                .medium-8.columns
-                  %h4 Addons
-                  - if addon_menus.any?
-                    .row.addons
-                      - addon_menus.each do |menu|
-                        .small-6.columns
-                          = link_to menu.name, eval(menu.items.first.path)
-                  - else
-                    .empty-state-wrapper
-                      %h2.text-center
-                        No Addons installed
-                      %p.lead.text-center.text-muted
-                        You don't have any addons installed yet.
-                      %p.text-center
-                        = link_to app_express.addons_path, class: 'button success radius' do
-                          %i.icon.ion-plus
-                          Install Addon
+  %section.top-bar-section
+    %ul.left
+      %li.divider
+      %li
+        %a{href: "/"} View Site
+
     %ul.right
       %li
         - if self.respond_to?(:user_signed_in?)
@@ -43,4 +29,3 @@
             = link_to 'Sign out', main_app.destroy_user_session_path, method: :delete
           - else
             = link_to 'Sign in', main_app.user_session_path
-

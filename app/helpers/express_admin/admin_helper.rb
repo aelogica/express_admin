@@ -12,10 +12,6 @@ module ExpressAdmin
         map {|engine| engine.express_admin_menu}
     end
 
-    def addon_menus
-      admin_menus.reject { |menu| menu.name == 'AppExpress' }
-    end
-
     def menu_item(name, path)
       content_tag(:li, link_to(name, path), class: is_active?(path))
     end
