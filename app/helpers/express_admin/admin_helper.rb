@@ -6,8 +6,7 @@ module ExpressAdmin
     end
 
     def admin_menus
-      Rails.application.eager_load!
-      ::Rails::Engine.descendants.
+      ExpressAdmin::Engine.all_rails_engines.
         select {|engine| engine.methods.include?(:express_admin_menu) }.
         map {|engine| engine.express_admin_menu}
     end

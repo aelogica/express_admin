@@ -14,8 +14,7 @@
     %header#header
       = render 'shared/express_admin/navigation_bar'
     = content_for?(:content) ? yield(:content) : yield
-    - if Kernel.const_defined?('AppExpress::Engine')
-      = javascript_include_tag 'message-bus'
+    = javascript_include_tag 'message-bus'
     - if Kernel.const_defined?('ExpressBlog::Engine')
       = javascript_include_tag 'tinymce-jquery'
       :javascript

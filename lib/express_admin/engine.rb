@@ -32,18 +32,24 @@ module ExpressAdmin
       Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
       Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
       Rails.application.config.assets.precompile += all_assets
+      Rails.application.config.assets.precompile += %w( message-bus.js )
 
-      if Kernel.const_defined?('AppExpress::Engine')
-        Rails.application.config.assets.precompile += %w( message-bus.js )
-      end
-      if Kernel.const_defined?('ExpressBlog::Engine')
-        Rails.application.config.assets.precompile += %w( tinymce-jquery.js )
+      ExpressAdmin::Engine.all_rails_engines.each do |engine|
+        if engine.methods.include?(:additional_assets)
+          puts "#{engine.to_s}: additional_assets #{engine.additional_assets.inspect}"
+          Rails.application.config.assets.precompile += engine.additional_assets
+        end
       end
     end
 
     config.autoload_paths += Dir[ExpressAdmin::Engine.root.join('app', 'jobs')]
 
     config.admin_mount_point = '/admin'
+
+    def all_rails_engines
+      Rails.application.eager_load!
+      ::Rails::Engine.descendants
+    end
 
   end
 end
