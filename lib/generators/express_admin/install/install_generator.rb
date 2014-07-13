@@ -9,6 +9,14 @@ class ExpressAdmin::InstallGenerator < Rails::Generators::Base
 
     git add: "config/routes.rb"
     git commit: "'-m [express_admin] install express_admin'"
+
+    Bundler.clean_system("rails generate #{file_name.underscore}:install")
+    append_file 'Gemfile', "gem 'rails_admin', github: 'aelogica/express_rails_admin'"
+    Bundler.clean_system("bundle install")
+    Bundler.clean_system("rails generate #{file_name.underscore}:install admin/manage")
+    git add: "."
+    git commit: "'-m [express_admin] install express_rails_admin'"
   end
+
 
 end
