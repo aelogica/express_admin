@@ -14,7 +14,7 @@
               .row
                 = render partial: 'shared/express_admin/express_admin_module_menu'
                 / Any module wishing to provide an extra menu may do here.
-                = render partial: 'shared/express_admin/express_admin_extra_menu' #rescue nil
+                = render partial: 'shared/express_admin/express_admin_extra_menu' rescue nil
 
   %section.top-bar-section
     %ul.left
