@@ -15,15 +15,4 @@
       = render 'shared/express_admin/navigation_bar'
     = content_for?(:content) ? yield(:content) : yield
     = javascript_include_tag 'message-bus'
-    - if Kernel.const_defined?('ExpressBlog::Engine')
-      = javascript_include_tag 'tinymce-jquery'
-      :javascript
-        $(function() {
-          tinyMCE.init({
-            selector: 'textarea.tinymce',
-            menubar: false,
-            width: 905,
-            height: 360
-          });
-        });
     = yield(:page_javascript)
