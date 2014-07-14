@@ -418,7 +418,7 @@ $button-border-width: 0px;
 // $f-dropdown-max-height: none;
 
 // Used for bottom position
-// $f-dropdown-margin-top: 2px;
+$f-dropdown-margin-top: 0;
 
 // Used for right position
 // $f-dropdown-margin-left: $f-dropdown-margin-top;
@@ -433,12 +433,12 @@ $button-border-width: 0px;
 // $f-dropdown-bg: #fff;
 
 // We use this to set the border styles for dropdowns.
-// $f-dropdown-border-style: solid;
-// $f-dropdown-border-width: 1px;
-// $f-dropdown-border-color: scale-color(#fff, $lightness: -20%);
+$f-dropdown-border-style: solid;
+$f-dropdown-border-width: 2px;
+$f-dropdown-border-color: scale-color(#fff, $lightness: -20%);
 
 // We use these to style the triangle pip.
-// $f-dropdown-triangle-size: 6px;
+$f-dropdown-triangle-size: 0;
 // $f-dropdown-triangle-color: #fff;
 // $f-dropdown-triangle-side-offset: 10px;
 
