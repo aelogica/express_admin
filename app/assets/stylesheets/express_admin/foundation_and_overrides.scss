@@ -651,11 +651,11 @@ $input-prefix-border-color: #AAA;
 // $include-html-label-classes: $include-html-classes;
 
 // We use these to style the labels
-// $label-padding: rem-calc(4 8 6);
+$label-padding: rem-calc(6 10);
 // $label-radius: $global-radius;
 
 // We use these to style the label text
-// $label-font-sizing: rem-calc(11);
+$label-font-sizing: rem-calc(14);
 // $label-font-weight: $font-weight-normal;
 // $label-font-color: #333;
 // $label-font-color-alt: #fff;
