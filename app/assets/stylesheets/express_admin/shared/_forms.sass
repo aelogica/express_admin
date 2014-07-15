@@ -34,4 +34,16 @@ form
 
   .postfix, .prefix
     height: 44px
-    
+
+  &.form-horizontal
+    .form-group
+      @include grid-row
+
+      input
+        margin-bottom: 0.5rem
+
+fieldset
+  border-radius: $global-radius
+
+.help-block
+  @extend .text-muted
