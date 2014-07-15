@@ -37,10 +37,13 @@ form
 
   &.form-horizontal
     .form-group
-      @include grid-row
+      @include clearfix
+      margin-left: -(rem-calc(15))
+      margin-right: -(rem-calc(15))
 
       input
         margin-bottom: 0.5rem
+
 
 fieldset
   border-radius: $global-radius
