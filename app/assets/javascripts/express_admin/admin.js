@@ -27,6 +27,7 @@ $(function() {
     for(i = 0; i < dots; i++) {
       dotSpan += "<span class='dot'>.</span>"
     }
+    $('#nav-js-alert').html("<div class='alert-box'></div>");
     $('#nav-js-alert .alert-box').html(message + "." + dotSpan);
 
     window.intervalId = setInterval( function() {
