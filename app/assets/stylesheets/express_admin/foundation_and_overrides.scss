@@ -6,8 +6,6 @@
 // FOUNDATION SETTINGS
 //
 
-// This is the default html and body font-size for the base rem value.
-$rem-base: 14px;
 
 // Allows the use of rem-calc() or lower-bound() in your settings
 @import "foundation/functions";
@@ -20,7 +18,10 @@ $rem-base: 14px;
 // Since the typical default browser font-size is 16px, that makes the calculation for grid size.
 // If you want your base font-size to be different and not have it affect the grid breakpoints,
 // set $rem-base to $base-font-size and make sure $base-font-size is a px value.
-// $base-font-size: 100%;
+$base-font-size: 14px;
+
+// This is the default html and body font-size for the base rem value.
+$rem-base: $base-font-size;
 
 // The $base-font-size is 100% while $base-line-height is 150%
 // $base-line-height: 150%;
@@ -341,7 +342,7 @@ $button-lrg: rem-calc(16);
 // $button-display: inline-block;
 // $button-margin-bottom: rem-calc(20);
 
-// $button-margin-bottom: 0;
+$button-margin-bottom: 0;
 
 // We use these to control button text styles.
 // $button-font-family: $body-font-family;
@@ -417,7 +418,7 @@ $button-border-width: 0px;
 // $f-dropdown-max-height: none;
 
 // Used for bottom position
-// $f-dropdown-margin-top: 2px;
+$f-dropdown-margin-top: 0;
 
 // Used for right position
 // $f-dropdown-margin-left: $f-dropdown-margin-top;
@@ -432,12 +433,12 @@ $button-border-width: 0px;
 // $f-dropdown-bg: #fff;
 
 // We use this to set the border styles for dropdowns.
-// $f-dropdown-border-style: solid;
-// $f-dropdown-border-width: 1px;
-// $f-dropdown-border-color: scale-color(#fff, $lightness: -20%);
+$f-dropdown-border-style: solid;
+$f-dropdown-border-width: 2px;
+$f-dropdown-border-color: scale-color(#fff, $lightness: -20%);
 
 // We use these to style the triangle pip.
-// $f-dropdown-triangle-size: 6px;
+$f-dropdown-triangle-size: 0;
 // $f-dropdown-triangle-color: #fff;
 // $f-dropdown-triangle-side-offset: 10px;
 
@@ -1097,10 +1098,10 @@ $table-head-bg: #eee;
 // $table-head-font-size: rem-calc(14);
 $table-head-font-color: #555;
 $table-head-font-weight: bold;
-$table-head-padding: rem-calc(10 10);
+$table-head-padding: rem-calc(14);
 
 // These control the row padding and font styles
-$table-row-padding: rem-calc(10);
+$table-row-padding: rem-calc(14);
 // $table-row-font-size: rem-calc(14);
 // $table-row-font-color: #222;
 // $table-line-height: rem-calc(18);
