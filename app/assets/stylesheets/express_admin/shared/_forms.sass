@@ -1,4 +1,5 @@
-.form-container
+.form-container,
+form
   label
     color: darken($gray, 30%)
     margin-bottom: 10px
@@ -22,14 +23,34 @@
   textarea
     border-radius: $global-radius
     border: 1px solid $gray
-    padding: 0.75rem
+    padding: 0.825rem
     height: auto
     box-shadow: none
 
     &:focus,
     &:active
+      box-shadow: none
       border-color: darken($gray, 20%)
 
   .postfix, .prefix
     height: 44px
-    
+
+  &.form-horizontal
+    .form-group
+      @include clearfix
+      margin-left: -(rem-calc(15))
+      margin-right: -(rem-calc(15))
+
+      input
+        margin-bottom: 0.5rem
+
+
+fieldset
+  margin: 0 0 rem-calc(20) 0
+  border-radius: $global-radius
+
+  fieldset
+    margin: rem-calc(20)
+
+.help-block
+  @extend .text-muted

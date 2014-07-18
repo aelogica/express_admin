@@ -12,6 +12,7 @@ $(function() {
   _.mixin(_.str.exports());
   $(document).foundation();
 
+  // Mega Dropdown buttons
   $(".megamenu").mouseenter(function(){
     if($(window).width()>641){
       $(".dropdown-wrapper").offset({left: 0});
@@ -19,6 +20,12 @@ $(function() {
     }else{
       $(".dropdown-wrapper").css("width",auto);
     }
+  });
+
+
+  // Table Row as links
+  $('.table-hover tr[data-url]').on('click', function() {
+    window.location.href = $(this).attr('data-url');
   });
 
   window.startAnimateProgress = function(message) {
@@ -33,10 +40,7 @@ $(function() {
     $('#nav-js-alert .alert-box').Loadingdotdotdot("Stop");
   };
 
-  $(".gallery a.addon").click(function(e) {
-  e.preventDefault();
-  });
-
+  // Modal Cancel buttons
   $("a.modal-cancel").click(function(e) {
     e.preventDefault();
     $('a.close-reveal-modal').trigger('click');

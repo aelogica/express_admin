@@ -301,29 +301,29 @@ $alert-border-style: none;
 // $include-html-nav-classes: $include-html-classes;
 
 // We use this to set the background color for the breadcrumb container.
-// $crumb-bg: scale-color($secondary-color, $lightness: 55%);
+$crumb-bg: #eee;
 
 // We use these to set the padding around the breadcrumbs.
-// $crumb-padding: rem-calc(9 14 9);
-// $crumb-side-padding: rem-calc(12);
+$crumb-padding: rem-calc(13 18);
+$crumb-side-padding: rem-calc(14);
 
 // We use these to control border styles.
 // $crumb-function-factor: -10%;
 // $crumb-border-size: 1px;
 // $crumb-border-style: solid;
-// $crumb-border-color: scale-color($crumb-bg, $lightness: $crumb-function-factor);
-// $crumb-radius: $global-radius;
+$crumb-border-color: transparent;
+$crumb-radius: $global-radius;
 
 // We use these to set various text styles for breadcrumbs.
-// $crumb-font-size: rem-calc(11);
-// $crumb-font-color: $primary-color;
-// $crumb-font-color-current: #333;
+$crumb-font-size: rem-calc(14);
+$crumb-font-color: #AAA;
+$crumb-font-color-current: #333;
 // $crumb-font-color-unavailable: #999;
-// $crumb-font-transform: uppercase;
-// $crumb-link-decor: underline;
+$crumb-font-transform: normal;
+$crumb-link-decor: underline;
 
 // We use these to control the slash between breadcrumbs
-// $crumb-slash-color: #aaa;
+$crumb-slash-color: #AAA;
 // $crumb-slash: "/";
 
 //
@@ -340,9 +340,9 @@ $button-lrg: rem-calc(16);
 
 // We use this to control the display property.
 // $button-display: inline-block;
-// $button-margin-bottom: rem-calc(20);
+$button-margin-bottom: rem-calc(20);
 
-$button-margin-bottom: 0;
+// $button-margin-bottom: 0;
 
 // We use these to control button text styles.
 // $button-font-family: $body-font-family;
@@ -512,7 +512,7 @@ $f-dropdown-triangle-size: 0;
 
 // We use these to style the labels in different ways
 // $form-label-pointer: pointer;
-$form-label-font-size: rem-calc(12);
+$form-label-font-size: rem-calc(14);
 $form-label-font-weight: bold;
 // $form-label-line-height: 1.5;
 // $form-label-font-color: scale-color(#000, $lightness: 30%);
@@ -533,9 +533,9 @@ $input-box-shadow: none;
 // $input-include-glowing-effect: true;
 
 // We use these to style the fieldset border and spacing.
-// $fieldset-border-style: solid;
-// $fieldset-border-width: 1px;
-// $fieldset-border-color: #ddd;
+$fieldset-border-style: dashed;
+$fieldset-border-width: 2px;
+$fieldset-border-color: #ddd;
 // $fieldset-padding: rem-calc(20);
 // $fieldset-margin: rem-calc(18 0);
 
@@ -651,11 +651,11 @@ $input-prefix-border-color: #AAA;
 // $include-html-label-classes: $include-html-classes;
 
 // We use these to style the labels
-// $label-padding: rem-calc(4 8 6);
+$label-padding: rem-calc(6 10);
 // $label-radius: $global-radius;
 
 // We use these to style the label text
-// $label-font-sizing: rem-calc(11);
+$label-font-sizing: rem-calc(14);
 // $label-font-weight: $font-weight-normal;
 // $label-font-color: #333;
 // $label-font-color-alt: #fff;
@@ -1104,7 +1104,7 @@ $table-head-padding: rem-calc(14);
 $table-row-padding: rem-calc(14);
 // $table-row-font-size: rem-calc(14);
 // $table-row-font-color: #222;
-// $table-line-height: rem-calc(18);
+$table-line-height: rem-calc(14);
 
 // These are for controlling the display and margin of tables
 // $table-display: table-cell;
@@ -1117,11 +1117,15 @@ $table-row-padding: rem-calc(14);
 // $include-html-tabs-classes: $include-html-classes;
 
 // $tabs-navigation-padding: rem-calc(16);
-// $tabs-navigation-bg-color: #efefef  ;
+$tabs-navigation-bg-color: #fff  ;
 // $tabs-navigation-active-bg-color: #fff;
 // $tabs-navigation-hover-bg-color: scale-color($tabs-navigation-bg-color, $lightness: -6%);
+
+$tabs-navigation-hover-bg-color: #fff;
+
 // $tabs-navigation-font-color: #222;
 // $tabs-navigation-active-font-color: $tabs-navigation-font-color;
+$tabs-navigation-active-font-color: $primary-color;
 // $tabs-navigation-font-size: rem-calc(16);
 // $tabs-navigation-font-family: $body-font-family;
 
