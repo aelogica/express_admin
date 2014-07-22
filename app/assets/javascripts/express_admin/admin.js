@@ -29,6 +29,17 @@ $(function() {
     window.location.href = $(this).attr('data-url');
   });
 
+  // Gallery Same height blocks
+  if($('ul[data-gallery]').length != 0) {
+    var blocks = $('ul[data-gallery] li');
+    var maxHeight = Math.max.apply(
+      null,
+      jQuery.map(blocks, function(num) { return $(num).outerHeight(false); })
+    );
+    blocks.css('min-height', maxHeight);
+    blocks.find('> a.panel').css('min-height', maxHeight);
+  }
+
   window.startAnimateProgress = function(message) {
     $('#nav-js-alert').html("<div class='alert-box'></div>");
     $('#nav-js-alert .alert-box').Loadingdotdotdot({
