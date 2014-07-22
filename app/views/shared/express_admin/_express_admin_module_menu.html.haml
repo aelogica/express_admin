@@ -3,5 +3,5 @@
     %h4 Modules
     .row.addons
       - admin_menus.each do |menu|
-        .small-6.columns
+        .small-6.columns.end
           = link_to menu.name, eval(menu.items.first.path)
