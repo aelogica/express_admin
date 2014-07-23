@@ -1,6 +1,25 @@
 .media
-  padding: rem-calc($base-font-size)
+  zoom: 1
+  overflow: hidden
+  @include clearfix
   box-sizing: border-box
 
-  .media-body
-    @extend .pull-left
+  .media-object
+    float: left
+    margin-right: rem-calc($base-font-size)
+
+    .icon
+      color: #222
+      font-size: rem-calc(38)
+
+.media-body
+  zoom: 1
+  overflow: hidden
+  display: block
+  color: #222
+
+  .media-heading
+    margin: 0 0 rem-calc(7)
+
+  > p:last-child
+    margin-bottom: 0
