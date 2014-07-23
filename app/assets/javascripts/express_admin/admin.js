@@ -2,7 +2,6 @@
 // All this logic will automatically be available in application.js.
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.datepicker
 //= require foundation
 //= require select2
 //= require underscore
