@@ -9,4 +9,7 @@
     .row
       = yield
 
+- content_for :page_css do
+  = stylesheet_link_tag 'app_express/application'
+
 = render template: 'layouts/express_admin/admin'
