@@ -38,11 +38,16 @@ form
   &.form-horizontal
     .form-group
       @include clearfix
-      margin-left: -(rem-calc(15))
-      margin-right: -(rem-calc(15))
+      margin:
+        left: -(rem-calc(15))
+        right: -(rem-calc(15))
+        bottom: rem-calc(20)
 
       input
         margin-bottom: 0.5rem
+
+      .control-label
+        margin-top: rem-calc(10)
 
 fieldset
   margin: 0 0 rem-calc(20) 0
