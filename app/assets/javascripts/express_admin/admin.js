@@ -56,6 +56,9 @@ $(function() {
     e.preventDefault();
     $('a.close-reveal-modal').trigger('click');
   });
+
+  // Fade flash messages
+  $('.alert-box:not(.sticky)').fadeOut(2000)
 });
 
 String.prototype.repeat = function( num )
