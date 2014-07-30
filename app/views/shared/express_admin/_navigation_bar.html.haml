@@ -23,7 +23,8 @@
         %a{href: "/"} View Site
 
     %ul.right
-      %li.gravatar= image_tag("#{gravatar_image_url(current_user.email)}?s=40")
+      - if current_user
+        %li.gravatar= image_tag("#{gravatar_image_url(current_user.email)}?s=40")
       %li
         - if self.respond_to?(:user_signed_in?)
           - if user_signed_in?
