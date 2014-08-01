@@ -1,0 +1,81 @@
+=select2-background-active()
+  background-color: #fafafa
+  background-image: none
+  background: #fafafa
+
+=select2-background-white()
+  background-color: #fff
+  background-image: none
+  background: #fff
+
+.select2-container
+  width: 100%
+  margin-bottom: rem-calc(20)
+
+  .select2-choice
+    height: rem-calc(40)
+    padding: rem-calc(12)
+    @include select2-background-white()
+    box-shadow: none
+    .select2-chosen
+      margin-top: 4px
+    abbr
+      top: 13px
+    border-color: $gray
+
+    .select2-chosen
+      line-height: 1
+      margin-top: 0
+
+    .select2-arrow
+      border-radius: 0
+      @include select2-background-active()
+      border-color: $gray
+      width: 22px
+      b
+        background-position: -3px
+
+        & > span
+        margin: 8px 0 0 6px
+
+  &.select2-container-active .select2-choice
+    border-color: darken($gray, 30%)
+  &.select2-dropdown-open .select2-choice
+    border-bottom-color: #ccc
+
+    &.select2-drop-above
+      @include select2-background-active()
+
+.select2-drop
+  -webkit-border-radius: 0 !important
+  border-radius: 0 !important
+  &:not(.select2-drop-above)
+    margin-top: -3px
+  .select2-results
+    max-height: 300px
+    li
+      line-height: inherit
+      margin: 0
+      padding: 0
+
+.select2-drop-active
+  box-shadow: none
+  border-color: darken($gray, 30%)
+
+.select2-search
+  margin: 4px 0
+  input
+    @include select2-background-white()
+    box-shadow: none
+    margin: 0
+    border: none
+
+    &:focus
+      @include select2-background-white()
+      box-shadow: none
+      border: none
+
+.select2-container.form-control
+  border: none
+  box-shadow: none
+  padding: 0
