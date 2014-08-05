@@ -1,6 +1,6 @@
 .main-container
   padding-bottom: 52px
-  padding-top: 70px
+  padding-top: 55px
   @include clearfix
 
   > .row,
@@ -10,14 +10,27 @@
 
 
 .page-header
+
+  h1
+    font-weight: normal
+    font-size: 1.8rem
+
   @include clearfix
 
-  margin: 0.5rem 0 2rem
+
+.page-header, .page-body
+  padding: 10px 20px 0
+
+.page-body > .row
+  margin: 0
+
+  & > .columns
+    padding: 0
 
 .content-body
   width: 100%
   background-color: #fff
   position: relative
-  padding-left: 186px
+  padding-left: 182px
   float: left
   display: block
