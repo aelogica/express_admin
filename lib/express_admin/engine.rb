@@ -5,6 +5,7 @@ require 'underscore-rails'
 require 'underscore-string-rails'
 require 'message_bus'
 require 'gravatar_image_tag'
+require 'sass-rails'
 
 def gem_path(gem)
   Gem::Specification.find_by_name(gem).gem_dir
