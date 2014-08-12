@@ -1,7 +1,7 @@
 -# navigation styled for Zurb Foundation 5
 -# the syntax for data-topbar may need to change for Zurb Foundation 5
 %nav.top-bar{"data-topbar" => true, "data-options" => "is_hover:false"}
-  = render title_partial
+  = render title_partial rescue 'ExpressAdmin'
 
   .top-bar-section
     %ul
