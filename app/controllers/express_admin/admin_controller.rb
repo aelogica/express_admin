@@ -2,7 +2,7 @@ require_dependency "express_admin/application_controller"
 
 module ExpressAdmin
   class AdminController < ApplicationController
-    before_filter :authenticate_user!
+    before_filter :authenticate_user! if defined?(Devise)
 
     layout "express_admin/admin"
   end
