@@ -9,22 +9,22 @@ $(function() {
   });
 
   // AJAX request utility
-  AJAXRequest = function(url, data, success, error)
+  AJAXRequest = function(url, method, data, success, error)
   {
     $.ajax({
         url      : url,
-        type     : 'POST',
+        type     : method,
         data     : data,
         dataType : 'JSON',
         cache    : false,
         success  : function(json)
         {
-              success(json)
-            },
+          success(json)
+        },
         error    : function()
         {
-              error()
-            }
+          error()
+        }
       });
   }
 });
