@@ -18,7 +18,15 @@ gem 'modernizr-rails'
 gem 'therubyracer'
 gem 'foundation-rails'
 gem 'devise'
-gem 'express_admin', github: 'aelogica/express_admin'
+
+gem_group :app_express do
+  gem 'express_admin', github: 'aelogica/express_admin'
+end
+
+app_express_gem_group = <<-GEM_GROUP
+    Bundler.require(:app_express, Rails.env) if defined?(Bundler)
+GEM_GROUP
+inject_into_file 'config/application.rb', app_express_gem_group, after: "class Application < Rails::Application\n"
 
 Bundler.clean_system("bundle install")
 
