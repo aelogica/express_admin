@@ -1,6 +1,6 @@
 - unless flash.empty?
   - flash.each do |name, message|
-    .alert-box-wrapper
+    %div
       .flash.nav-alert.alert-box{class: flash_class(name), data: {alert: ''}}
         = message.html_safe
         %a.close{:href => "#"} &times;

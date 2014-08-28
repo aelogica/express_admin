@@ -6,44 +6,41 @@
   transform: translateX(-50%)
   width: 400px
 
-.alert-box-wrapper
-  padding: 20px 20px 0
+.alert-box
+  font-size: 1rem
+  line-height: 1.5em
+  margin: 20px 20px 0
+  position: relative
+  border-radius: 3px
+  width: inherit
 
-  .alert-box
-    font-size: 1rem
-    line-height: 1.5em
-    margin-bottom: 0
-    position: relative
-    border-radius: 3px
-    width: inherit
+  .close
+    margin-top: 0 !important
+    right: 0 !important
+    text-decoration: none !important
+    top: 1px !important
 
-    .close
-      margin-top: 0 !important
-      right: 0 !important
-      text-decoration: none !important
-      top: 1px !important
+  a
+    color: #fff !important
+    opacity: 1 !important
+    text-decoration: underline
+
+    &:hover
+      text-decoration: none
+
+
+  &.warning
+    h1
+      font-size: 1.2rem
+      color: white
+
+    ul
+      padding-left: 15px
+      color: white
 
     a
-      color: #fff !important
-      opacity: 1 !important
+      color: black
       text-decoration: underline
-
-      &:hover
-        text-decoration: none
-
-
-    &.warning
-      h1
-        font-size: 1.2rem
-        color: white
-
-      ul
-        padding-left: 15px
-        color: white
-
-      a
-        color: black
-        text-decoration: underline
 
 .dot
   color: transparent
