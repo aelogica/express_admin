@@ -3,3 +3,38 @@
   position: fixed
   width: 100%
   z-index: 9999999
+
+  .top-bar
+    background-color: $brand-color
+
+    a
+      color: #c8c8c8
+      font-size: 1.2rem
+
+      &:hover
+        color: #fff !important
+
+    .top-bar-section
+      .has-dropdown
+        &:hover
+          & > a:after
+            border-color: rgba(255, 255, 255, 1) transparent transparent transparent
+
+    .top-bar-section
+      ul
+        li
+          & > a
+            background-color: $brand-color
+            padding-right: 44px !important
+
+            &:hover
+              background-color: $lightest-brand-color
+
+        & > .divider
+          border-right-color: $top-menu-border-color
+
+  .title-area
+    width: 239px
+
+    a
+      color: #fff
