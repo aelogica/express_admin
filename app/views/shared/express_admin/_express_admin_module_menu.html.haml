@@ -4,7 +4,7 @@
     .row.addons
       - admin_menus.each do |menu|
         .small-6.columns.end
-          = link_to eval(menu.items.first.path), class: 'media addon-link' do
+          = link_to eval(menu.path), class: 'media addon-link' do
             .media-object
               %i.icon{class: "icon-express_#{menu.name.downcase}"}
             .media-body
