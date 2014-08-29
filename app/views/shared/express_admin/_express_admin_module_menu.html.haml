@@ -1,11 +1,8 @@
 - if admin_menus.any?
-  .medium-8.columns
-    %h4 Modules
-    .row.addons
-      - admin_menus.each do |menu|
-        .small-6.columns.end
-          = link_to eval(menu.path), class: 'media addon-link' do
-            .media-object
-              %i.icon{class: "icon-express_#{menu.name.downcase}"}
-            .media-body
-              = menu.name
+  %h1 Modules
+  %ul
+    - admin_menus.each do |menu|
+      %li
+        = link_to eval(menu.path), class: 'media addon-link' do
+          %i.icon{class: "icon-express_#{menu.name.downcase}"}
+          %span= menu.name

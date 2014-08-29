@@ -11,12 +11,16 @@
       color: #c8c8c8
       font-size: 1.2rem
 
-      &:hover
-        color: #fff !important
-
     .top-bar-section
       .has-dropdown
-        &:hover
+        &:hover, &.hover
+          a
+            background-color: $lightest-brand-color
+            color: #fff !important
+
+            &.addon-link:hover
+              color: #4c8dcf !important
+
           & > a:after
             border-color: rgba(255, 255, 255, 1) transparent transparent transparent
 

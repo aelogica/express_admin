@@ -6,47 +6,35 @@
       right: 20px
 
 .top-bar-section .dropdown li
-  .megamenu-container
-    padding: 20px
-    width: 960px
-    background-color: #fff
-    border:
-      left: 2px solid $border-color
-      right: 2px solid $border-color
-      bottom: 2px solid $border-color
+  background-color: #1f1f1f
+  border:
+    left: 1px solid $top-menu-border-color
+    right: 1px solid $top-menu-border-color
+    bottom: 1px solid $top-menu-border-color
+  padding: 10px 20px
+  width: 100%
 
-    a:not(.button)
-      font-size: rem-calc(16)
-      color: $blue-color
-      display: block
-      line-height: 1.4em
-      padding: 10px 0
-      background-color: transparent
+  h1
+    border-bottom: 1px solid #333
+    color: #999
+    font-size: 1.4rem
+    font-weight: normal
+    padding-bottom: 10px
 
-      &:hover
-        text-decoration: underline
-        color: darken($blue-color, 10%)
+  ul
+    li
+      border: none
+      float: left
+      padding: 0 20px 0 0
+      width: 25%
 
-    .button
-      padding: 1rem 2rem 1.07rem
-      line-height: 0
+      .addon-link
+        color: #4c8dcf !important
+        padding-left: 0
 
-      &.success
-        background-color: $success-color
-
-        &:hover
-          background-color: darken($success-color, 10%)
-
-    .addons
-      background-color: transparent
-
-      .media-object .icon
-        font-size: rem-calc(18)
-
-      a:not(.button)
-        background-color: transparent
-        color: darken($blue-color, 10%)
-
+        i
+          position: relative
+          top: 2px
 
 @media #{$small-up}
   .dropdown-wrapper
