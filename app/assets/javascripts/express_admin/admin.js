@@ -15,25 +15,11 @@ $(function() {
   // Mega Dropdown buttons
   $(".megamenu").mouseenter(function(){
     if($(window).width()>641){
-      $(".dropdown-wrapper").offset({left: 0});
-      $(".dropdown-wrapper").css("width",$(window).width());
+      $(".dropdown-wrapper").offset({left: 240});
+      $(".dropdown-wrapper").css("width",'960px');
     }else{
       $(".dropdown-wrapper").css("width",auto);
     }
-  }).click(function(){
-    $('.sidebar-wrapper').addClass('megamenu-active')
-
-    if ($('.has-dropdown.megamenu').hasClass('hover')) {
-      $('.sidebar-wrapper').removeClass('megamenu-active')
-    }
-  });
-
-  $('body').click(function(){
-    setTimeout(function(){
-      if (!$('.has-dropdown.megamenu').hasClass('hover')) {
-        $('.sidebar-wrapper').removeClass('megamenu-active')
-      }
-    }, 50);
   });
 
   // Table Row as links
