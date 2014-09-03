@@ -12,16 +12,6 @@ $(function() {
   _.mixin(_.str.exports());
   $(document).foundation();
 
-  // Mega Dropdown buttons
-  $(".megamenu").mouseenter(function(){
-    if($(window).width()>641){
-      $(".dropdown-wrapper").offset({left: 240});
-      $(".dropdown-wrapper").css("width",'960px');
-    }else{
-      $(".dropdown-wrapper").css("width",auto);
-    }
-  });
-
   // Table Row as links
   $('.table-hover tr[data-url]').on('click', function() {
     window.location.href = $(this).attr('data-url');

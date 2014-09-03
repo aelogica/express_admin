@@ -11,9 +11,11 @@
         %ul.dropdown.dropdown-wrapper
           %li.megamenu-overlay
             .megamenu-container
-              = render partial: 'shared/express_admin/express_admin_module_menu'
+              .medium-9.columns
+                = render partial: 'shared/express_admin/express_admin_module_menu'
               / Any module wishing to provide an extra menu may do here.
-              = render partial: 'shared/express_admin/express_admin_extra_menu' rescue nil
+              .medium-3.columns.extra
+                = render partial: 'shared/express_admin/express_admin_extra_menu' rescue nil
 
   %section.top-bar-section
     %ul.left

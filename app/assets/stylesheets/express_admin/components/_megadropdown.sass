@@ -1,7 +1,7 @@
 .top-bar
   .megamenu-overlay
     background: transparent
-    padding: 0 20px 20px
+    padding: 0 0 20px
 
 .dropdown.dropdown-wrapper
   background-color: #fff
@@ -9,7 +9,8 @@
     left: 2px solid $border-color
     right: 2px solid $border-color
     bottom: 2px solid $border-color
-  width: 960px
+  left: -225px
+  width: 960px !important
 
 .top-bar-section .dropdown li
   .megamenu-container
@@ -18,27 +19,37 @@
   h1
     font-size: 1.4rem
 
-  ul
-    li
-      background-color: transparent
-      border: none
-      float: left
-      padding: 0 20px 0 0
-      width: 25%
-
-      .addon-link
+  nav
+    ul
+      li
         background-color: transparent
-        line-height: 2
-        padding-left: 0
+        border: none
+        float: left
+        padding: 0 20px 0 0
+        width: 33.3333333333333%
 
-        i
-          font-size: 1.2rem
-          position: relative
-          top: 2px
+        a
+          background-color: transparent !important
+          color: #26ade4 !important
+          line-height: 2 !important
+          padding: 0 !important
+          transition: color 0.3s ease !important
 
-        &:hover
-          span
-            text-decoration: underline
+          i
+            font-size: 1.2rem
+            position: relative
+            top: 2px
+
+          &:hover
+            color: #1998cb !important
+
+            span
+              text-decoration: underline
+
+  .extra
+    ul
+      li
+        float: inherit
 
 @media #{$small-up}
   .dropdown-wrapper

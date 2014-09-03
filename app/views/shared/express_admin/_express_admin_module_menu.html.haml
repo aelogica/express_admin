@@ -1,8 +1,17 @@
+%h1 Modules
+
 - if admin_menus.any?
-  %h1 Modules
-  %ul
-    - admin_menus.each do |menu|
-      %li
-        = link_to eval(menu.path), class: 'media addon-link' do
-          %i.icon{class: "icon-express_#{menu.name.downcase}"}
-          %span= menu.name
+  %nav
+    %ul
+      - admin_menus.each do |menu|
+        %li
+          = link_to eval(menu.path) do
+            %i.icon{class: "icon-express_#{menu.name.downcase}"}
+            %span= menu.name
+- else
+  .empty-state-wrapper
+    %p.lead.text-muted No modules added yet.
+    %p
+      = link_to app_express.addons_path, class: 'button success radius' do
+        %span.icon.ion-plus
+          Add Module
