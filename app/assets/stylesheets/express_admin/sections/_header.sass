@@ -8,12 +8,14 @@
     background-color: $brand-color
 
     a
+      transition: background-color 0.3s ease
       font-size: 1.1rem
 
     .top-bar-section
       .has-dropdown
         &:hover, &.hover
-          a
+
+          > a
             background-color: $lightest-brand-color
             color: #fff !important
 
@@ -24,17 +26,24 @@
           & > a:after
             border-color: rgba(255, 255, 255, 1) transparent transparent transparent
 
-    .top-bar-section
-      ul
-        li
-          & > a
-            background-color: $brand-color
+      > nav
+        ul
+          li
+            a
+              background-color: $brand-color
 
-            &:hover
-              background-color: $lightest-brand-color
+              &:hover
+                background-color: $lightest-brand-color
 
-        & > .divider
-          border-right-color: $top-menu-border-color
+          > .divider
+            border-right-color: $top-menu-border-color
+
+      .button.success
+        background-color: #8fbe00
+        line-height: 35px
+
+        &:hover
+          background-color: #698b00
 
   .title-area
     width: 239px
