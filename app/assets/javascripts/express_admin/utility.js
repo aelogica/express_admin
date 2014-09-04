@@ -6,6 +6,7 @@ $(function() {
     targetShow = $(this).data('toggle-show')
     $('[data-toggle-name="' + targetHide  + '"]').addClass('hide')
     $('[data-toggle-name="' + targetShow  + '"]').removeClass('hide')
+                                                 .find('input:text, textarea').first().focus()
   });
 
   // AJAX request utility
