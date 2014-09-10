@@ -1,52 +1,81 @@
-#header
-  background-color: $brand-color
+.top-bar
+  background-color: #333
+  top: 0
   position: fixed
   width: 100%
   z-index: 9999999
 
-  .top-bar
-    background-color: $brand-color
+  a
+    transition: background-color 0.3s ease
+    font-size: 1.1rem !important
 
-    a
-      transition: background-color 0.3s ease
-      font-size: 1.1rem
+  .top-bar-section
+    .has-dropdown
+      &:hover, &.hover
 
-    .top-bar-section
-      .has-dropdown
-        &:hover, &.hover
+        > a
+          background-color: #272727
+          color: #fff !important
 
-          > a
-            background-color: $lightest-brand-color
-            color: #fff !important
+          &.addon-link
+            background-color: transparent
+            color: #4c8dcf !important
 
-            &.addon-link
-              background-color: transparent
-              color: #4c8dcf !important
+        & > a:after
+          border-color: rgba(255, 255, 255, 1) transparent transparent transparent
 
-          & > a:after
-            border-color: rgba(255, 255, 255, 1) transparent transparent transparent
+    > nav
+      ul
+        li
+          a
+            background-color: #ddd
 
-      > nav
-        ul
-          li
-            a
-              background-color: $brand-color
+            &:hover
+              background-color: #272727
 
-              &:hover
-                background-color: $lightest-brand-color
+        > .divider
+          border-right-color: #4e4e4e
 
-          > .divider
-            border-right-color: $top-menu-border-color
+    .button.success
+      background-color: #8fbe00
+      line-height: 35px
 
-      .button.success
-        background-color: #8fbe00
-        line-height: 35px
+      &:hover
+        background-color: #698b00
 
-        &:hover
-          background-color: #698b00
+.title-area
+  width: 239px
 
-  .title-area
-    width: 239px
+  a
+    color: #fff
 
-    a
-      color: #fff
+#appexpress-admin-navbar
+  .has-dropdown
+
+    > ul
+      border-radius: 0 0 5px 5px
+      opacity: 0
+      transition: opacity 0.3s ease-in-out
+
+    &:hover
+      overflow: visible
+
+      > ul.dropdown
+        background-color: #3d3d3d
+        clip: auto
+        opacity: 1
+        padding: 5px 0 !important
+        min-width: 200px
+        width: auto
+
+        li
+          background-color: transparent
+
+          a
+            background-color: transparent
+            line-height: 1.5 !important
+            padding: 7px 19px !important
+            white-space: nowrap
+
+            &:hover
+              background-color: #26ade4
