@@ -37,6 +37,8 @@ module ExpressAdmin
       Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
       Rails.application.config.assets.precompile += all_assets
       Rails.application.config.assets.precompile += %w( message-bus.js )
+      Rails.application.config.assets.precompile += %w( express_admin/sections/_header.css )
+      Rails.application.config.assets.precompile += %w( express_admin/shared/_navigation.css )
 
       ExpressAdmin::Engine.all_rails_engines.each do |engine|
         if engine.methods.include?(:additional_assets)

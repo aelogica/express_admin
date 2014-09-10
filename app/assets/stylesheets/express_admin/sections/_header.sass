@@ -50,7 +50,23 @@
     color: #fff
 
 #appexpress-admin-navbar
+  .top-bar
+    height: 55px
+    line-height: 55px
+
+    a
+      font-size: 0.97rem !important
+
+    .divider
+      height: 55px
+
+  .top-bar-section
+    a
+      padding: 5px 18.33333px
+
   .has-dropdown
+    > a:after, .top-bar .top-bar-section .has-dropdown.hover > a:after
+      margin-top: 2px
 
     > ul
       border-radius: 0 0 5px 5px
