@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require select2
+ *= require dataTables/dataTables.foundation
  *= require ionicons/ionicons
  *= require express_admin/screen
  *= require_self
