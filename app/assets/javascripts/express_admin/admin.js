@@ -2,6 +2,8 @@
 // All this logic will automatically be available in application.js.
 //= require jquery
 //= require jquery_ujs
+//= require express_admin/dataTables/jquery.dataTables
+//= require express_admin/dataTables/dataTables.foundation
 //= require foundation
 //= require select2
 //= require underscore
@@ -47,7 +49,7 @@ $(function() {
   });
 
   // dataTables
-  $('.dataTable').dataTable();
+  table = $('.dataTable').DataTable();
 });
 
 String.prototype.repeat = function( num )
