@@ -47,12 +47,9 @@ $(function() {
     e.preventDefault();
     $('a.close-reveal-modal').trigger('click');
   });
-
-  // dataTables
-  table = $('.dataTable').DataTable();
 });
 
 String.prototype.repeat = function( num )
 {
-    return new Array( num + 1 ).join( this );
+  return new Array( num + 1 ).join( this );
 }

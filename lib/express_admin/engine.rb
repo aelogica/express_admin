@@ -7,6 +7,7 @@ require 'message_bus'
 require 'gravatar_image_tag'
 require 'sass-rails'
 require 'recursive-open-struct'
+require 'express_admin/ajax_datatables'
 
 def gem_path(gem)
   Gem::Specification.find_by_name(gem).gem_dir
