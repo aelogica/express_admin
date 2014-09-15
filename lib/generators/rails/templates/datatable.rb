@@ -1,5 +1,5 @@
-class <%= @datatable_name %>Datatable < AjaxDatatables::Base
-  include AjaxDatatables::Extensions::Kaminari
+class <%= @datatable_name %>Datatable < ExpressAdmin::AjaxDatatables::Base
+  include ExpressAdmin::AjaxDatatables::Extensions::Kaminari
 
   def sortable_columns
     # list columns inside the Array in string dot notation.
