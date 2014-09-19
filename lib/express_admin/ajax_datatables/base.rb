@@ -60,7 +60,7 @@ module ExpressAdmin
       def sort_records(records)
         sort_by = []
         params[:order].each_value do |item|
-          sort_by << "#{sort_column(item)} #{sort_direction(item)}"
+          sort_by << "lower(#{sort_column(item)}) #{sort_direction(item)}"
         end
         records.order(sort_by.join(", "))
       end
