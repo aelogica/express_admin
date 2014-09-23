@@ -1,4 +1,4 @@
 require "express_admin/engine"
-require "gara"
+require "express_templates"
 module ExpressAdmin
 end

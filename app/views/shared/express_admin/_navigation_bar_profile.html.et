@@ -1,0 +1,8 @@
+ul.right {
+  li.gravatar {
+    image_tag("#{gravatar_image_url(current_user.email)}?s=40")
+  } 
+  li {
+    sign_in_or_sign_out
+  }
+}

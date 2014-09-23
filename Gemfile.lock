@@ -3,7 +3,6 @@ PATH
   specs:
     express_admin (0.1.0)
       bourbon (~> 3.2)
-      gara
       gravatar_image_tag
       haml-rails
       message_bus
@@ -14,6 +13,11 @@ PATH
       select2-rails
       underscore-rails
       underscore-string-rails
+
+PATH
+  remote: ../templates
+  specs:
+    express_templates (0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -55,8 +59,6 @@ GEM
     foundation-rails (5.3.0.1)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
-    gara (0.1.0)
-      nokogiri (~> 1.6)
     gravatar_image_tag (1.2.0)
     haml (4.0.5)
       tilt
@@ -80,12 +82,9 @@ GEM
       redis
     method_source (0.8.2)
     mime-types (1.25.1)
-    mini_portile (0.6.0)
     minitest (5.4.0)
     mono_logger (1.1.0)
     multi_json (1.10.1)
-    nokogiri (1.6.3.1)
-      mini_portile (= 0.6.0)
     polyglot (0.3.5)
     pry (0.10.0)
       coderay (~> 1.1.0)
@@ -149,7 +148,6 @@ GEM
     thread_safe (0.3.4)
     tilt (1.4.1)
     treetop (1.4.15)
-      polyglot
       polyglot (>= 0.3.1)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
@@ -163,6 +161,7 @@ PLATFORMS
 
 DEPENDENCIES
   express_admin!
+  express_templates!
   foundation-rails (~> 5.3)
   jquery-rails
   pry
