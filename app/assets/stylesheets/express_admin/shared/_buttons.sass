@@ -1,4 +1,12 @@
-button, .button
+button, .button, .button.tiny
+  margin-bottom: 0
+  padding-left: 10px
+  padding-right: 10px
+
+  &.secondary
+    &:hover, &:focus
+      background-color: #d4d4d4
+
   &.gray
     background-color: $silver
     color: #333
