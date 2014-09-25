@@ -1,3 +1,109 @@
+ul.quick-filters
+  font-size: 1.1rem
+  list-style: none
+  margin: 0
+  padding-bottom: 30px
+
+  li
+    display: inline
+
+    &.divider
+      border-right: 1px solid #bbb
+      margin: 0 10px 0 5px
+
+div.dataTables_length label, div.dataTables_filter label, div.dataTables_info
+  font-size: 1.1rem
+
+div.dataTables_filter input
+  margin-left: 5px
+  min-width: 250px
+  padding-left: 4px
+
+div.dataTables_paginate
+  ul.pagination
+    li
+      a
+        background: none
+        font-size: 1.1rem
+        padding: 0 3px
+
+      &:hover, &.current
+        a
+          background: none
+          color: #26ade4
+
+      &.current
+        a
+          font-weight: bold
+
+      &.unavailable
+        display: none
+
+.dataTables_processing
+  display: none !important
+
+table.dataTable
+  &.hide-first-column
+    tr
+      th:first-child, td:first-child
+        display: none
+
+  tr
+    min-height: 72px
+    vertical-align: top
+
+    th
+      padding: 14px 10px
+
+    &:hover
+      td
+
+      .action-menu
+        visibility: visible
+        z-index: 999
+
+    &.even
+      td
+        background-color: #fbfbfb
+
+    td
+      font-size: 1.1rem
+      line-height: 1.3
+      padding: 8px 10px 28px
+      position: relative
+
+      abbr
+        font-size: 1.1rem
+
+      .action-menu
+        bottom: 5px
+        position: absolute
+        visibility: hidden
+
+        ul.inline-list
+          font-size: 0.95rem
+          white-space: nowrap
+          overflow: visible
+
+          li
+            display: inline
+            float: none
+            margin-left: 0
+            margin-right: 3px
+
+            &.hide
+              display: none
+
+            a
+              margin-right: 3px
+
+            a, span
+              display: inline
+
+            span
+              color: #999
+              font-weight: bold
+
 .dataTables_empty
   padding: 8px 10px !important
 
