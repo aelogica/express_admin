@@ -8,7 +8,7 @@ html(lang: 'en') {
     csrf_meta_tags
   }
   body {
-    render 'shared/express_admin/messages'
+    flash_message_component
     yield
   }
 }

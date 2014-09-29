@@ -19,6 +19,14 @@ module ExpressAdmin
       end
     end
 
+    def each_flash
+      unless flash.empty?
+        flash.each do |name, message|
+          yield(name, message)
+        end
+      end
+    end
+
     def admin_menus
       ExpressAdmin::Engine.all_rails_engines.
         select {|engine| engine.methods.include?(:express_admin_menu) }.
