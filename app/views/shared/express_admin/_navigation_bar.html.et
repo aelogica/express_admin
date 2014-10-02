@@ -1,24 +1,24 @@
 # navigation styled for Zurb Foundation 5
 # the syntax for data-topbar may need to change for Zurb Foundation 5
-nav(:class => 'top-bar', "data-topbar" => true, "data-options" => "is_hover:false") {
+nav._top_bar("data-topbar" => true, "data-options" => "is_hover:false") {
   title_partial_or_express_admin
-  div.send('top-bar-section') {
+  div._top_bar_section {
     ul {
       li.divider
-      li.megamenu.send("has-dropdown") {
-        a(href: '#', onClick: 'return false;') { "Manage" }
-        ul.dropdown.send("dropdown-wrapper") {
-          li.send("megamenu-overlay") {
-            div.send("megamenu-container") {
+      li.megamenu._has_dropdown {
+        a("Manage", href: '#', onClick: 'return false;')
+        ul.dropdown._dropdown_wrapper {
+          li._megamenu_overlay {
+            div._megamenu_container {
               render(partial: 'shared/express_admin/express_admin_module_menu')
-              render(partial: 'shared/express_admin/express_admin_extra_menu') rescue nil
+              # render(partial: 'shared/express_admin/express_admin_extra_menu') rescue nil
             }
           }
         }
       }
     }
   }
-  section.send("top-bar-section") {
+  section._top_bar_section {
     ul.left {
       li.divider
       li {

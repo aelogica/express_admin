@@ -1,8 +1,8 @@
 html {
   head {
     meta(:name => "viewport", :content => "width=device-width, initial-scale=1.0")
-    title(content_for?(:title) ? yield(:title) : Rails.application.class.parent_name.underscore.titleize)
-    meta(:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Testapp'}")
+    title { title_content }
+    meta(:name => "description", :content => "{{description_meta_content}}")
     meta(:name => "viewport", :content => "width=device-width", "initial-scale" => 1.0)
     stylesheet_link_tag 'express_admin/application', media: 'all', 'data-turbolinks-track' => true
     # Modernizr is required for Zurb Foundation

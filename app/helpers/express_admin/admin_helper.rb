@@ -19,12 +19,16 @@ module ExpressAdmin
       end
     end
 
-    def each_flash
-      unless flash.empty?
-        flash.each do |name, message|
-          yield(name, message)
-        end
-      end
+    def current_user_gravatar(size=40)
+      image_tag("#{gravatar_image_url(current_user.email) rescue nil}?s=#{size}")
+    end
+
+    def title_content
+      content_for?(:title) ? yield(:title) : Rails.application.class.parent_name.underscore.titleize
+    end
+
+    def description_meta_content
+      content_for?(:description) ? yield(:description) : 'Testapp'
     end
 
     def admin_menus

@@ -1,6 +1,6 @@
 ul(class: 'title-area') {
   li.name {
-    a(href: '#', disabled: true) { ExpressAdmin }
+    a("ExpressAdmin", href: '#', disabled: true)
   }
   li(class:"toggle-topbar menu-icon") {
     a(href: "#") { span menu }
