@@ -5,17 +5,7 @@ nav._top_bar("data-topbar" => true, "data-options" => "is_hover:false") {
   div._top_bar_section {
     ul {
       li.divider
-      li.megamenu._has_dropdown {
-        a("Manage", href: '#', onClick: 'return false;')
-        ul.dropdown._dropdown_wrapper {
-          li._megamenu_overlay {
-            div._megamenu_container {
-              render(partial: 'shared/express_admin/express_admin_module_menu')
-              # render(partial: 'shared/express_admin/express_admin_extra_menu') rescue nil
-            }
-          }
-        }
-      }
+      mega_menu_component
     }
   }
   section._top_bar_section {

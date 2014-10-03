@@ -1,5 +1,5 @@
 module ExpressAdmin
-  class AdminMenusComponent < ExpressTemplates::Components::Base
+  class MegaMenuComponent < ExpressTemplates::Components::Base
     # %h1 "Modules"
 
     # - if admin_menus.any?
@@ -34,9 +34,20 @@ module ExpressAdmin
               },
 
               menu_wrapper: -> {
-                nav {
-                  ul {
-                    _yield
+                li.megamenu._has_dropdown {
+                  a("Manage", href: '#', onClick: 'return false;')
+                  ul.dropdown._dropdown_wrapper {
+                    li._megamenu_overlay {
+                      div._megamenu_container {
+                        h1 "Modules"
+                        nav {
+                          ul {
+                            _yield
+                          }
+                        }
+                        # render(partial: 'shared/express_admin/express_admin_extra_menu') rescue nil
+                      }
+                    }
                   }
                 }
               }
@@ -45,12 +56,16 @@ module ExpressAdmin
 
     # wrap_with :menu_wrapper
 
+    def self.render(context)
+      s = super(context)
+      # binding.pry
+      s
+    end
+
     for_each = -> (c) {
-      s = admin_menus.map do |menu|
+      admin_menus.map do |menu|
         eval(c[:menu_item])
       end.join()
-      binding.pry
-      s
     }
 
     using_logic do |c|

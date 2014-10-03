@@ -3,6 +3,6 @@ ul(class: 'title-area') {
     a("ExpressAdmin", href: '#', disabled: true)
   }
   li(class:"toggle-topbar menu-icon") {
-    a(href: "#") { span menu }
+    a(href: "#") { span { menu } }
   }
 }
