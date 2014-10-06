@@ -49,6 +49,9 @@ table.dataTable
       th:first-child, td:first-child
         display: none
 
+      .dataTables_empty:first-child
+        display: table-cell
+
   tr
     min-height: 72px
     vertical-align: top
@@ -106,6 +109,7 @@ table.dataTable
 
 .dataTables_empty
   padding: 8px 10px !important
+  text-align: center
 
 [id*=_ellipsis]
   display: block !important
