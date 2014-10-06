@@ -9,12 +9,12 @@ module ExpressAdmin
     }
 
     using_logic { |markup_code|
-      unless flash.empty?
+      # unless flash.empty?
         flash.map do |name, message|
           safe_message = message.html_safe
           eval(markup_code)
         end.join
-      end
+      # end
     }
 
   end
