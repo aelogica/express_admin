@@ -1,12 +1,9 @@
 content_for(:content) {
-  main(role: "main").send("main-container") {
+  main(role: "main")._main_container {
+    addon_sidebar_component
     flash_message_component
-    if content_for?(:page_header)
-      row.send("page-header") {
-        h1(yield(:page_header))
-      }
-    end
-    row.send("page-body") {
+    page_header_component
+    row._page_body {
       yield
     }
 
