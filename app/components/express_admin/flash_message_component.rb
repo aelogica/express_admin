@@ -1,20 +1,23 @@
 module ExpressAdmin
   class FlashMessageComponent < ExpressTemplates::Components::Base
-
+  # - unless flash.empty?
+  #   - flash.each do |name, message|
+  #     %div
+  #       .flash.nav-alert.alert-box{class: flash_class(name), data: {alert: ''}}
+  #         = message.html_safe
+  #         %a.close{:href => "#"} &times;
     emits {
-      div(class: -> {"flash nav-alert alert-box #{flash_class(name)}"}, data: {alert: ''}) {
+      div(class: '{{"flash nav-alert alert-box "+flash_class(name)}}', data: {alert: ''}) {
         safe_message
         a.close(:href => "#") { "&times;" }
       }
     }
 
-    using_logic { |markup_code|
-      # unless flash.empty?
-        flash.map do |name, message|
-          safe_message = message.html_safe
-          eval(markup_code)
-        end.join
-      # end
+    using_logic { |c|
+      flash.map do |name, message|
+        safe_message = message
+        eval(c[:markup])
+      end.join
     }
 
   end
