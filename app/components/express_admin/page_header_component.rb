@@ -28,17 +28,20 @@ module ExpressAdmin
 
 
     using_logic { |c|
+      _o = ''
       if content_for?(:page_header)
-        c._wrap_using(:header_wrap, self) {
-          c[:header]
+        _o << c._wrap_using(:header_wrap, self) {
+          eval(c[:header])
         }
       end
       if content_for?(:page_header_lead)
-        c._wrap_using(:lead_wrap, self) {
-          c[:lead]
+        _o << c._wrap_using(:lead_wrap, self) {
+          eval(c[:lead])
         }
       end
+      _o.html_safe
     }
+
 
   end
 end
