@@ -1,14 +1,25 @@
 .tabs
-  border-top: 1px solid $border-color
   border-bottom: 1px solid $border-color
 
-  dd > a,
-  .tab-title > a
-    padding: rem-calc(16 32)
-    font-weight: 500
+  .tab-title
+    a
+      background-color: #fff
+      padding: 10px 20px
+      transition: background-color 0.25s ease
 
-    &:first-child
-      padding-left: 0
+      &:hover
+        background-color: #f6f6f6
 
-    &:hover
-      color: $primary-color
+    &.active
+      background-color: #efefef
+
+      a
+        background-color: #efefef
+        color: #222
+
+        &:hover
+          background-color: #e1e1e1
+
+.tabs-content
+  section
+    outline: none
