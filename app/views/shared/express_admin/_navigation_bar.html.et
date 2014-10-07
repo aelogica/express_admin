@@ -1,6 +1,6 @@
 # navigation styled for Zurb Foundation 5
 # the syntax for data-topbar may need to change for Zurb Foundation 5
-nav._top_bar("data-topbar" => true, "data-options" => "is_hover:false") {
+nav._top_bar(data: {topbar: true, options: "is_hover:false"}) {
   title_partial_or_express_admin
   div._top_bar_section {
     ul {
