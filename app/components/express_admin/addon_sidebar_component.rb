@@ -4,21 +4,20 @@ module ExpressAdmin
   #
   # .sidebar-wrapper
   #   %aside.sidebar
-  #     %h5.title= ExpressData::Engine.express_admin_menu.name
+  #     %h5.title= <addon>::Engine.express_admin_menu.name
   #     %ul.side-nav
-  #       - ExpressData::Engine.express_admin_menu.items.each do |item|
+  #       - <addon>::Engine.express_admin_menu.items.each do |item|
   #         %li
   #           = link_to item.name, eval(item.path)
 
-    helper(:menu_name) { current_module.express_admin_menu.name }
-
-    helper(:menu_link) { link_to item.name, item.path }
-
-
+    helper :menu_name, &-> { current_menu_name }
 
     emits menu_item:    -> {
-                             li { menu_link }
+                             li { 
+                              link_to "{{(item.name||item.title)}}", "{{eval(item.path)}}"
+                             }
                            },
+
           menu_wrapper: -> {
                              div._sidebar_wrapper {
                                aside.sidebar {
@@ -31,7 +30,7 @@ module ExpressAdmin
                                }
                              }
                            }
-    for_each -> { current_module.express_admin_menu.items }, emit: :menu_item
+    for_each -> { current_menu.items }, as: :item, emit: :menu_item
 
     wrap_with :menu_wrapper
 

@@ -4,10 +4,9 @@ html {
     title { title_content }
     meta(:name => "description", :content => "{{description_meta_content}}")
     meta(:name => "viewport", :content => "width=device-width", "initial-scale" => 1.0)
-    stylesheet_link_tag 'express_admin/application', media: 'all', 'data-turbolinks-track' => true
     # Modernizr is required for Zurb Foundation
     javascript_include_tag 'vendor/modernizr'
-    javascript_include_tag 'express_admin/application', 'data-turbolinks-track' => true
+    admin_javascript_and_css_includes
     yield(:page_css)
     csrf_meta_tags
   }
@@ -15,7 +14,18 @@ html {
     header {
       render('shared/express_admin/navigation_bar')
     }
-    content_for?(:content) ? yield(:content) : yield
+    main(role: "main")._main_container {
+      addon_sidebar_component
+      div._content_body {
+        flash_message_component
+        div.row._page_header {
+          page_header_component
+        }
+        div.row._page_body {
+          yield
+        }
+      }
+    }
     javascript_include_tag('message-bus')
     yield(:page_javascript)
   }

@@ -1,15 +1,3 @@
-content_for(:content) {
-  main(role: "main")._main_container {
-    addon_sidebar_component
-    flash_message_component
-    page_header_component
-    row._page_body {
-      yield
-    }
-
-  }
-}
-
 content_for(:page_css) {
   stylesheet_link_tag 'app_express/application'
 }

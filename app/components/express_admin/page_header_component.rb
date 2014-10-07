@@ -9,11 +9,9 @@ module ExpressAdmin
       #         = yield :page_header_lead
 
     emits header_wrap: -> {
-              div.row._page_header {
                 h1 {
                   _yield
                 }
-              }
 
             },
           lead_wrap: -> {
@@ -29,12 +27,16 @@ module ExpressAdmin
           }
 
 
-    using_logic {
+    using_logic { |c|
       if content_for?(:page_header)
-        c._wrap_using(:header_wrap, self, c[:header])
+        c._wrap_using(:header_wrap, self) {
+          c[:header]
+        }
       end
       if content_for?(:page_header_lead)
-        c._wrap_using(:lead_wrap, self, c[:lead])
+        c._wrap_using(:lead_wrap, self) {
+          c[:lead]
+        }
       end
     }
 
