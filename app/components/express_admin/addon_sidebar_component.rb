@@ -21,16 +21,17 @@ module ExpressAdmin
           menu_wrapper: -> {
                              div._sidebar_wrapper {
                                aside.sidebar {
-                                 h5.title {
+                                 h1 {
                                    menu_name
                                  }
-                                 ul._side_nav {
+                                 ul {
                                    _yield
                                  }
                                }
                              }
                            }
-    for_each -> { current_menu.items }, as: :item, emit: :menu_item
+
+    for_each -> { current_menu.items || [] }, as: :item, emit: :menu_item
 
     wrap_with :menu_wrapper
 
