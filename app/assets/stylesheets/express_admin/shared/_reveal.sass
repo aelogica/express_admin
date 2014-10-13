@@ -1,6 +1,12 @@
 dialog, .reveal-modal
+  position: fixed
   margin-left: -48%
+  top: 0px !important
+  transition: top .25s ease
   width: 96%
+
+  &.open
+    top: 100px !important
 
 dialog .close-reveal-modal, .reveal-modal .close-reveal-modal
   right: 7px
