@@ -23,6 +23,10 @@ module ExpressAdmin
       controller.class.to_s.split('::').first.constantize
     end
 
+    def current_module_path_name
+      current_module.to_s.underscore
+    end
+
     def current_engine
       "#{current_module}::Engine".constantize
     end

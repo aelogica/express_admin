@@ -31,9 +31,23 @@ module ExpressAdmin
                              }
                            }
 
-    for_each -> { current_menu.items || [] }, as: :item, emit: :menu_item
+    # for_each -> { current_menu.items || [] }, as: :item, emit: :menu_item
 
     wrap_with :menu_wrapper
+
+    menu_items = -> (c) {
+      (current_menu.items || []).map do |item|
+        eval(c[:menu_item])
+      end.join
+    }
+
+    using_logic do |c|
+      begin
+        render(partial: "shared/#{current_module_path_name}/sidebar")
+      rescue => e
+        c._wrap_it(self, &menu_items)
+      end
+    end
 
   end
 end
