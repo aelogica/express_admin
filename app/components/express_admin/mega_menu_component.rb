@@ -54,13 +54,7 @@ module ExpressAdmin
 
     # for_each -> {admin_menus}, as: 'menu', emit: :menu_item
 
-    # wrap_with :menu_wrapper
-
-    def self.render(context)
-      s = super(context)
-      # binding.pry
-      s
-    end
+    wrap_with :menu_wrapper
 
     for_each = -> (c) {
       admin_menus.map do |menu|
@@ -70,8 +64,7 @@ module ExpressAdmin
 
     using_logic do |c|
       if admin_menus.any?
-        c._wrap_using(:menu_wrapper, self, &for_each)
-        # c.render(self)
+        c._wrap_it(self, &for_each)
       else
         c.render(:empty_state, self)
       end
