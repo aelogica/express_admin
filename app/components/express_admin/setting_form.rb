@@ -25,8 +25,9 @@ module ExpressAdmin
 
     emits widget_wrapper: -> {
                     widget_box(my[:id]) {
-                      form(href: SettingForm.settings_path, id: "#{my[:id]}-setting-form", onSubmit: 'return false;', method: 'patch') {
-                        hidden_field_tag :form_id, "#{my[:id]}-setting-form"
+                      setting_selector = my[:id].to_s.gsub('_', '-')
+                      form(href: SettingForm.settings_path, id: "#{setting_selector}-setting-form", onSubmit: 'return false;', method: 'patch') {
+                        hidden_field_tag :form_id, "#{setting_selector}-setting-form"
                         div._form_group {
                           _yield
                         }
