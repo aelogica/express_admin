@@ -52,23 +52,9 @@ module ExpressAdmin
                 }
               }
 
-    # for_each -> {admin_menus}, as: 'menu', emit: :menu_item
+    for_each -> {admin_menus}, as: 'menu', emit: :menu_item, empty: :empty_state
 
-    wrap_with :menu_wrapper
-
-    for_each = -> (c) {
-      admin_menus.map do |menu|
-        eval(c[:menu_item])
-      end.join()
-    }
-
-    using_logic do |c|
-      if admin_menus.any?
-        c._wrap_it(self, &for_each)
-      else
-        c.render(:empty_state, self)
-      end
-    end
+    wrap_with :menu_wrapper, dont_wrap_if: -> { admin_menus.empty? }
 
   end
 end
