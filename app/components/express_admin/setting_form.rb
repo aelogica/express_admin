@@ -27,11 +27,7 @@ module ExpressAdmin
                     widget_box(my[:id]) {
                       setting_selector = my[:id].to_s.gsub('_', '-')
                       form(href: SettingForm.settings_path, id: "#{setting_selector}-setting-form", onSubmit: 'return false;', method: 'POST') {
-                        div(style: 'display:none') {
-                          utf8_enforcer_tag
-                          method_tag('patch')
-                          token_tag
-                        }
+                        form_rails_support(:patch)
                         hidden_field_tag :form_id, "#{setting_selector}-setting-form"
                         div._form_group {
                           _yield
