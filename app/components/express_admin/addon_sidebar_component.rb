@@ -13,8 +13,8 @@ module ExpressAdmin
     helper :menu_name, &-> { current_menu_name }
 
     emits menu_item:    -> {
-                             li { 
-                              link_to "{{(item.name||item.title)}}", "{{eval(item.path)}}"
+                             li {
+                               link_to "{{(item.name||item.title)}}", "{{eval(item.path)}}"
                              }
                            },
 
