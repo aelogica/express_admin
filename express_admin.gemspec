@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 4.1.1"
 
   # s.add_dependency 'express_templates'
-  s.add_dependency "haml-rails"
+  s.add_dependency "express_templates", "~> 0.2.2"
   s.add_dependency "resque"
   s.add_dependency "sass-rails", "~> 4.0.3"
   s.add_dependency "bourbon", "~> 3.2"
