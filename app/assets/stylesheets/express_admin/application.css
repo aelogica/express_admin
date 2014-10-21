@@ -14,5 +14,6 @@
  *= require dataTables/dataTables.foundation
  *= require ionicons/ionicons
  *= require express_admin/screen
+ *= require express_admin/express_icons
  *= require_self
  */

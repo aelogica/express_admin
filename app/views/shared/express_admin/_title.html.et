@@ -1,0 +1,8 @@
+ul(class: 'title-area') {
+  li.name {
+    a("ExpressAdmin", href: '#', disabled: true)
+  }
+  li(class:"toggle-topbar menu-icon") {
+    a(href: "#") { span { menu } }
+  }
+}

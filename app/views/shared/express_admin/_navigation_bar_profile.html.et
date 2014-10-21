@@ -1,0 +1,8 @@
+ul.right {
+  li.gravatar {
+    current_user_gravatar
+  } 
+  li {
+    sign_in_or_sign_out
+  }
+}

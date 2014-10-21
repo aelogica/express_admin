@@ -1,0 +1,20 @@
+# navigation styled for Zurb Foundation 5
+# the syntax for data-topbar may need to change for Zurb Foundation 5
+nav._top_bar(data: {topbar: true, options: "is_hover:false"}) {
+  title_partial_or_express_admin
+  div._top_bar_section {
+    ul {
+      li.divider
+      mega_menu_component
+    }
+  }
+  section._top_bar_section {
+    ul.left {
+      li.divider
+      li {
+        a(href: '/') { "View Site" }
+      }
+    }
+    render partial: 'shared/express_admin/navigation_bar_profile'
+  }
+}
