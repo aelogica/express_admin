@@ -18,6 +18,10 @@ module ExpressAdmin
     #         %span.icon.ion-plus
     #           Add Module
 
+    helper(:extra_menu) {
+      render(partial: 'shared/express_admin/express_admin_extra_menu') rescue nil
+    }
+
     fragments menu_item: -> {
                         li {
                           a(href: "{{eval(menu.main.path)}}") {
@@ -45,7 +49,7 @@ module ExpressAdmin
                             _yield
                           }
                         }
-                        # render(partial: 'shared/express_admin/express_admin_extra_menu') rescue nil
+                        extra_menu
                       }
                     }
                   }
