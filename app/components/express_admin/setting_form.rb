@@ -23,24 +23,23 @@ module ExpressAdmin
       end.join()
     }
 
-    emits widget_wrapper: -> {
-                    widget_box(my[:id]) {
-                      setting_selector = my[:id].to_s.gsub('_', '-')
-                      form(href: SettingForm.settings_path, id: "#{setting_selector}-setting-form", onSubmit: 'return false;', method: 'POST') {
-                        form_rails_support(:patch)
-                        hidden_field_tag :form_id, "#{setting_selector}-setting-form"
-                        div._form_group {
-                          _yield
-                        }
-                        settings(my[:id])
-                        div._form_group._widget_buttons {
-                          save_button
-                        }
-                      }
-                    }
-                  }
+    emits {
+        widget_box(my[:id]) {
+          setting_selector = my[:id].to_s.gsub('_', '-')
+          form(href: SettingForm.settings_path, id: "#{setting_selector}-setting-form", onSubmit: 'return false;', method: 'POST') {
+            form_rails_support(:patch)
+            hidden_field_tag :form_id, "#{setting_selector}-setting-form"
+            div._form_group {
+              _yield
+            }
+            settings(my[:id])
+            div._form_group._widget_buttons {
+              save_button
+            }
+          }
+        }
+      }
 
-    wrap_with :widget_wrapper
 
   end
 end
