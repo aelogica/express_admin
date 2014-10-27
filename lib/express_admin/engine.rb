@@ -58,5 +58,10 @@ module ExpressAdmin
       ::Rails::Engine.descendants
     end
 
+    def self.express_admin_menu
+      OpenStruct.new(name: 'Admin', items: [], main:
+        OpenStruct.new(title: 'Admin', path: 'express_admin.root_path'))
+    end
+
   end
 end
