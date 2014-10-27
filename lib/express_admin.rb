@@ -1,3 +1,4 @@
+require "express_admin/menu"
 require "express_admin/engine"
 require "express_templates"
 

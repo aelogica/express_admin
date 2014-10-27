@@ -20,6 +20,7 @@ end
 module ExpressAdmin
   class Engine < ::Rails::Engine
     isolate_namespace ExpressAdmin
+    include ExpressAdmin::Menu::Loader
 
     initializer "bourbon" do
       Sass.load_paths << stylesheets_path("bourbon")
@@ -55,12 +56,16 @@ module ExpressAdmin
 
     def all_rails_engines
       Rails.application.eager_load!
-      ::Rails::Engine.descendants
+      @all_engines ||= ::Rails::Engine.descendants
     end
 
-    def self.express_admin_menu
-      OpenStruct.new(name: 'Admin', items: [], main:
-        OpenStruct.new(title: 'Dashboard', path: 'express_admin.root_path'))
+    # Find all the rails engines that have
+    # :addon_name presumably from including
+    # ExpressAdmin::Menu::Loader
+    def all_addons
+      @all_addons ||= all_rails_engines.select do |engine|
+        engine.methods.include?(:addon_name)
+      end
     end
 
   end

@@ -14,7 +14,7 @@ module ExpressAdmin
 
     emits menu_item:    -> {
                              li {
-                               link_to "{{(item.name||item.title)}}", "{{eval(item.path)}}"
+                               link_to "{{(item.title)}}", "{{eval(item.path)}}"
                              }
                            },
 

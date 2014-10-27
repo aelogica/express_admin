@@ -1,0 +1,12 @@
+title: 'Big Menu'
+path: 'express_admin.some_path'
+items:
+  -
+    title: 'Foo'
+    path: 'express_admin.foo_path'
+  -
+    title: 'Bar'
+    path: 'express_admin.bar_path'
+  -
+    title: 'Baz'
+    path: 'express_admin.baz_path'

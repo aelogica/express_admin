@@ -34,11 +34,11 @@ module ExpressAdmin
     end
 
     def current_menu
-      current_engine.express_admin_menu
+      ExpressAdmin::Menu[current_module_path_name]
     end
 
     def current_menu_name
-      current_menu.name || current_menu.title || current_menu.main.try(:title)
+      current_menu.title
     end
 
     def current_user_gravatar(size=40)
@@ -66,9 +66,10 @@ module ExpressAdmin
 
 
     def admin_menus
-      ExpressAdmin::Engine.all_rails_engines.
-        select {|engine| engine.methods.include?(:express_admin_menu) }.
-        map {|engine| engine.express_admin_menu}
+      # should sort here
+      ExpressAdmin::Engine.all_addons.map do |engine|
+        ExpressAdmin::Menu[engine.addon_name] rescue nil
+      end.compact
     end
 
     def menu_item(name, path)
