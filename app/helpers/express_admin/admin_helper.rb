@@ -58,7 +58,7 @@ module ExpressAdmin
       a = []
       a << stylesheet_link_tag("express_admin/application")
       a << stylesheet_link_tag("#{current_module_path}/admin/application") if current_module_path
-      a << stylesheet_link_tag("app_express/application") if defined?(AppExpress)
+      a << stylesheet_link_tag("app_express/admin/application") if defined?(AppExpress)
       a << javascript_include_tag("express_admin/application", 'data-turbolinks-track' => true)
       a << javascript_include_tag("#{current_module_path}/application", 'data-turbolinks-track' => true) if current_module_path
       a.join()
