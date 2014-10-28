@@ -26,8 +26,8 @@ $(function() {
       null,
       jQuery.map(blocks, function(num) { return $(num).outerHeight(false); })
     );
-    blocks.css('min-height', maxHeight);
-    blocks.find('> a.panel').css('min-height', maxHeight);
+
+    blocks.find('> a.panel').css('height', maxHeight);
   }
 
   window.startAnimateProgress = function(message) {
