@@ -43,13 +43,17 @@ module ExpressAdmin
                   ul.dropdown._dropdown_wrapper {
                     li._megamenu_overlay {
                       div._megamenu_container {
-                        h1 "Modules"
-                        nav {
-                          ul {
-                            _yield
+                        div.main {
+                          h1 "Modules"
+                          nav {
+                            ul {
+                              _yield
+                            }
                           }
                         }
-                        extra_menu
+                        div.extra {
+                          extra_menu
+                        }
                       }
                     }
                   }
