@@ -1,15 +1,3 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-//= require jquery
-//= require jquery_ujs
-//= require express_admin/dataTables/jquery.dataTables
-//= require express_admin/dataTables/dataTables.foundation
-//= require foundation
-//= require select2
-//= require underscore
-//= require underscore.string
-//= require jquery.loadingdotdotdot
-
 $(function() {
   _.mixin(_.str.exports());
   $(document).foundation();
