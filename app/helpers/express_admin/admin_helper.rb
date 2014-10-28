@@ -64,7 +64,6 @@ module ExpressAdmin
       a.join()
     end
 
-
     def admin_menus
       # should sort here
       ExpressAdmin::Engine.all_addons.map do |engine|
