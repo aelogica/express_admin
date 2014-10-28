@@ -68,7 +68,7 @@ module ExpressAdmin
     def admin_menus
       # should sort here
       ExpressAdmin::Engine.all_addons.map do |engine|
-        ExpressAdmin::Menu[engine.addon_name] rescue nil
+        ExpressAdmin::Menu[engine.addon_name.to_s] rescue nil
       end.compact
     end
 
