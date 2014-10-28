@@ -1,9 +1,9 @@
+doctype
 html {
   head {
-    meta(name: "viewport", content: "width=device-width, initial-scale=1.0")
     title { title_content }
     meta(name: "description", content: "{{description_meta_content}}")
-    meta(name: "viewport", content: "width=device-width", "initial-scale" => 1.0)
+    meta(name: "viewport", content: "width=device-width, initial-scale=1.0")
     # Modernizr is required for Zurb Foundation
     javascript_include_tag 'vendor/modernizr'
     admin_javascript_and_css_includes
