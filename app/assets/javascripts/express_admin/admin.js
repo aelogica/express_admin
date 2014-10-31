@@ -19,15 +19,14 @@ $(function() {
   }
 
   window.startAnimateProgress = function(message) {
-    $('#nav-js-alert').html("<div class='alert-box'></div>");
-    $('#nav-js-alert .alert-box').Loadingdotdotdot({
+    $('.content-body').prepend("<div class='alert-box'></div>");
+    $('.content-body .alert-box').Loadingdotdotdot({
       "word": message
     }).addClass('info');
-    $('#nav-js-alert').show();
   };
 
   window.stopAnimateProgress = function() {
-    $('#nav-js-alert .alert-box').Loadingdotdotdot("Stop");
+    $('.alert-box').Loadingdotdotdot("Stop");
   };
 
   // Modal Cancel buttons
