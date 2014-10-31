@@ -1,6 +1,2 @@
 title: 'Dashboard'
 path: 'express_admin.root_path'
-items:
-  -
-    title: 'Tables'
-    path: 'express_data.tables_path'
