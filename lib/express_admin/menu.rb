@@ -39,10 +39,11 @@ module ExpressAdmin
 
 
     class MenuItem
-      attr :title, :path, :items
+      attr :title, :path, :position, :items
       def initialize(hash)
         @title = hash[:title]
         @path = hash[:path]
+        @position = hash[:position] || 99
         @items = (hash[:items]||[]).map {|item| MenuItem.new(item)}
       end
     end

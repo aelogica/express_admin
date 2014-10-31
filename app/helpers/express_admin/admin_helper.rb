@@ -66,9 +66,10 @@ module ExpressAdmin
 
     def admin_menus
       # should sort here
-      ExpressAdmin::Engine.all_addons.map do |engine|
+      addons = ExpressAdmin::Engine.all_addons.map do |engine|
         ExpressAdmin::Menu[engine.addon_name.to_s] rescue nil
       end.compact
+      addons.sort_by{|addon| [addon.position]}
     end
 
     def menu_item(name, path)
