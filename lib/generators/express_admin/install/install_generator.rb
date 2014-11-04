@@ -17,6 +17,8 @@ EXPRESS_RAILS_ADMIN
 
     Bundler.clean_system("bundle install")
     Bundler.clean_system("rails generate rails_admin:install admin/manage")
+    Bundler.clean_system("rake express_admin:install:migrations")
+    Bundler.clean_system("rake db:migrate")
     git add: "."
     git commit: "-m '[express_admin] install express_rails_admin'"
   end
