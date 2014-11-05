@@ -7,4 +7,5 @@ components = Dir.glob(File.join(File.dirname(__FILE__), '..', 'app', 'components
 components.each {|component| require component }
 
 module ExpressAdmin
+  mattr_accessor :module_name
 end

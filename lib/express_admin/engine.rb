@@ -51,6 +51,12 @@ module ExpressAdmin
       end
     end
 
+    initializer 'express_admin.action_controller' do |app|
+      ActiveSupport.on_load :action_controller do
+        helper ExpressAdmin::ModuleSettingsHelper
+      end
+    end
+
     config.autoload_paths += Dir[ExpressAdmin::Engine.root.join('app', 'jobs')]
 
     config.admin_mount_point = '/admin'
