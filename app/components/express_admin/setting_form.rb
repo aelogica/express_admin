@@ -23,7 +23,7 @@ module ExpressAdmin
       end.join()
     }
 
-    emits {
+    emits -> {
         widget_box(my[:id]) {
           setting_selector = my[:id].to_s.gsub('_', '-')
           form(href: SettingForm.settings_path, id: "#{setting_selector}-setting-form", onSubmit: 'return false;', method: 'POST') {

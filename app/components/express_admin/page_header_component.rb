@@ -5,7 +5,7 @@ module ExpressAdmin
     class PageHeader < ExpressTemplates::Components::Base
       include ETC::Capabilities::Conditionality
 
-      emits {
+      emits -> {
               h1 {
                 content_for(:page_header)
               }
@@ -18,7 +18,7 @@ module ExpressAdmin
     class PageHeaderLead < ExpressTemplates::Components::Base
       include ETC::Capabilities::Conditionality
 
-      emits {
+      emits -> {
               p.lead {
                 content_for(:page_header_lead)
               }
@@ -28,7 +28,7 @@ module ExpressAdmin
 
     end
 
-    emits {
+    emits -> {
         page_header
         page_header_lead
     }
