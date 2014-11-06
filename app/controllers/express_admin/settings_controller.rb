@@ -2,7 +2,7 @@ require_dependency "express_admin/application_controller"
 
 module ExpressAdmin
   module Admin
-    class SettingsController < ExpressAdmin::Admin::AdminController
+    class SettingsController < ExpressAdmin::AdminController
       before_filter :authenticate_user!
 
       def show
