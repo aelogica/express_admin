@@ -82,6 +82,7 @@ module ExpressAdmin
 
     after_save  :update_cache
     attr_reader :definition
+    validates   :setting, uniqueness: true
 
     class SettingsError < RuntimeError; end
 
