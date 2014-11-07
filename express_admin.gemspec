@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'haml-rails'
   s.add_dependency 'express_templates', '~> 0.3'
   s.add_dependency 'jquery-rails'
-  s.add_dependency 'foundation-rails', '~> 5.3'
+  s.add_dependency 'foundation-rails', '~> 5.4'
   s.add_dependency 'sass-rails', '~> 4.0.3'
   s.add_dependency 'bourbon', '~> 3.2'
   s.add_dependency 'select2-rails'
