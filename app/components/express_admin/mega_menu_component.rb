@@ -25,7 +25,7 @@ module ExpressAdmin
     fragments menu_item: -> {
                         li {
                           a(href: "{{eval(menu.path)}}") {
-                            i.icon(class: '{{"icon-express_#{menu.title.downcase}"}}')
+                            i.icon(class: "icon-express_{{menu.title.downcase}}")
                             span "{{menu.title}}"
                           }
                         }
