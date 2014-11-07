@@ -1,5 +1,5 @@
 module ExpressAdmin
   class Term < ActiveRecord::Base
-    has_one :taxonomy, dependent: :destroy
+    has_many :taxonomies
   end
 end

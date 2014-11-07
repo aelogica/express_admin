@@ -5,5 +5,11 @@ module ExpressAdmin
     has_many :object_taxonomies
 
     self.inheritance_column = :_type_disabled
+
+    scope :list, -> { includes(:term).order('express_admin_terms.name') }
+
+    ExpressAdmin::Taxonomy.pluck(:taxonomy).uniq.each do |taxonomy|
+      scope taxonomy.pluralize.to_sym, -> { where(taxonomy: taxonomy) }
+    end
   end
 end
