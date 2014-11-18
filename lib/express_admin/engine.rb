@@ -1,14 +1,13 @@
-require 'haml-rails'
-require 'ostruct'
-require 'select2-rails'
-require 'underscore-rails'
-require 'underscore-string-rails'
-require 'message_bus'
-require 'gravatar_image_tag'
-require 'sass-rails'
-require 'recursive-open-struct'
 require 'express_admin/ajax_datatables'
 require 'express_admin/menu'
+require 'gravatar_image_tag'
+require 'haml-rails'
+require 'sass-rails'
+require 'recursive-open-struct'
+require 'select2-rails'
+require 'ostruct'
+require 'underscore-rails'
+require 'underscore-string-rails'
 
 def gem_path(gem)
   Gem::Specification.find_by_name(gem).gem_dir
