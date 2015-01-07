@@ -84,10 +84,6 @@ module ExpressAdmin
       end
     end
 
-    def flash_classes_for(message)
-      "flash nav-alert alert-box #{flash_class(message[0])}"
-    end
-
     def flash_class(key)
       case key
       when 'notice' then 'info'
