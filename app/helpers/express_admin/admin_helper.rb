@@ -41,8 +41,8 @@ module ExpressAdmin
       current_menu.title
     end
 
-    def current_user_gravatar(size=40)
-      image_tag("#{gravatar_image_url(current_user.email) rescue nil}?s=#{size}")
+    def current_user_gravatar
+      gravatar_image_tag current_user.email
     end
 
     def title_content
