@@ -33,3 +33,5 @@ test/dummy/tmp/
 test/dummy/.sass-cache
 .ruby-gemset
 .ruby-version
+
+Gemfile.lock
