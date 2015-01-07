@@ -8,6 +8,7 @@ require 'select2-rails'
 require 'ostruct'
 require 'underscore-rails'
 require 'underscore-string-rails'
+require 'express_taxonomy'
 
 def gem_path(gem)
   Gem::Specification.find_by_name(gem).gem_dir
