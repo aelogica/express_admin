@@ -7,9 +7,6 @@ class ExpressAdmin::InstallGenerator < Rails::Generators::Base
   mount ExpressAdmin::Engine, at: ExpressAdmin::Engine.config.admin_mount_point\n}
     inject_into_file "#{Rails.root}/config/routes.rb", route_code, after: "Rails.application.routes.draw do\n"
 
-    git add: "config/routes.rb"
-    git commit: "'-m [express_admin] install express_admin'"
-
     rails_admin_gem_line = <<-EXPRESS_RAILS_ADMIN
   gem 'rails_admin', github: 'aelogica/express_rails_admin'
 EXPRESS_RAILS_ADMIN
@@ -25,9 +22,6 @@ EXPRESS_TAXONOMY
     Bundler.clean_system("rake express_admin:install:migrations")
     Bundler.clean_system("rake express_taxonomy:install:migrations")
     Bundler.clean_system("rake db:migrate")
-    git add: "."
-    git commit: "-m '[express_admin] install express_rails_admin'"
   end
-
 
 end
