@@ -26,7 +26,6 @@ html {
         }
       }
     }
-    javascript_include_tag('message-bus')
     yield(:page_javascript)
   }
 }
