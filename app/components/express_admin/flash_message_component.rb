@@ -7,10 +7,11 @@ module ExpressAdmin
     emits -> {
       div {
         div(class: ExpressAdmin::FlashMessageComponent.classes('{{flash_message}}'), data: {alert: ''}) {
-          safe_message('{{flash_message}}')}
+          safe_message('{{flash_message}}')
           a.close(:href => "#") { "&times;" }
         }
       }
+    }
 
     for_each -> { flash }, as: :flash_message
 
