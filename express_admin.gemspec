@@ -19,10 +19,10 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'bourbon', '~> 3.2'
   s.add_dependency 'express_templates', '~> 0.3'
-  s.add_dependency 'foundation-rails', '5.4'
+  s.add_dependency 'foundation-rails', '~> 5.5.0'
   s.add_dependency 'haml-rails'
   s.add_dependency 'jquery-rails'
-  s.add_dependency 'sass-rails', '~> 4.0.3'
+  s.add_dependency 'sass-rails', '~> 5.0'
   s.add_dependency 'select2-rails'
   s.add_dependency 'underscore-rails'
   s.add_dependency 'underscore-string-rails'
@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'friendly_id'
   s.add_dependency 'gravatar_image_tag'
   s.add_dependency 'kaminari'
-  s.add_dependency 'rails', '~> 4.1.1'
+  s.add_dependency 'rails', '~> 4.2'
   s.add_dependency 'recursive-open-struct'
   s.add_dependency 'sanitize', '~> 3.0'
 
