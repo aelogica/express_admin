@@ -5,6 +5,7 @@ html(lang: 'en') {
     title { yield(:title) }
     stylesheet_link_tag 'express_admin/application'
     javascript_include_tag :modernizr
+    javascript_include_tag 'express_admin/application'
     csrf_meta_tags
   }
   body {
