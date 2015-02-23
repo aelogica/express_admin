@@ -1,5 +1,6 @@
 require 'express_admin/ajax_datatables'
 require 'express_admin/menu'
+require 'foundation-rails'
 require 'gravatar_image_tag'
 require 'sass-rails'
 require 'recursive-open-struct'
