@@ -1,3 +1,5 @@
+require 'bundler'
+Bundler.setup
 
 git :init
 git add: "."
@@ -33,10 +35,6 @@ Bundler.clean_system("bundle install")
 git add: "Gemfile"
 git add: "Gemfile.lock"
 git commit: "-m 'Added gems'"
-
-Bundler.clean_system("rails generate foundation:install --force")
-git add: "."
-git commit: "-a -m 'Installed Foundation'"
 
 Bundler.clean_system("rails generate devise:install && rails generate devise User --force && rake db:migrate")
 git add: "."
