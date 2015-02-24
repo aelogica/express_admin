@@ -1,3 +1,5 @@
+require 'bundler'
+Bundler.setup
 
 git :init
 git add: "."
@@ -28,20 +30,20 @@ app_express_gem_group = <<-GEM_GROUP
 GEM_GROUP
 inject_into_file 'config/application.rb', app_express_gem_group, after: "class Application < Rails::Application\n"
 
-Bundler.clean_system("bundle install")
+run "bundle install"
 
 git add: "Gemfile"
 git add: "Gemfile.lock"
 git commit: "-m 'Added gems'"
 
-Bundler.clean_system("rails generate foundation:install --force")
+run "rails generate foundation:install --force"
 git add: "."
 git commit: "-a -m 'Installed Foundation'"
 
-Bundler.clean_system("rails generate devise:install && rails generate devise User --force && rake db:migrate")
+run "rails generate devise:install && rails generate devise User --force && rake db:migrate"
 git add: "."
 git commit: "-a -m 'Installed Devise'"
 
-Bundler.clean_system("rails generate express_admin:install --force")
+run "rails generate express_admin:install --force"
 git add: "."
 git commit: "-a -m 'Installed ExpressAdmin'"
