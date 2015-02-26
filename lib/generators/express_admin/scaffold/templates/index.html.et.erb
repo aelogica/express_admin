@@ -1,0 +1,11 @@
+table(id: '<%= "#{plural_table_name}-datatable" %>', class: "hide-first-column{ data: {source: '{{admin_<%= plural_table_name %>_path}}'}}" ) {
+  thead {
+    tr {
+    <% for attribute in attributes -%>
+      th { '<%= attribute.name.titleize %>' }
+    <% end -%>
+    }
+  }
+  tbody {
+  }
+}
