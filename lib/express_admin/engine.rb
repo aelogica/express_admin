@@ -1,7 +1,6 @@
 require 'express_admin/ajax_datatables'
 require 'express_admin/menu'
 require 'gravatar_image_tag'
-require 'haml-rails'
 require 'sass-rails'
 require 'recursive-open-struct'
 require 'select2-rails'

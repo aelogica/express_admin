@@ -15,7 +15,7 @@ git add: ".ruby-version"
 git add: ".ruby-gemset"
 git commit: "-a -m 'Ruby version and gemset'"
 
-gem 'haml'
+gem 'express_templates'
 gem 'modernizr-rails'
 gem 'therubyracer'
 gem 'foundation-rails'
