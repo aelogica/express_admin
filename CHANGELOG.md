@@ -18,3 +18,8 @@
 ### 0.2.4
 
 * properly prefix migrations
+
+### 0.3.0
+
+* add express_admin:scaffold
+* add express_admin:common_files (ajax forms)

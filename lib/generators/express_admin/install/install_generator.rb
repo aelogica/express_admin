@@ -12,6 +12,7 @@ class ExpressAdmin::InstallGenerator < Rails::Generators::Base
 EXPRESS_RAILS_ADMIN
     inject_into_file "Gemfile", rails_admin_gem_line, after: "group :app_express do\n"
 
+
     Bundler.clean_system("bundle install")
     Bundler.clean_system("rails generate rails_admin:install admin/manage")
     Bundler.clean_system("rake express_admin:install:migrations")
