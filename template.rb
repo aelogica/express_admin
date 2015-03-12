@@ -15,7 +15,7 @@ git add: ".ruby-version"
 git add: ".ruby-gemset"
 git commit: "-a -m 'Ruby version and gemset'"
 
-gem 'haml'
+gem 'express_templates'
 gem 'modernizr-rails'
 gem 'therubyracer'
 gem 'foundation-rails'
@@ -30,20 +30,20 @@ app_express_gem_group = <<-GEM_GROUP
 GEM_GROUP
 inject_into_file 'config/application.rb', app_express_gem_group, after: "class Application < Rails::Application\n"
 
-run "bundle install"
+Bundler.clean_system "bundle install"
 
 git add: "Gemfile"
 git add: "Gemfile.lock"
 git commit: "-m 'Added gems'"
 
-run "rails generate foundation:install --force"
+Bundler.clean_system "rails generate foundation:install --force"
 git add: "."
 git commit: "-a -m 'Installed Foundation'"
 
-run "rails generate devise:install && rails generate devise User --force && rake db:migrate"
+Bundler.clean_system "rails generate devise:install && rails generate devise User --force && rake db:migrate"
 git add: "."
 git commit: "-a -m 'Installed Devise'"
 
-run "rails generate express_admin:install --force"
+Bundler.clean_system "rails generate express_admin:install --force"
 git add: "."
 git commit: "-a -m 'Installed ExpressAdmin'"
