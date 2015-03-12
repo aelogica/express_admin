@@ -10,11 +10,11 @@ Gem::Specification.new do |s|
   s.authors     = ['Steven Talcott Smith']
   s.email       = ['steve@aelogica.com']
   s.homepage    = ''
-  s.summary     = 'ExpressAdmin provides an admin menu framework based on foundation.'
-  s.description = 'ExpressAdmin is the admin menu framework used by appexpress.io, ExpressBlog.'
+  s.summary     = 'ExpressAdmin provides an admin menu framework based on Foundation.'
+  s.description = 'ExpressAdmin is the admin menu framework used by appexpress.io, ExpressBlog, etc.'
   s.license     = 'MIT'
 
-  s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
+  s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'bourbon', '~> 3.2'
