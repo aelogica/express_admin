@@ -9,3 +9,8 @@
 * bump to ruby 2.2.1
 * modify template.rb to fix broken bundle install
 * add instructions on how to setup a sample app
+
+### 0.2.3
+
+* replace haml with express_templates
+* fix bundle install in template.rb
