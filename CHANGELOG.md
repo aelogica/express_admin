@@ -14,3 +14,7 @@
 
 * replace haml with express_templates
 * fix bundle install in template.rb
+
+### 0.2.4
+
+* properly prefix migrations
