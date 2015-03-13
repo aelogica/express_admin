@@ -11,55 +11,11 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
   def test_scaffold_on_invoke
     run_generator
 
+    # Model
+    assert_file "app/models/dummy/agent.rb", /module Dummy\n  class Agent < ActiveRecord::Base/
+
+    # View
     assert_file "app/views/dummy/admin/agents/index.html.et"
-
-    # Datatables JavaScript
-    assert_file "app/assets/javascripts/dummy/admin/agents.js" do |content|
-      assert_match /#agents-datatable/, content
-      assert_match /first_name/, content
-      assert_match /last_name/, content
-      assert_match /age/, content
-      assert_match /address/, content
-      assert_match /#agents-datatable tbody/, content
-      assert_match /\$\('#agents-datatable'\)\.data\('source'\)/, content
-      assert_match /\$\('#agents-datatable tbody'\)\.removeAttr\('style'\)/, content
-    end
-
-    # Datatables Ruby
-    assert_file "app/datatables/dummy/agent_datatable.rb" do |content|
-      assert_match /class Dummy::AgentDatatable/, content
-      assert_match /:admin_dummy_agent_path/, content
-      assert_match /:edit_admin_dummy_agent_path/, content
-
-      assert_instance_method :sortable_columns, content do |m|
-        assert_match /dummy_agents\.first_name/, m
-        assert_match /dummy_agents\.last_name/, m
-        assert_match /dummy_agents\.age/, m
-        assert_match /dummy_agents\.address'/, m
-      end
-
-      assert_instance_method :searchable_columns, content do |m|
-        assert_match /dummy\/agents\.first_name/, m
-        assert_match /dummy\/agents\.last_name/, m
-        assert_match /dummy\/agents\.age'/, m
-        assert_match /dummy\/agents\.address'/, m
-      end
-
-      # Private data method
-      assert_instance_method :data, content do |m|
-        assert_match /link_to\(record\.first_name, admin_dummy_agent_path\(record\.id\)/, m
-        assert_match /record\.last_name/, m
-        assert_match /record\.age/, m
-        assert_match /record\.address/, m
-      end
-
-      assert_instance_method :get_raw_records, content do |m|
-        assert_match /Dummy::Agent\.all/, m
-      end
-
-      assert_match "admin_dummy_agent_path(record.id), onClick: 'return false;'", content
-      assert_match /confirm: 'Delete this agent permanently\?'/, content
-    end
 
     # Controller
     assert_file "app/controllers/dummy/admin/agents_controller.rb" do |content|
@@ -106,7 +62,13 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
   def test_scaffold_on_revoke
     run_generator ["Agent"], behavior: :revoke
 
+    # Model
+    assert_no_file "app/models/dummy/agent.rb"
+
+    # View
     assert_no_file "app/views/dummy/admin/agents/index.html.et"
+
+    # Controller
     assert_no_file "app/controllers/dummy/admin/agents_controller.rb"
   end
 end

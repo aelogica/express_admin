@@ -29,6 +29,10 @@ module ExpressAdmin
         template "controller/controller.rb", File.join("app/controllers", @project_path, "admin", "#{controller_file_path}_controller.rb")
       end
 
+      def create_model_file
+        template "model/model.rb", File.join("app/models/", @project_path, "#{singular_name}.rb")
+      end
+
       hook_for :form_builder, :as => :scaffold
 
       protected
