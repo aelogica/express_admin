@@ -4,6 +4,7 @@ require 'generators/express_admin/scaffold/scaffold_generator'
 class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestCase
   destination File.expand_path("../../../tmp", File.dirname(__FILE__))
   setup :prepare_destination
+  setup :copy_routes
 
   tests ExpressAdmin::Generators::ScaffoldGenerator
   arguments %w(agent first_name:string last_name:string age:integer address:integer)
@@ -57,6 +58,12 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
       assert_match(/scope 'dummy', as: 'dummy'/, content)
       assert_match(/resources :agents/, content)
     end
+
+    # Routes
+    assert_file "config/routes.rb" do |content|
+      assert_match(/scope 'dummy', as: 'dummy'/, content)
+      assert_match(/resources :agents/, content)
+    end
   end
 
   def test_scaffold_on_revoke
@@ -70,5 +77,10 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
 
     # Controller
     assert_no_file "app/controllers/dummy/admin/agents_controller.rb"
+
+    # Route
+    assert_file "config/routes.rb" do |route|
+      assert_no_match(/resources :agents$/, route)
+    end
   end
 end
