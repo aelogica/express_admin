@@ -33,6 +33,39 @@ module ExpressAdmin
         template "model/model.rb", File.join("app/models/", @project_path, "#{singular_name}.rb")
       end
 
+      def create_datatables_files
+        template "datatables/datatables.rb", File.join('app/datatables', @project_path, "#{singular_name}_datatable.rb")
+        template "datatables/datatables.js", File.join('app/assets/javascripts', @project_path, 'admin' ,"#{controller_file_name}.js")
+      end
+
+      def add_route
+        if File.readlines('config/routes.rb').grep(/Kernel\.const_defined\?\(\'ExpressAdmin::Engine\'\)/).any?
+          inject_into_file 'config/routes.rb', "          resources :#{controller_file_name}\n", after: /module: scope '#{@project_path}', as: '#{@project_path}' do\n/
+        else
+          append_to_file 'config/routes.rb',"\n\n
+if Kernel.const_defined?('ExpressAdmin::Engine')
+  ExpressAdmin::Engine.routes.draw do
+    scope ExpressAdmin::Engine.config.admin_mount_point do
+      scope module: 'admin', as: 'admin' do
+        scope '#{@project_path}', as: '#{@project_path}' do
+          resources :#{controller_file_name}
+        end
+      end
+    end
+  end
+end"
+        end
+      end
+
+      def create_migration
+        args = ''
+        attributes.each do |attribute|
+          args << "#{attribute.name}:#{attribute.type} "
+        end
+
+        generate :migration, "create_#{plural_table_name} #{args}"
+      end
+
       hook_for :form_builder, :as => :scaffold
 
       protected
