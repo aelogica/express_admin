@@ -106,12 +106,6 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
       assert_match(/scope 'dummy', as: 'dummy'/, content)
       assert_match(/resources :agents/, content)
     end
-
-    # Routes
-    assert_file "config/routes.rb" do |content|
-      assert_match(/scope 'dummy', as: 'dummy'/, content)
-      assert_match(/resources :agents/, content)
-    end
   end
 
   def test_scaffold_on_revoke
