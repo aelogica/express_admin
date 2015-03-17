@@ -1,3 +1,7 @@
+### 0.3.3
+
+* fix merge errors
+
 ### 0.3.2
 
 * draw the route within the app's namespace
