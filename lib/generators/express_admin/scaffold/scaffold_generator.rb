@@ -15,18 +15,18 @@ module ExpressAdmin
         @project_path = @project_name.underscore
         @resource_class = "#{@project_name}::#{singular_name.camelize}".classify
         @view_path = File.join('app/views', @project_path, 'admin', plural_name)
-        empty_directory File.join("app/views", @project_path, "admin", controller_file_path)
+        empty_directory File.join("app/views", @project_path, "admin", controller_file_name)
       end
 
       def copy_view_files
         available_views.each do |view|
           filename = filename_with_extensions(view)
-          template "#{view}.html.et.erb", File.join("app/views", @project_path, "admin", controller_file_path, filename)
+          template "#{view}.html.et.erb", File.join("app/views", @project_path, "admin", controller_file_name, filename)
         end
       end
 
       def create_controller_file
-        template "controller/controller.rb", File.join("app/controllers", @project_path, "admin", "#{controller_file_path}_controller.rb")
+        template "controller/controller.rb", File.join("app/controllers", @project_path, "admin", "#{controller_file_name}_controller.rb")
       end
 
       def create_model_file
