@@ -23,3 +23,7 @@
 
 * add express_admin:scaffold
 * add express_admin:common_files (ajax forms)
+
+### 0.3.1
+
+* properly append resources within the ExpressAdmin namespace
