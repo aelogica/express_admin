@@ -48,10 +48,8 @@ module ExpressAdmin
 if Kernel.const_defined?('ExpressAdmin::Engine')
   ExpressAdmin::Engine.routes.draw do
     scope ExpressAdmin::Engine.config.admin_mount_point do
-      scope module: 'admin', as: 'admin' do
-        scope '#{@project_path}', as: '#{@project_path}' do
-          resources :#{controller_file_name}
-        end
+      scope '#{@project_path}', as: '#{@project_path}' do
+        resources :#{controller_file_name}
       end
     end
   end
