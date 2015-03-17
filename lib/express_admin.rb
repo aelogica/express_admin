@@ -8,4 +8,7 @@ components.each {|component| require component }
 
 module ExpressAdmin
   mattr_accessor :module_name
+  class Railtie < ::Rails::Railtie
+    config.app_generators.template_engine :et
+  end
 end
