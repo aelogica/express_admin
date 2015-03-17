@@ -66,7 +66,7 @@ EOD
           args << "#{attribute.name}:#{attribute.type} "
         end
 
-        generate :migration, "create_#{plural_table_name} #{args}"
+        generate :migration, "create_#{@project_path}_#{plural_table_name} #{args}"
       end
 
       hook_for :form_builder, :as => :scaffold

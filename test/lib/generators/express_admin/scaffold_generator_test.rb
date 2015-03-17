@@ -14,6 +14,7 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
 
     # Model
     assert_file "app/models/dummy/agent.rb", /module Dummy\n  class Agent < ActiveRecord::Base/
+    # TODO test migration file
 
     # View
     assert_file "app/views/dummy/admin/agents/index.html.et"
