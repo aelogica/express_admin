@@ -46,10 +46,12 @@ module ExpressAdmin
           append_to_file 'config/routes.rb', <<-EOD
 \n\n
 if Kernel.const_defined?('ExpressAdmin::Engine')
-  ExpressAdmin::Engine.routes.draw do
+  #{@project_name}::Engine.routes.draw do
     scope ExpressAdmin::Engine.config.admin_mount_point do
-      scope '#{@project_path}', as: '#{@project_path}' do
-        resources :#{controller_file_name}
+      scope module: 'admin', as: 'admin' do
+        scope '#{@project_path}', as: '#{@project_path}' do
+          resources :#{controller_file_name}
+        end
       end
     end
   end

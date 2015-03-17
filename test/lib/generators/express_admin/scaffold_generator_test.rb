@@ -103,6 +103,8 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
 
     # Routes
     assert_file "config/routes.rb" do |content|
+      assert_match(/Dummy::Engine.routes.draw/, content)
+      assert_match(/scope module: 'admin', as: 'admin'/, content)
       assert_match(/scope 'dummy', as: 'dummy'/, content)
       assert_match(/resources :agents/, content)
     end
