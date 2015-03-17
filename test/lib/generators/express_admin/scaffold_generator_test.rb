@@ -125,4 +125,14 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
       assert_no_match(/resources :agents/, route)
     end
   end
+
+  def test_scaffold_twice
+    run_generator ["blog", "title: string"]
+    run_generator ["picture", "url: string"]
+
+    assert_file "config/routes.rb" do |content|
+      assert_match(/resources :blogs/, content)
+      assert_match(/resources :pictures/, content)
+    end
+  end
 end

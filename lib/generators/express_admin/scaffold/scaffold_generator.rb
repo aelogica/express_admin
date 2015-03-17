@@ -39,10 +39,12 @@ module ExpressAdmin
       end
 
       def add_route
-        if File.readlines('config/routes.rb').grep(/Kernel\.const_defined\?\(\'ExpressAdmin::Engine\'\)/).any?
-          inject_into_file 'config/routes.rb', "          resources :#{controller_file_name}\n", after: /module: scope '#{@project_path}', as: '#{@project_path}' do\n/
+        if open('config/routes.rb').grep(/scope '#{@project_path}', as: '#{@project_path}'/).any?
+          inject_into_file 'config/routes.rb', "          resources :#{controller_file_name}\n",
+            after: /scope '#{@project_path}', as: '#{@project_path}' do\n/
         else
-          append_to_file 'config/routes.rb',"\n\n
+          append_to_file 'config/routes.rb', <<-EOD
+\n\n
 if Kernel.const_defined?('ExpressAdmin::Engine')
   ExpressAdmin::Engine.routes.draw do
     scope ExpressAdmin::Engine.config.admin_mount_point do
@@ -53,7 +55,8 @@ if Kernel.const_defined?('ExpressAdmin::Engine')
       end
     end
   end
-end"
+end
+EOD
         end
       end
 
