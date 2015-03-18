@@ -7,6 +7,7 @@ require 'select2-rails'
 require 'ostruct'
 require 'underscore-rails'
 require 'underscore-string-rails'
+require 'foundation-rails'
 
 def gem_path(gem)
   Gem::Specification.find_by_name(gem).gem_dir
