@@ -16,6 +16,11 @@ $ rails generate express_admin:scaffold agent last_name:string
 $ rails destroy express_admin:scaffold agent
 
 
+### Assumptions
+
+1. Parent app uses Devise.
+2. Route is mounted in /admin.
+
 ### License
 
 This project rocks and uses MIT-LICENSE.
