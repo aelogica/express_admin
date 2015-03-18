@@ -25,7 +25,10 @@ row {
 <% for attribute in attributes -%>
            f.<%= attribute.field_type %> :<%= attribute.name %>, wrapper_class: 'form-group'
 <% end -%>
-           f.submit 'Save', class: 'button tiny right radius ajax-submit', wrapper_class: 'form-group widget-buttons', remote: true
+           f.actions({
+             cancel: ['Cancel', {class: 'button radius tiny secondary cancel hide', href: '{{admin_<%= @project_path %>_<%= plural_table_name %>_path}}'}],
+             submit: ['Save', class: 'button tiny right radius ajax-submit', remote: true]
+           }, wrapper_class: 'form-group widget-buttons')
          end
         }
       }
