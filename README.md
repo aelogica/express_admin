@@ -18,8 +18,9 @@ $ rails destroy express_admin:scaffold agent
 
 ### Assumptions
 
-1. Parent app uses Devise.
+1. Parent app uses Devise and has a User model.
 2. Route is mounted in /admin.
+3. Parent app uses express_admin.
 
 ### License
 
