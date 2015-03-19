@@ -42,7 +42,9 @@ module ExpressAdmin
     end
 
     def current_user_gravatar
-      gravatar_image_tag current_user.email
+      if defined?(current_user)
+        gravatar_image_tag current_user.email
+      end
     end
 
     def title_content

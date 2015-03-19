@@ -1,5 +1,6 @@
 require 'express_admin/ajax_datatables'
 require 'express_admin/menu'
+require 'foundation-rails'
 require 'gravatar_image_tag'
 require 'sass-rails'
 require 'recursive-open-struct'
@@ -8,7 +9,6 @@ require 'ostruct'
 require 'underscore-rails'
 require 'underscore-string-rails'
 require 'kaminari'
-require 'foundation-rails'
 
 def gem_path(gem)
   Gem::Specification.find_by_name(gem).gem_dir
