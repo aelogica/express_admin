@@ -1,9 +1,9 @@
 require 'test_helper'
-require 'generators/express_admin/install/install_generator'
+require 'generators/<%= project_name %>/install/install_generator'
 
-module ExpressAdmin
-  class ExpressAdmin::InstallGeneratorTest < Rails::Generators::TestCase
-    tests ExpressAdmin::InstallGenerator
+module <%= project_class %>
+  class <%= project_class %>::InstallGeneratorTest < Rails::Generators::TestCase
+    tests <%= project_class %>::InstallGenerator
     destination Rails.root.join('tmp/generators')
     setup :prepare_destination
 
