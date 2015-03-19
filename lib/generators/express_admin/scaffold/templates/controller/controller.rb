@@ -1,6 +1,6 @@
 module <%= project_name %>
   module Admin
-    class <%= @project_name %>::Admin::<%= controller_class_name %>Controller < ExpressAdmin::AdminController
+    class <%= project_name %>::Admin::<%= controller_class_name %>Controller < ExpressAdmin::AdminController
       respond_to :json, :html
 
       def index

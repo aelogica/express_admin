@@ -1,0 +1,16 @@
+require 'test_helper'
+require 'generators/<%= project_name %>/install/install_generator'
+
+module <%= project_class %>
+  class <%= project_class %>::InstallGeneratorTest < Rails::Generators::TestCase
+    tests <%= project_class %>::InstallGenerator
+    destination Rails.root.join('tmp/generators')
+    setup :prepare_destination
+
+    # test "generator runs without errors" do
+    #   assert_nothing_raised do
+    #     run_generator ["arguments"]
+    #   end
+    # end
+  end
+end
