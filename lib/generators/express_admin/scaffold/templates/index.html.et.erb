@@ -1,6 +1,6 @@
 row {
   div(class: 'large-8 columns', id: 'main') {
-  table(id: '<%= "#{plural_table_name}-datatable" %>', 'data-source' => '{{admin_<%= @project_path %>_<%= plural_table_name %>_path}}' ) {
+  table(id: '<%= "#{plural_table_name}-datatable" %>', 'data-source' => '{{admin_<%= plural_table_name %>_path}}' ) {
       thead {
         tr {
 <% for attribute in attributes -%>
@@ -17,16 +17,15 @@ row {
       div(class: 'widget-box') {
         h2(class: 'widget-header') {
           span {'New <%= singular_table_name.titleize %>' }
-          a(class: 'cancel button radius tiny secondary right hide', href: '{{admin_<%= @project_path %>_<%= plural_table_name %>_path}}', onClick: 'return false') { 'Cancel' }
         }
 
         div(class: 'widget-body', id: '<%= singular_table_name %>-form') {
-        form_for(:<%= singular_table_name %>, method: :post, action: '{{admin_<%= @project_path %>_<%= plural_table_name %>_path}}') do |f|
+        form_for(:<%= singular_table_name %>, method: :post, action: '{{admin_<%= plural_table_name %>_path}}') do |f|
 <% for attribute in attributes -%>
            f.<%= attribute.field_type %> :<%= attribute.name %>, wrapper_class: 'form-group'
 <% end -%>
            f.actions({
-             cancel: ['Cancel', {class: 'button radius tiny secondary cancel hide', href: '{{admin_<%= @project_path %>_<%= plural_table_name %>_path}}'}],
+             cancel: ['Cancel', {class: 'button radius tiny secondary cancel hide', href: '{{admin_<%= plural_table_name %>_path}}'}],
              submit: ['Save', class: 'button tiny right radius ajax-submit', remote: true]
            }, wrapper_class: 'form-group widget-buttons')
          end

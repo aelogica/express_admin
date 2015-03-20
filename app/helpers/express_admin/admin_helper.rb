@@ -42,9 +42,7 @@ module ExpressAdmin
     end
 
     def current_user_gravatar
-      if defined?(current_user)
-        gravatar_image_tag current_user.email
-      end
+      gravatar_image_tag current_user.email if defined?(current_user)
     end
 
     def title_content
@@ -56,13 +54,11 @@ module ExpressAdmin
     end
 
     def admin_javascript_and_css_includes
-      current_module_path = current_module.to_s.underscore unless current_module.eql?(ExpressAdmin)
+      current_module_path = current_module.to_s.underscore
       a = []
-      a << stylesheet_link_tag("express_admin/application")
-      a << stylesheet_link_tag("#{current_module_path}/admin/application") if current_module_path
+      a << stylesheet_link_tag("#{current_module_path}/admin/application")
       a << stylesheet_link_tag("app_express/admin/application") if defined?(AppExpress)
-      a << javascript_include_tag("express_admin/application", 'data-turbolinks-track' => true)
-      a << javascript_include_tag("#{current_module_path}/admin/application", 'data-turbolinks-track' => true) if current_module_path
+      a << javascript_include_tag("#{current_module_path}/admin/application", 'data-turbolinks-track' => true)
       a.join()
     end
 

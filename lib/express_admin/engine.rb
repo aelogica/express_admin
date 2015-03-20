@@ -1,64 +1,33 @@
-require 'express_admin/ajax_datatables'
-require 'express_admin/menu'
-require 'foundation-rails'
-require 'gravatar_image_tag'
-require 'sass-rails'
-require 'recursive-open-struct'
-require 'select2-rails'
-require 'ostruct'
-require 'underscore-rails'
-require 'underscore-string-rails'
-require 'kaminari'
+require "express_admin/menu"
+require "express_admin/version"
+require "express_admin/ajax_datatables"
+require "express_templates"
+require "jquery-rails"
+require "foundation-rails"
+require "bourbon"
+require "gravatar_image_tag"
+require "kaminari"
 
-def gem_path(gem)
-  Gem::Specification.find_by_name(gem).gem_dir
-end
-
-def stylesheets_path(gem)
-  File.join(gem_path(gem), 'app', 'assets', 'stylesheets')
-end
+# should be a way to add this folder to rails' autoload paths
+components = Dir.glob(File.join(File.dirname(__FILE__), '..', '..', 'app', 'components', '**', '*.rb'))
+components.each {|component| require component }
 
 module ExpressAdmin
   class Engine < ::Rails::Engine
-    isolate_namespace ExpressAdmin
-    include ExpressAdmin::Menu::Loader
 
-    initializer "bourbon" do
-      Sass.load_paths << stylesheets_path("bourbon")
-    end
-
-    initializer :assets do |config|
-      engine_assets_path = File.join(File.dirname(__FILE__), '..', '..', 'app', 'assets')
-      all_assets = Dir.glob File.join(engine_assets_path, 'stylesheets', '**', '*.css*')
-      all_assets += Dir.glob File.join(engine_assets_path, 'javascripts', '**', '*.js*')
-      all_assets.each {|path| path.gsub!("#{engine_assets_path}/stylesheets/", '')}
-      all_assets.each {|path| path.gsub!("#{engine_assets_path}/javascripts/", '')}
-      all_assets.each {|path| path.gsub!("#{engine_assets_path}/fonts/", '')}
-      all_assets.each {|path| path.gsub!(/.(scss|coffee)$/, '')}
-
-      Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-      Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
-      Rails.application.config.assets.precompile += all_assets
-      Rails.application.config.assets.precompile += %w( express_admin/sections/_header.css )
-      Rails.application.config.assets.precompile += %w( express_admin/shared/_navigation.css )
-
-      ExpressAdmin::Engine.all_rails_engines.each do |engine|
-        if engine.methods.include?(:additional_assets)
-          puts "#{engine.to_s}: additional_assets #{engine.additional_assets.inspect}"
-          Rails.application.config.assets.precompile += engine.additional_assets
-        end
-      end
-    end
-
-    initializer 'express_admin.action_controller' do |app|
-      ActiveSupport.on_load :action_controller do
-        helper ExpressAdmin::ModuleSettingsHelper
-      end
-    end
-
-    config.autoload_paths += Dir[ExpressAdmin::Engine.root.join('app', 'jobs')]
-
-    config.admin_mount_point = '/admin'
+   initializer :assets do |config|
+    engine_assets_path = File.join(File.dirname(__FILE__), '..', '..', 'app', 'assets')
+    all_assets = Dir.glob File.join(engine_assets_path, 'stylesheets', '**', '*.css*')
+    all_assets += Dir.glob File.join(engine_assets_path, 'javascripts', '**', '*.js*')
+    all_assets.each {|path| path.gsub!("#{engine_assets_path}/stylesheets/", '')}
+    all_assets.each {|path| path.gsub!("#{engine_assets_path}/javascripts/", '')}
+    all_assets.each {|path| path.gsub!("#{engine_assets_path}/fonts/", '')}
+    all_assets.each {|path| path.gsub!(/.(scss|coffee)$/, '')}
+    Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    Rails.application.config.assets.precompile << /\.(?:png)$/
+    Rails.application.config.assets.precompile += all_assets
+  end
 
     def all_rails_engines
       Rails.application.eager_load!
@@ -74,5 +43,9 @@ module ExpressAdmin
       end
     end
 
+  end
+
+  class Railtie < ::Rails::Railtie
+    config.app_generators.template_engine :et
   end
 end
