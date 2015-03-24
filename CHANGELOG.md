@@ -1,3 +1,9 @@
+### 1.0.0
+
+* express_admin:install no longer mounts an engine
+* express_admin:install generates an installer for a new express module
+* removes previous assumptions (re: User model and having express_admin installed in the parent app)
+
 ### 0.3.3
 
 * fix merge errors
