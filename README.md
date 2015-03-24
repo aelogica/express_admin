@@ -1,26 +1,29 @@
 express_admin
 =============
 
-ExpressAdmin provides an admin menu framework based on Foundation.  This was developed to be used by other AppExpress components, namely ExpressBlog, ExpressPages, and AppExpress itself.  Visit [appexpress.io](http://appexpress.io) to learn more.
+ExpressAdmin is a common admin layout based on [Foundation](http://foundation.zurb.com). It also provides tools for creating modules for [AppExpress](http://www.appexpress.io).
 
+### Usage
 
-### Sample Application
+#### 1. Create a mountable engine
 
-$ rails new myapp -m https://raw.githubusercontent.com/aelogica/express_admin/master/template.rb
+    $ rails plugin new awesome --mountable
 
+#### 2. Add this gem
 
-### Scaffolding
+```ruby
+gem.add_dependency "express_admin", "~> 1.0"
+```
 
-$ rails generate express_admin:scaffold agent last_name:string
+    $ bundle
 
-$ rails destroy express_admin:scaffold agent
+#### 3. Install
 
+    $ rails generate express_admin:install 
 
-### Assumptions
+#### 4. Scaffold
 
-1. Parent app uses Devise and has a User model.
-2. Route is mounted in /admin.
-3. Parent app uses express_admin.
+    $ rails generate express_admin:scaffold agent last_name:string first_name:string
 
 ### License
 

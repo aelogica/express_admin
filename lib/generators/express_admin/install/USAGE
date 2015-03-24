@@ -1,8 +1,23 @@
 Description:
-    Explain the generator
+    Installs a new AppExpress module.
 
 Example:
-    rails generate install Thing
+    `rails generate express_admin:install`
 
-    This will create:
-        what/will/it/create
+    Creates a standard AppExpress module:
+      app/assets/javascripts/express_awesome/admin/ajax_forms.js
+      app/controllers/express_awesome/admin_controller.rb
+      app/views/layouts/express_awesome/admin.html.et
+      config/menu.yml
+      lib/generators/express_awesome/install/install_generator.rb
+      lib/generators/express_awesome/install/USAGE
+      test/lib/generators/express_awesome/install/install_generator_test.rb
+
+    Adds an entry to config/routes.rb:
+      `mount ExpressAwesome::Engine, at: ExpressAwesome::Engine.config.express_awesome_mount_point`
+
+    Adds a line to app/assets/javascripts/express_awesome/admin/application.js:
+      `//= require express_admin`
+
+    Adds a line to app/assets/stylesheets/express_awesome/admin/application.css:
+      `*= require express_admin`

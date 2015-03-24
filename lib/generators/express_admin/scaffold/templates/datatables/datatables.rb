@@ -3,8 +3,8 @@ class <%= @project_name %>::<%= singular_table_name.classify %>Datatable < Expre
   def_delegators :@view,
                  :link_to,
                  :content_tag,
-                 :admin_<%= @project_path %>_<%= singular_table_name %>_path,
-                 :edit_admin_<%= @project_path %>_<%= singular_table_name %>_path
+                 :admin_<%= singular_table_name %>_path,
+                 :edit_admin_<%= singular_table_name %>_path
 
   def sortable_columns
     @sortable_columns ||= [
@@ -29,7 +29,7 @@ class <%= @project_name %>::<%= singular_table_name.classify %>Datatable < Expre
         [
 <% for attribute in attributes -%>
    <% if attribute == attributes.first -%>
-   link_to(record.<%= attribute.name %>, admin_<%= @project_path %>_<%= singular_table_name %>_path(record.id), onClick: 'return false;', class: 'edit-link', 'data-model': '<%= singular_table_name %>') + add_quick_actions(record),
+   link_to(record.<%= attribute.name %>, admin_<%= singular_table_name %>_path(record.id), onClick: 'return false;', class: 'edit-link', 'data-model': '<%= singular_table_name %>') + add_quick_actions(record),
    <% else -%>
 record.<%= attribute.name %><%= ',' unless attribute == attributes.last %>
    <% end -%>
@@ -58,7 +58,7 @@ record.<%= attribute.name %><%= ',' unless attribute == attributes.last %>
       content_tag(:nav, class: 'action-menu', id: "<%= singular_table_name %>-#{record.id}") do
         content_tag(:ul, class: 'inline-list') do
           content_tag(:li, class: "delete-link") do
-            link_to 'Delete', admin_<%= @project_path %>_<%= singular_table_name %>_path(record.id), onClick: 'return false;', method: :delete, remote: true, data: { confirm: 'Delete this <%= singular_name %> permanently?' }
+            link_to 'Delete', admin_<%= singular_table_name %>_path(record.id), onClick: 'return false;', method: :delete, remote: true, data: { confirm: 'Delete this <%= singular_name %> permanently?' }
           end
         end
       end

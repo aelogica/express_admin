@@ -1,9 +1,9 @@
 require 'test_helper'
 require 'generators/express_admin/scaffold/scaffold_generator'
+require 'generators_test_helper'
 
 class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestCase
-  destination File.expand_path("../../../tmp", File.dirname(__FILE__))
-  setup :prepare_destination
+  include GeneratorsTestHelper
   setup :copy_routes
 
   tests ExpressAdmin::Generators::ScaffoldGenerator
@@ -14,7 +14,9 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
 
     # Model
     assert_file "app/models/dummy/agent.rb", /module Dummy\n  class Agent < ActiveRecord::Base/
-    # TODO test migration file
+
+    # TODO
+    #assert_migration "db/migrate/create_dummy_agents.rb"
 
     # View
     assert_file "app/views/dummy/admin/agents/index.html.et"
@@ -34,8 +36,8 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
     # Datatables Ruby
     assert_file "app/datatables/dummy/agent_datatable.rb" do |content|
       assert_match /class Dummy::AgentDatatable/, content
-      assert_match /:admin_dummy_agent_path/, content
-      assert_match /:edit_admin_dummy_agent_path/, content
+      assert_match /:admin_agent_path/, content
+      assert_match /:edit_admin_agent_path/, content
 
       assert_instance_method :sortable_columns, content do |m|
         assert_match /dummy_agents\.first_name/, m
@@ -53,7 +55,7 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
 
       # Private data method
       assert_instance_method :data, content do |m|
-        assert_match /link_to\(record\.first_name, admin_dummy_agent_path\(record\.id\)/, m
+        assert_match /link_to\(record\.first_name, admin_agent_path\(record\.id\)/, m
         assert_match /record\.last_name/, m
         assert_match /record\.age/, m
         assert_match /record\.address/, m
@@ -63,13 +65,13 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
         assert_match /Dummy::Agent\.all/, m
       end
 
-      assert_match "admin_dummy_agent_path(record.id), onClick: 'return false;'", content
+      assert_match "admin_agent_path(record.id), onClick: 'return false;'", content
       assert_match /confirm: 'Delete this agent permanently\?'/, content
     end
 
     # Controller
     assert_file "app/controllers/dummy/admin/agents_controller.rb" do |content|
-      assert_match(/class Dummy::Admin::AgentsController < ExpressAdmin::AdminController/, content)
+      assert_match(/class AgentsController < Dummy::Admin::AdminController/, content)
 
       assert_instance_method :index, content do |m|
         assert_match /\@agent = Dummy::Agent\.new/, m
@@ -105,8 +107,7 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
     # Routes
     assert_file "config/routes.rb" do |content|
       assert_match(/Dummy::Engine.routes.draw/, content)
-      assert_match(/scope module: 'admin', as: 'admin'/, content)
-      assert_match(/scope 'dummy', as: 'dummy'/, content)
+      assert_match(/namespace :admin do/, content)
       assert_match(/resources :agents/, content)
     end
   end

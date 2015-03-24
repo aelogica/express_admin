@@ -1,0 +1,11 @@
+require_dependency "<%= project_name %>/application_controller"
+
+module <%= project_class %>
+  module Admin
+    class AdminController < ApplicationController
+      helper ::ExpressAdmin::AdminHelper
+      before_filter :authenticate_user! if defined?(Devise)
+      layout "<%= project_name %>/admin"
+    end
+  end
+end

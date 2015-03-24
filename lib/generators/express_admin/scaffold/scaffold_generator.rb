@@ -10,7 +10,7 @@ module ExpressAdmin
         @project_name = if Rails.application
                           Rails.application.class.parent_name
                         else
-                          class_path.first.classify
+                          class_path.first.camelize
                         end
         @project_path = @project_name.underscore
         @resource_class = "#{@project_name}::#{singular_name.camelize}".classify
@@ -39,24 +39,20 @@ module ExpressAdmin
       end
 
       def add_route
-        if open('config/routes.rb').grep(/scope '#{@project_path}', as: '#{@project_path}'/).any?
-          inject_into_file 'config/routes.rb', "          resources :#{controller_file_name}\n",
-            after: /scope '#{@project_path}', as: '#{@project_path}' do\n/
+        route_path = Rails.root ? "#{Rails.root}/config/routes.rb": "config/routes.rb"
+        if open(route_path).grep("scope '#{@project_path}'").any?
+          inject_into_file 'config/routes.rb', "        resources :#{controller_file_name}\n",
+            after: "scope '#{@project_path}' do\n"
         else
-          append_to_file 'config/routes.rb', <<-EOD
-\n\n
-if Kernel.const_defined?('ExpressAdmin::Engine')
-  #{@project_name}::Engine.routes.draw do
-    scope ExpressAdmin::Engine.config.admin_mount_point do
-      scope module: 'admin', as: 'admin' do
-        scope '#{@project_path}', as: '#{@project_path}' do
-          resources :#{controller_file_name}
-        end
-      end
+          admin_route = <<-EOD
+  namespace :admin do
+    scope '#{@project_path}' do
+      resources :#{controller_file_name}
     end
   end
-end
 EOD
+          inject_into_file 'config/routes.rb', admin_route,
+            after: "#{@project_name}::Engine.routes.draw do\n"
         end
       end
 

@@ -1,5 +1,4 @@
 $(function() {
-  _.mixin(_.str.exports());
   $(document).foundation();
 
   // Table Row as links
