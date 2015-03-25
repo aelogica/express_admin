@@ -1,3 +1,7 @@
+### 1.0.2
+
+* add integration tests
+
 ### 1.0.1
 
 * add responders to gemspec
