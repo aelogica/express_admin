@@ -1,3 +1,7 @@
+### 1.0.1
+
+* add responders to gemspec
+
 ### 1.0.0
 
 * express_admin:install no longer mounts an engine
