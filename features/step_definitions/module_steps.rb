@@ -44,7 +44,6 @@ When(/^I scaffold invoices$/) do
   stdout_str, stderr_str, status =
     Open3.capture3("cd tmp/aruba/express_invoices && rails g express_admin:scaffold invoice total:float")
   unless status.success?
-    binding.pry
     raise "Unable to scaffold invoice"
   end
 end
