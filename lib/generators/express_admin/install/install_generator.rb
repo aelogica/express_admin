@@ -63,13 +63,6 @@ module ExpressAdmin
         end
       end
 
-      def require_responders
-        if open(engine_path).any?
-          inject_into_file engine_path, "require 'responders'\n\n",
-            after: "require \'express_admin\'\n"
-        end
-      end
-
       def create_menu
         template 'config/menu.yml.erb', File.join('config/menu.yml')
       end
@@ -78,15 +71,6 @@ module ExpressAdmin
         if open(engine_path).any?
           inject_into_file engine_path, "    include ::ExpressAdmin::Menu::Loader\n",
             after: "class Engine < ::Rails::Engine\n"
-        end
-      end
-
-      def add_responders_to_gemspec
-        gemspec_path = Rails.root ? "#{Rails.root}/#{@project_name}.gemspec" : "#{@project_name}.gemspec"
-
-        if open(gemspec_path).any?
-          inject_into_file gemspec_path, "s.add_dependency \"responders\", \"~> 2.0\"\n  ",
-            before: /s.add_dependency \"rails\"*/
         end
       end
 

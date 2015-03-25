@@ -6,7 +6,6 @@ class ExpressAdmin::Generators::InstallGeneratorTest < Rails::Generators::TestCa
   include GeneratorsTestHelper
   tests ExpressAdmin::Generators::InstallGenerator
   setup :copy_engine
-  setup :copy_gemspec
 
   def test_install_on_invoke
     run_generator
@@ -41,7 +40,6 @@ class ExpressAdmin::Generators::InstallGeneratorTest < Rails::Generators::TestCa
 
     assert_file 'lib/tmp/engine.rb' do |content|
       assert_match /require \'express_admin\'/, content
-      assert_match /require \'responders\'/, content
       assert_match /Tmp::Engine.config.tmp_mount_point = \'\/\'/, content
       assert_match /include ::ExpressAdmin::Menu::Loader/, content
 
@@ -52,10 +50,6 @@ class ExpressAdmin::Generators::InstallGeneratorTest < Rails::Generators::TestCa
       assert_match 'all_assets.each {|path| path.gsub!("#{engine_assets_path}/stylesheets/", \'\')}', content
       assert_match 'all_assets.each {|path| path.gsub!("#{engine_assets_path}/javascripts/", \'\')}', content
       assert_match "Rails.application.config.assets.precompile += all_assets", content
-    end
-
-    assert_file 'tmp.gemspec' do |content|
-      assert_match /s.add_dependency \"responders\", \"~> 2\.0\"/, content
     end
   end
 
