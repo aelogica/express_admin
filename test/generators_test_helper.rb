@@ -29,11 +29,4 @@ module GeneratorsTestHelper
     FileUtils.cp File.expand_path(engine), File.expand_path(destination)
   end
 
-  def copy_gemspec
-    gemspec = File.expand_path('test/fixtures/tmp.gemspec')
-    destination = File.join(destination_root)
-    FileUtils.mkdir_p(destination)
-    FileUtils.cp File.expand_path(gemspec), File.expand_path(destination)
-  end
-
 end

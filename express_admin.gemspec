@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'gravatar_image_tag'
   s.add_dependency 'kaminari'
   s.add_dependency 'rails', '~> 4.2'
+  s.add_dependency 'responders', '~> 2.0'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'pry'
