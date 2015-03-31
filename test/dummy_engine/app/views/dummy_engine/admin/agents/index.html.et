@@ -1,0 +1,39 @@
+row {
+  div(class: 'large-8 columns', id: 'main') {
+  table(id: 'agents-datatable', 'data-source' => '{{admin_agents_path}}' ) {
+      thead {
+        tr {
+          th { 'Last Name' }
+          th { 'First Name' }
+        }
+      }
+      tbody {
+      }
+    }
+  }
+  div(class: 'large-4 columns', id: 'sidebar') {
+    div(class: 'container ajax-form') {
+      div(class: 'widget-box') {
+        h2(class: 'widget-header') {
+          span {'New Agent' }
+        }
+
+        div(class: 'widget-body', id: 'agent-form') {
+        form_for(:agent, method: :post, action: '{{admin_agents_path}}') do |f|
+           f.text_field :last_name, wrapper_class: 'form-group'
+           f.text_field :first_name, wrapper_class: 'form-group'
+           f.actions({
+             cancel: ['Cancel', {class: 'button radius tiny secondary cancel hide', href: '{{admin_agents_path}}'}],
+             submit: ['Save', class: 'button tiny right radius ajax-submit', remote: true]
+           }, wrapper_class: 'form-group widget-buttons')
+         end
+        }
+      }
+    }
+  }
+}
+
+content_for(:page_javascript) do
+  javascript_include_tag 'dummy_engine/admin/agents'
+  javascript_include_tag 'dummy_engine/admin/ajax_forms'
+end
