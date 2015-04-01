@@ -29,7 +29,7 @@ class ExpressAdmin::Generators::InstallGeneratorTest < Rails::Generators::TestCa
     assert_file 'test/lib/generators/tmp/install/install_generator_test.rb'
 
     assert_file 'app/assets/javascripts/tmp/admin/application.js' do |content|
-      assert_match /\/\/= require express_admin/, content
+      assert_match /\/\/= require_tree \./, content
     end
 
     assert_file 'app/assets/stylesheets/tmp/admin/application.css' do |content|
