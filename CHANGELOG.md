@@ -1,3 +1,9 @@
+### 1.0.3
+
+* more integration tests (Capybara)
+* fix page load error when Devise is not installed in the parent app
+* fix Foundation JS loading error
+
 ### 1.0.2
 
 * add integration tests
