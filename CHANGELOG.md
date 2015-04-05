@@ -1,3 +1,7 @@
+### 1.0.4
+
+* add nil guard for current_user
+
 ### 1.0.3
 
 * more integration tests (Capybara)
