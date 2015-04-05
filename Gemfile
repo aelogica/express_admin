@@ -1,9 +1,5 @@
 source "https://rubygems.org"
 
-group :test do
-  gem 'minitest-rails-capybara'
-end
-
 # Declare your gem's dependencies in express_admin.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
