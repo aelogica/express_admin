@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'express_admin', path: '../..'
+gem 'express_admin', path: '../../'
 
 # Declare your gem's dependencies in dummy_engine.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and

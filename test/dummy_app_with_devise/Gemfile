@@ -40,7 +40,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 end
 
-# Normally, we would need to add express_admin here.
+# Do this only on development
 gem 'express_admin', path: '../../'
 
 gem 'dummy_engine', path: '../dummy_engine'
