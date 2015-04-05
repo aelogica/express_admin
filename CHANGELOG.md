@@ -1,3 +1,9 @@
+### 1.0.5
+
+* add minitest-rails-capybara as a development dependency
+* dummy apps use local express_admin
+* rename bin/run_tests to test/bin/run
+
 ### 1.0.4
 
 * add nil guard for current_user
