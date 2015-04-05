@@ -1,0 +1,9 @@
+#!/bin/bash
+
+EXPRESS_ADMIN_ROOT=$(echo $PWD)
+
+rake app:tmp:clear &&\
+cd test/dummy_app && rake tmp:clear &&\
+cd $EXPRESS_ADMIN_ROOT &&\
+cd test/dummy_app_with_devise && rake tmp:clear &&\
+cd $EXPRESS_ADMIN_ROOT && rake build
