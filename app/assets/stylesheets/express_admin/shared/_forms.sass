@@ -20,10 +20,12 @@ form
   input[type="tel"],
   input[type="time"],
   input[type="url"],
-  textarea
+  textarea,
+  select,
     border-radius: $global-radius
     border: 1px solid $gray
-    padding: 0.825rem
+    padding: rem-calc(12)
+    padding-top: rem-calc(11)
     height: auto
     box-shadow: none
 
@@ -33,7 +35,7 @@ form
       border-color: darken($gray, 20%)
 
   .postfix, .prefix
-    height: 44px
+    height: 42px
 
   &.form-horizontal
     .form-group
@@ -65,9 +67,6 @@ label
 .inline
   display: inline-block
   width: auto
-
-.content-body input[type=text]
-  padding: 10px
 
 input[type=checkbox], input[type=radio]
   margin-right: 5px
