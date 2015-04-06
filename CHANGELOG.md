@@ -1,3 +1,8 @@
+### 1.0.6
+
+* add wrapper script for building gems
+* misc. stylesheet fixes
+
 ### 1.0.5
 
 * add minitest-rails-capybara as a development dependency
