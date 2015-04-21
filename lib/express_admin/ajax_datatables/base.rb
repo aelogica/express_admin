@@ -58,11 +58,15 @@ module ExpressAdmin
       end
 
       def sort_records(records)
-        sort_by = []
-        params[:order].each_value do |item|
-          sort_by << "lower(#{sort_column(item)}) #{sort_direction(item)}"
+        if params[:order]
+          sort_by = []
+          params[:order].each_value do |item|
+            sort_by << "lower(#{sort_column(item)}) #{sort_direction(item)}"
+          end
+          records.order(sort_by.join(", "))
+        else
+          records
         end
-        records.order(sort_by.join(", "))
       end
 
       def paginate_records(records)
