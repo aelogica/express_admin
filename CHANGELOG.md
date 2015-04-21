@@ -1,3 +1,9 @@
+### 1.0.7
+
+* add sort order to datatables
+* do not load media helper
+
+
 ### 1.0.6
 
 * add wrapper script for building gems
