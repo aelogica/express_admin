@@ -1,3 +1,8 @@
+### 1.0.7
+
+* Fix bug when no order is passed in datatables
+* do not load media helper
+
 ### 1.0.6
 
 * add wrapper script for building gems
