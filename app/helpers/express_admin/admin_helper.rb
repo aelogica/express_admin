@@ -1,7 +1,8 @@
 module ExpressAdmin
   module AdminHelper
 
-    include ExpressMedia::Admin::MediaHelper if Kernel.const_defined?("ExpressMedia::Engine")
+    # TODO move this out
+    #include ExpressMedia::Admin::MediaHelper if Kernel.const_defined?("ExpressMedia::Engine")
 
     def title_partial
       (ExpressAdmin::Engine.config.title_partial rescue nil) || 'shared/express_admin/title'
