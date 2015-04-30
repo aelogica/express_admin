@@ -10,8 +10,6 @@ class ExpressAdmin::Generators::InstallGeneratorTest < Rails::Generators::TestCa
   def test_install_on_invoke
     run_generator
 
-    assert_file 'app/assets/javascripts/tmp/admin/ajax_forms.js'
-
     assert_file 'app/controllers/tmp/admin/admin_controller.rb' do |content|
       assert_match /module Tmp/, content
       assert_match /class AdminController < ApplicationController/, content
@@ -55,8 +53,6 @@ class ExpressAdmin::Generators::InstallGeneratorTest < Rails::Generators::TestCa
 
   def test_install_on_revoke
     run_generator [], behavior: :revoke
-
-    assert_no_file 'app/assets/javascripts/tmp/admin/ajax_forms.js'
 
     assert_no_file 'app/controllers/tmp/admin_controller.rb'
 

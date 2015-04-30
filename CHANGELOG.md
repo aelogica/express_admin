@@ -1,3 +1,8 @@
+### 2.0.0 (simplify branch WIP...)
+
+* Removed Ajax forms
+* Removed Datatables
+
 ### 1.0.7
 
 * Fix bug when no order is passed in datatables
