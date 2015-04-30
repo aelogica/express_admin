@@ -33,11 +33,6 @@ module ExpressAdmin
         template "model/model.rb", File.join("app/models/", @project_path, "#{singular_name}.rb")
       end
 
-      def create_datatables_files
-        template "datatables/datatables.rb", File.join('app/datatables', @project_path, "#{singular_name}_datatable.rb")
-        template "datatables/datatables.js", File.join('app/assets/javascripts', @project_path, 'admin' ,"#{controller_file_name}.js")
-      end
-
       def add_route
         route_path = Rails.root ? "#{Rails.root}/config/routes.rb": "config/routes.rb"
         if open(route_path).grep("scope '#{@project_path}'").any?

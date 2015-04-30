@@ -1,6 +1,5 @@
 require "express_admin/menu"
 require "express_admin/version"
-require "express_admin/ajax_datatables"
 require "express_templates"
 require "jquery-rails"
 require "foundation-rails"
