@@ -22,7 +22,12 @@ row {
         div(class: 'widget-body', id: '<%= singular_table_name %>-form') {
         form_for(:<%= singular_table_name %>, method: :post, action: '{{admin_<%= plural_table_name %>_path}}') do |f|
 <% for attribute in attributes -%>
+  <% case attribute.field_type 
+     when 'check_box' %>
+           f.check_box :<%= attribute.name %>, [[1, 'true']] wrapper_class: 'form-group'
+  <% else %>
            f.<%= attribute.field_type %> :<%= attribute.name %>, wrapper_class: 'form-group'
+  <% end %>
 <% end -%>
            f.actions({
              cancel: ['Cancel', {class: 'button radius tiny secondary cancel hide', href: '{{admin_<%= plural_table_name %>_path}}'}],
@@ -37,5 +42,4 @@ row {
 
 content_for(:page_javascript) do
   javascript_include_tag '<%= @project_path %>/admin/<%= plural_table_name %>'
-  javascript_include_tag '<%= @project_path %>/admin/ajax_forms'
 end
