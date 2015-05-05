@@ -12,7 +12,9 @@ module ExpressAdmin
           tr {
             display_columns.each do |column|
               th.send(column.name) {
-                column.name.titleize
+                div { # wrap in div so we can use overflow
+                  column.name.titleize
+                }
               }
             end
             show_hidden_columns_header_indicator if columns_hidden?
@@ -26,6 +28,7 @@ module ExpressAdmin
                   cell_value(column.name)
                 }
               end
+              show_hidden_column_cell if columns_hidden?
             }
           }
         }
@@ -60,6 +63,10 @@ module ExpressAdmin
       th.more_columns_indicator {
         "..."
       }
+    end
+
+    def show_hidden_column_cell
+      td.more_columns_indicator
     end
 
     def columns
