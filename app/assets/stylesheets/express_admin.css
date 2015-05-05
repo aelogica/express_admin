@@ -3,3 +3,7 @@
 *= require express_admin/screen
 *= require ionicons/ionicons
 */
+
+.hidden {
+  display: none;
+}
