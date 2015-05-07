@@ -7,6 +7,14 @@ module Admin
 
     defaults resource_class: <%= model_class_name %>
 
+    def create
+      create! { admin_<%= plural_table_name %>_path }
+    end
+
+    def edit
+      edit! { admin_<%= plural_table_name %>_path }
+    end
+
     private
 
       def <%= singular_table_name %>_params
