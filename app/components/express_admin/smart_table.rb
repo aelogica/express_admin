@@ -4,8 +4,6 @@ module ExpressAdmin
 
     MAX_COLS_TO_SHOW_IDX = 7
 
-          require 'pry'
-
     emits -> {
       table(my[:id]) {
         thead {
