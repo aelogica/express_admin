@@ -3,14 +3,6 @@ module ExpressAdmin
   class SmartForm < ExpressTemplates::Components::Base
     include ExpressTemplates::Components::Capabilities::Configurable
 
-
-# <% for attribute in attributes -%>
-
-#            f.actions({
-#              cancel: ['Cancel', {class: 'button radius tiny secondary cancel hide', href: '{{admin_blog_posts_path}}'}],
-#              submit: ['Save', class: 'button tiny right radius ajax-submit', remote: true]
-#            }, wrapper_class: 'form-group widget-buttons')
-
     emits -> {
       express_form(resource_name_for_path, resource_name: resource_name) {
         attributes.each do |attrib|
@@ -20,15 +12,24 @@ module ExpressAdmin
       }
     }
 
+    TIMESTAMPS = ['updated_at', 'created_at']
+
     def form_field_for(attrib)
       field_type_substitutions = {'text_area'       => 'textarea',
                                   'datetime_select' => 'datetime',
                                   'check_box'       => 'checkbox'}
       field_type = attrib.field_type.to_s.sub(/_field$/,'')
-      unless attrib.name.eql?('id')
-        self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
-      else
+      case
+      when attrib.name.eql?('id')
         hidden(:id)
+      when TIMESTAMPS.include?(attrib.name)
+        div {
+          label {
+            "#{attrib.name.titleize}: {{@#{resource_name}.try(:#{attrib.name})}}"
+          }
+        }
+      else
+        self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
       end
     end
 
