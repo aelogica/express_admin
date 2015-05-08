@@ -11,8 +11,12 @@ module Admin
       create! { admin_<%= plural_table_name %>_path }
     end
 
-    def edit
-      edit! { admin_<%= plural_table_name %>_path }
+    def show
+      show! { admin_<%= plural_table_name %>_path }
+    end
+
+    def destroy!
+      destroy! { admin_<%= plural_table_name %>_path }
     end
 
     private

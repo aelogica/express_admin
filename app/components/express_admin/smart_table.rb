@@ -5,7 +5,7 @@ module ExpressAdmin
     MAX_COLS_TO_SHOW_IDX = 7
 
     emits -> {
-      table(my[:id]) {
+      table(my[:id], 'data-turbolinks-permanent': nil) {
         thead {
           tr {
             display_columns.each do |column|
@@ -20,7 +20,7 @@ module ExpressAdmin
         }
         tbody {
           for_each(collection_var) {
-            tr(id: row_id) {
+            tr(id: row_id, 'data-resource-url': "{{admin_#{collection_member_name}_path(#{collection_member_name}.id)}}") {
               display_columns.each do |column|
                 td.send(column.name) {
                   cell_value(column.name)
@@ -30,6 +30,14 @@ module ExpressAdmin
             }
           }
         }
+      }
+      script {
+        %Q(
+          $(document).on('click', 'tr', function(e){
+            e.preventDefault();
+            window.location = $(this).attr('data-resource-url');
+          })
+        )
       }
     }
 
@@ -58,17 +66,17 @@ module ExpressAdmin
     end
 
     def show_hidden_columns_header_indicator
-      th.more_columns_indicator {
+      th._more_columns_indicator {
         "..."
       }
     end
 
     def show_hidden_column_cell
-      td.more_columns_indicator
+      td._more_columns_indicator
     end
 
     def columns
-      resource_class.constantize.columns
+      resource_class.constantize.content_columns
     end
 
     def resource_class

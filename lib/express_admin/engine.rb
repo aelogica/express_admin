@@ -7,6 +7,7 @@ require "bourbon"
 require "gravatar_image_tag"
 require "kaminari"
 require "responders"
+require 'inherited_resources'
 
 # should be a way to add this folder to rails' autoload paths
 components = Dir.glob(File.join(File.dirname(__FILE__), '..', '..', 'app', 'components', '**', '*.rb'))

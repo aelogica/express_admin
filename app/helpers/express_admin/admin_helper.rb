@@ -61,6 +61,7 @@ module ExpressAdmin
       a = []
       a << stylesheet_link_tag("#{current_module_path}/admin/application")
       a << stylesheet_link_tag("app_express/admin/application") if defined?(AppExpress)
+      a << javascript_include_tag("express_admin", 'data-turbolinks-track' => true)
       a << javascript_include_tag("#{current_module_path}/admin/application", 'data-turbolinks-track' => true)
       a.join()
     end
