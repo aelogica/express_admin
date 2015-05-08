@@ -5,7 +5,7 @@ module ExpressAdmin
     MAX_COLS_TO_SHOW_IDX = 7
 
     emits -> {
-      table(my[:id], 'data-turbolinks-permanent': nil) {
+      table(my[:id], 'data-turbolinks-permanent': nil)._table_hover {
         thead {
           tr {
             display_columns.each do |column|
