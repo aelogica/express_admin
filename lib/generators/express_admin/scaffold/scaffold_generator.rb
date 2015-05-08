@@ -42,14 +42,6 @@ module ExpressAdmin
         end
       end
 
-#       def create_controller_file
-#         template "controller/controller.rb", File.join("app/controllers", project_path, 'admin', "#{controller_file_name}_controller.rb")
-#       end
-
-#       def create_model_file
-#         template "model/model.rb", File.join("app/models/", project_path, 'admin', "#{singular_name}.rb")
-#       end
-
       def add_route
         route_path = Rails.root ? "#{Rails.root}/config/routes.rb": "config/routes.rb"
         if open(route_path).grep("scope '#{project_path}'").any?
@@ -76,16 +68,16 @@ EOD
         end
       end
 
-      # def create_migration
-      #   args = ''
-      #   attributes.each do |attribute|
-      #     args << "#{attribute.name}:#{attribute.type} "
-      #   end
+      def add_menu_item
+menu_entry = %Q(
+  -
+    title: '#{controller_file_name.titleize}'
+    path: '#{namespaced?.to_s.underscore}.admin_#{controller_file_name}_path'
+)
+        menu_path = Rails.root ? "#{Rails.root}/config/menu.yml": "config/menu.yml"
+        inject_into_file menu_path, menu_entry, after: 'items:'
+      end
 
-      #   generate :migration, "create_#{project_path}_#{plural_table_name} #{args}"
-      # end
-
-      # hook_for :form_builder, :as => :scaffold
 
       protected
         def available_views
