@@ -4,7 +4,7 @@ module ExpressAdmin
     include ExpressTemplates::Components::Capabilities::Configurable
 
     emits -> {
-      express_form(id: resource_name, action: resource_name_for_path, resource_name: resource_name) {
+      express_form(form_args) {
         attributes.each do |attrib|
           form_field_for(attrib)
         end
@@ -35,8 +35,15 @@ module ExpressAdmin
 
 
     protected
-      def resource_name_for_path
-        "admin_#{resource_name}".to_sym
+
+      def form_args
+        {           id: resource_name,
+                action: action_path,
+         resource_name: resource_name }
+      end
+
+      def action_path
+        "{{resource.persisted? ? resource_path(resource.id) : collection_path}}"
       end
 
       def resource_name

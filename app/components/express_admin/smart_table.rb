@@ -20,7 +20,7 @@ module ExpressAdmin
         }
         tbody {
           for_each(collection_var) {
-            tr(id: row_id, 'data-resource-url': "{{admin_#{collection_member_name}_path(#{collection_member_name}.id)}}") {
+            tr(id: row_id, 'data-resource-url': "{{resource_path(#{collection_member_name}.id)}}") {
               display_columns.each do |column|
                 td.send(column.name) {
                   cell_value(column.name)
