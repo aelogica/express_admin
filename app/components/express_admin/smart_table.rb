@@ -35,14 +35,14 @@ module ExpressAdmin
         %Q(
           $(document).on('click', 'tr', function(e){
             e.preventDefault();
-            window.location = $(this).attr('data-resource-url');
+            Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false, change: ['#{collection_member_name}', e.currentTarget.id] });
           })
         )
       }
     }
 
     def row_id
-      "#{collection_member_name}-{{#{collection_member_name}.id}}"
+      "#{collection_member_name}:{{#{collection_member_name}.id}}"
     end
 
     def collection_member_name

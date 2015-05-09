@@ -4,7 +4,7 @@ module ExpressAdmin
     include ExpressTemplates::Components::Capabilities::Configurable
 
     emits -> {
-      express_form(resource_name_for_path, resource_name: resource_name) {
+      express_form(id: resource_name, action: resource_name_for_path, resource_name: resource_name) {
         attributes.each do |attrib|
           form_field_for(attrib)
         end
