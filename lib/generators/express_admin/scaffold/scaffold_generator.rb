@@ -72,7 +72,7 @@ EOD
 menu_entry = %Q(
   -
     title: '#{controller_file_name.titleize}'
-    path: '#{namespaced?.to_s.underscore}.admin_#{controller_file_name}_path'
+    path: '#{namespaced?.to_s.underscore}.#{namespaced_path}_admin_#{controller_file_name}_path'
 )
         menu_path = Rails.root ? "#{Rails.root}/config/menu.yml": "config/menu.yml"
         inject_into_file menu_path, menu_entry, after: 'items:'
