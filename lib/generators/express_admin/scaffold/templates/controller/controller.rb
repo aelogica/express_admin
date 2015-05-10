@@ -1,23 +1,8 @@
 <% module_namespacing do -%>
 module Admin
   class <%= controller_class_name %>Controller < AdminController
-    respond_to :html
-
-    actions :all, :except => [:edit]
 
     defaults resource_class: <%= model_class_name %>
-
-    def create
-      create! { admin_<%= plural_table_name %>_path }
-    end
-
-    def show
-      show! { admin_<%= plural_table_name %>_path }
-    end
-
-    def destroy!
-      destroy! { admin_<%= plural_table_name %>_path }
-    end
 
     private
 
