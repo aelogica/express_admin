@@ -2,7 +2,7 @@ module ExpressAdmin
   class SmartTable < ExpressTemplates::Components::Base
     include ExpressTemplates::Components::Capabilities::Configurable
 
-    MAX_COLS_TO_SHOW_IDX = 7
+    MAX_COLS_TO_SHOW_IDX = 5
 
     emits -> {
       table(my[:id], 'data-turbolinks-permanent': nil)._table_hover {
