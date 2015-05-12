@@ -83,7 +83,7 @@ module ExpressAdmin
 
     def resource_class
       # TODO: Module namespace needs to be guessed somehow
-      "ExpressCms::#{collection_member_name.classify}"
+      @config[:class_name] || "ExpressCms::#{collection_member_name.classify}"
     end
   end
 end
