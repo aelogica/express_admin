@@ -15,17 +15,21 @@ module ExpressAdmin
                 }
               }
             end
+            th.actions { 'Actions' }
             show_hidden_columns_header_indicator if columns_hidden?
           }
         }
         tbody {
           for_each(collection_var) {
-            tr(id: row_id, 'data-resource-url': "{{resource_path(#{collection_member_name}.id)}}") {
+            tr(id: row_id, 'data-resource-url': resource_link) {
               display_columns.each do |column|
                 td.send(column.name) {
                   cell_value(column.name)
                 }
               end
+              td {
+                link_to 'Delete', resource_link, method: :delete, data: {confirm: 'Are you sure?'}, class: 'button tiny secondary'
+              }
               show_hidden_column_cell if columns_hidden?
             }
           }
@@ -42,6 +46,10 @@ module ExpressAdmin
         }
       end
     }
+
+    def resource_link
+      "{{resource_path(#{collection_member_name}.id)}}"
+    end
 
     def row_id
       "#{collection_member_name}:{{#{collection_member_name}.id}}"
