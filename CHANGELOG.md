@@ -1,7 +1,11 @@
-### 2.0.0 (simplify branch WIP...)
+### 1.1.0
+
+(We really are not 1.0 here... breaking changes may occur at any time.)
 
 * Removed Ajax forms
 * Removed Datatables
+* Implemented a smart_table and smart_form
+* Removed excessive testing
 
 ### 1.0.7
 
