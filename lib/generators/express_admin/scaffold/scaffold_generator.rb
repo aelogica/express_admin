@@ -1,10 +1,12 @@
-require 'rails/generators/erb/scaffold/scaffold_generator'
+require 'rails/generators/rails/scaffold/scaffold_generator'
 
 module ExpressAdmin
   module Generators
-    class ScaffoldGenerator < Erb::Generators::ScaffoldGenerator
+    class ScaffoldGenerator < ::Rails::Generators::ScaffoldGenerator
       source_root File.expand_path("../templates", __FILE__)
       attr_reader :view_path, :resource_class
+
+      remove_hook_for :scaffold_controller
 
       def create_root_folder
         empty_directory admin_view_path
@@ -12,34 +14,13 @@ module ExpressAdmin
 
       def copy_view_files
         available_views.each do |view|
-          filename = filename_with_extensions(view)
-          template "#{view}.html.et.erb", File.join(admin_view_path, filename)
+          template "#{view}.html.et.erb", File.join(admin_view_path, "#{view}.html.et")
         end
       end
 
       def generate_controller
-        controller_file_path = File.join("app/controllers",project_name, admin_controller_path, "#{controller_file_name}_controller.rb")
+        controller_file_path = File.join(["app/controllers", project_name, admin_controller_path, "#{controller_file_name}_controller.rb"].compact)
         template "controller/controller.rb", controller_file_path
-      end
-
-      def generate_model
-        # use rails' model generator so we get the module namespace right
-        if behavior.eql?(:invoke)
-          model_args = attributes.map do |attrib|
-            attrib_opt = case
-            when attrib.instance_variable_get(:@has_uniq_index)
-              "uniq"
-            when attrib.instance_variable_get(:@has_index)
-              "index"
-            else
-              nil
-            end
-            [attrib.name, attrib.type, attrib_opt].join(":")
-          end
-          generate :model, model_path, *model_args
-        else
-          destroy :model, model_path
-        end
       end
 
       def add_route
@@ -72,10 +53,12 @@ EOD
 menu_entry = %Q(
   -
     title: '#{controller_file_name.titleize}'
-    path: '#{namespaced?.to_s.underscore}.#{namespaced_path}_admin_#{controller_file_name}_path'
+    path: '#{namespaced?.to_s.underscore}.#{project_name}_admin_#{controller_file_name}_path'
 )
         menu_path = Rails.root ? "#{Rails.root}/config/menu.yml": "config/menu.yml"
-        inject_into_file menu_path, menu_entry, after: 'items:'
+        if File.exists?(menu_path)
+          inject_into_file menu_path, menu_entry, after: 'items:'
+        end
       end
 
 
@@ -97,7 +80,7 @@ menu_entry = %Q(
         end
 
         def project_name
-          namespaced_path
+          namespaced_path rescue nil
         end
 
         def module_name
@@ -106,7 +89,13 @@ menu_entry = %Q(
 
         def admin_controller_path
           # place the generated controller into an Admin module
-          File.join controller_class_path.dup.insert(1, 'admin').compact.slice(1..-1)
+          acp = controller_class_path.dup
+          if acp.empty?
+            acp.push 'admin'
+          else
+            acp.insert(1,'admin').compact.slice(1..-1)
+          end
+          File.join acp
         end
 
         def model_class_name

@@ -12,48 +12,21 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
   def test_scaffold_on_invoke
     run_generator
 
-    # Model
-    assert_file "app/models/dummy/agent.rb", /module Dummy\n  class Agent < ActiveRecord::Base/
+    assert_file "app/models/agent.rb", /^class Agent < ActiveRecord::Base/
 
-    # TODO
-    #assert_migration "db/migrate/create_dummy_agents.rb"
+    # TODO:
+    assert_migration "db/migrate/create_agents.rb"
 
     # View
-    assert_file "app/views/dummy/admin/agents/index.html.et"
+    assert_file "app/views/admin/agents/index.html.et"
 
     # Controller
-    assert_file "app/controllers/dummy/admin/agents_controller.rb" do |content|
-      assert_match(/class AgentsController < Dummy::Admin::AdminController/, content)
+    assert_file "app/controllers/admin/agents_controller.rb" do |content|
+      assert_match(/module Admin/, content)
+      assert_match(/class AgentsController < AdminController/, content)
 
-      assert_instance_method :index, content do |m|
-        assert_match /\@agent = Dummy::Agent\.new/, m
-        assert_match /AgentDatatable\.new\(view_context\)/, m
-      end
-
-      assert_instance_method :create, content do |m|
-        assert_match /@agent = Dummy::Agent\.create\(agent_params\)/, m
-        assert_match /render json: {agent: @agent, status: :created}/, m
-      end
-
-      assert_instance_method :show, content do |m|
-        assert_match /@agent = Dummy::Agent\.find_by_id\(params\[:id\]\)/, m
-        assert_match /@agent/, m
-        assert_match /agent: @agent, status: :ok/, m
-      end
-
-      assert_instance_method :update, content do |m|
-        assert_match /@agent = Dummy::Agent\.find_by_id\(params\[:id\]\)/, m
-        assert_match /@agent\.update_attributes\(agent_params\)/, m
-      end
-
-      assert_instance_method :destroy, content do |m|
-        assert_match /@agent = Dummy::Agent\.find_by_id\(params\[:id\]\)/, m
-        assert_match /@agent\.destroy/, m
-      end
-
-      assert_instance_method :agent_params, content do |m|
-        assert_match /params\.require\(:agent\)\.permit!/, m
-      end
+      assert_match(/defaults resource_class: Agent/, content)
+      assert_match(/def agent_params()/, content)
     end
 
     # Routes
