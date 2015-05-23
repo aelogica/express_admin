@@ -44,7 +44,7 @@ module ExpressAdmin
       def insert_mount_point
         @project_class = @project_name.camelize
 
-        if open(engine_path).any?
+        if File.exists?(engine_path)
           inject_into_file engine_path,
             "    #{@project_class}::Engine.config.#{@project_name}_mount_point = '/'\n",
             after: "class Engine < ::Rails::Engine\n"
@@ -54,7 +54,7 @@ module ExpressAdmin
       def require_express_admin
         @project_class = @project_name.camelize
 
-        if open(engine_path).any?
+        if File.exists?(engine_path)
           inject_into_file engine_path, "require 'express_admin'\n",
             before: "module #{@project_class}"
         end
@@ -65,7 +65,7 @@ module ExpressAdmin
       end
 
       def add_express_admin_menu
-        if open(engine_path).any?
+        if File.exists?(engine_path)
           inject_into_file engine_path, "    include ::ExpressAdmin::Menu::Loader\n",
             after: "class Engine < ::Rails::Engine\n"
         end
@@ -82,7 +82,7 @@ module ExpressAdmin
       Rails.application.config.assets.precompile += all_assets
     end
 EOD
-        if open(engine_path).any?
+        if File.exists?(engine_path)
           inject_into_file engine_path, assets, after: "class Engine < ::Rails::Engine\n"
         end
       end
