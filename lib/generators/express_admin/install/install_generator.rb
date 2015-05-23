@@ -6,9 +6,6 @@ module ExpressAdmin
 
       def create_common_files
         @project_name = destination_root.split('/').last
-
-        template "assets/javascripts/ajax_forms.js",
-          File.join('app/assets/javascripts', @project_name, 'admin' ,'ajax_forms.js')
       end
 
       def create_installer

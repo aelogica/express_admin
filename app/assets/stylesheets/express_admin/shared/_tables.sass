@@ -6,19 +6,59 @@
     padding-right: 20px
 
 table, .table
-  border-collapse: collapse
+  border-collapse: separate
+  border-spacing: 0
   width: 100%
 
   thead
     tr
-      border-bottom: 1px solid $border-color
+      background-color: #fff
+
+      th:first-child
+        border-left: 1px solid $border-color
+
+      th:last-child
+        border-right: 1px solid $border-color
+
+    tr:first-child
+      th
+        border-top: 1px solid $border-color
+
+      th:first-child
+        border-top-left-radius: 5px
+
+      th:last-child
+        border-top-right-radius: 5px
+
+    tr:last-child
+      th
+        border-bottom: 1px solid $border-color
+
 
   tbody
     tr
-      border-bottom: 1px solid $border-color
+      td:last-child
+        border-right: 1px solid $border-color
 
+      td:first-child
+        border-left: 1px solid $border-color
+
+    tr:first-child
       td
-        border: none
+
+    tr:last-child
+      td
+        border-bottom: 1px solid $border-color
+
+      td:first-child
+        border-bottom-left-radius: 5px
+
+      td:last-child
+        border-bottom-right-radius: 5px
+
+  tr
+    th
+      background-color: #f4f4f4
 
   td
     .button

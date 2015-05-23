@@ -1,0 +1,10 @@
+row {
+  main_region {
+    smart_table(:<%= plural_table_name %>)
+  }
+  sidebar_region {
+    widget_box(:edit_<%= singular_table_name %>) {
+      smart_form(:<%= singular_table_name %>)
+    }
+  }
+}
