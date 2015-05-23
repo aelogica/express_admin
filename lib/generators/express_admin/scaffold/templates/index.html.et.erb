@@ -3,7 +3,7 @@ row {
     smart_table(:<%= plural_table_name %>, show_on_click: true)
   }
   sidebar_region {
-    widget_box(:new_<%= singular_table_name %>) {
+    widget_box(:<%= singular_table_name %>) {
       smart_form(:<%= singular_table_name %>)
     }
   }
