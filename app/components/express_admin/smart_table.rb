@@ -64,7 +64,7 @@ module ExpressAdmin
     end
 
     def cell_value(column_name)
-      "{{#{collection_member_name}.#{column_name}}}"
+      "{{(#{collection_member_name}.#{column_name}).to_s.truncate(27)}}"
     end
 
     def display_columns
