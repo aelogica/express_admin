@@ -29,7 +29,11 @@ module ExpressAdmin
           }
         }
       else
-        self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
+        if attrib.name.match(/_id$/)
+          select(attrib.name)
+        else
+          self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
+        end
       end
     end
 
