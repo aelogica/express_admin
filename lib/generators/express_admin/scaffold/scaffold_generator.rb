@@ -7,6 +7,7 @@ module ExpressAdmin
       attr_reader :view_path, :resource_class
 
       remove_hook_for :scaffold_controller
+      remove_hook_for :assets
 
       def create_root_folder
         empty_directory admin_view_path
@@ -29,7 +30,9 @@ module ExpressAdmin
           inject_into_file 'config/routes.rb', "        resources :#{controller_file_name}\n",
             after: "scope '#{project_path}' do\n"
         else
-          if module_name
+          # this whole thing needs reworking for admin controllers
+          # in applications
+          if module_name # <-- should be namespaced?
             admin_route = <<-EOD
   namespace :admin do
     scope '#{module_name}' do
@@ -50,10 +53,15 @@ EOD
       end
 
       def add_menu_item
+        path = if namespaced?
+          "#{namespaced?.to_s.underscore}.#{project_name}_admin_#{controller_file_name}_path"
+        else
+          "admin_#{controller_file_name}_path"
+        end
 menu_entry = %Q(
   -
     title: '#{controller_file_name.titleize}'
-    path: '#{namespaced?.to_s.underscore}.#{project_name}_admin_#{controller_file_name}_path'
+    path: '#{path}'
 )
         menu_path = Rails.root ? "#{Rails.root}/config/menu.yml": "config/menu.yml"
         if File.exists?(menu_path)
