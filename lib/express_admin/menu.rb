@@ -26,8 +26,13 @@ module ExpressAdmin
     def self.[](addon_name)
       @menus ||= {}
       @menus[addon_name.to_sym] ||= begin
-        addon_path = Gem.loaded_specs[addon_name].full_gem_path if addon_name.to_s.match(/^\w+$/)
-        menu_yml_path = File.join(addon_path, 'config', 'menu.yml')
+        menu_yml_path =
+          if addon_name.eql?('admin')
+            File.join(Rails.root, 'config', 'menu.yml')
+          else
+            addon_path = Gem.loaded_specs[addon_name].full_gem_path if addon_name.to_s.match(/^\w+$/)
+            File.join(addon_path, 'config', 'menu.yml')
+          end
         from(menu_yml_path)
       end
     end
