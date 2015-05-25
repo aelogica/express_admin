@@ -2,7 +2,7 @@ module ExpressAdmin
   class SmartTable < ExpressTemplates::Components::Base
     include ExpressTemplates::Components::Capabilities::Configurable
 
-    MAX_COLS_TO_SHOW_IDX = 5
+    MAX_COLS_TO_SHOW_IDX = 4
 
     emits -> {
       table(my[:id], 'data-turbolinks-permanent': nil)._table_hover {
@@ -90,9 +90,16 @@ module ExpressAdmin
       resource_class.constantize.content_columns
     end
 
-    def resource_class
-      # TODO: Module namespace needs to be guessed somehow
-      @config[:class_name] || "ExpressCms::#{collection_member_name.classify}"
-    end
+    private
+
+      def namespace
+        @config[:namespace]
+      end
+
+      def resource_class
+        class_name = ["#{collection_member_name.classify}"]
+        class_name.unshift("#{namespace}") unless namespace.nil?
+        class_name.join("::")
+      end
   end
 end

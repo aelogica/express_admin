@@ -11,12 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031004627) do
+ActiveRecord::Schema.define(version: 20150525221228) do
 
-  create_table "express_admin_settings", force: true do |t|
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "express_admin_settings", force: :cascade do |t|
     t.string "setting"
     t.string "value"
     t.string "type"
+  end
+
+  create_table "widgets", force: :cascade do |t|
+    t.integer  "category_id"
+    t.string   "column2"
+    t.text     "column3"
+    t.datetime "column4"
+    t.boolean  "column5"
+    t.string   "column6"
+    t.integer  "column7"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end
