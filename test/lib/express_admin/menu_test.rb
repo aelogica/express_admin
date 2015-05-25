@@ -9,7 +9,7 @@ module ExpressAdmin
     # end
 
     test "Menu.from() accepts path and returns a menu from the yaml" do
-      menu = ExpressAdmin::Menu.from 'test/fixtures/express_admin/test_menu.yml'
+      menu = ExpressAdmin::Menu.from 'test/support/test_menu.yml'
       assert_equal 'Big Menu', menu.title
       assert_equal 3, menu.items.size
       assert_equal 'express_admin.baz_path', menu.items.last.path
