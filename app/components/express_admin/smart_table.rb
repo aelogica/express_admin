@@ -48,6 +48,7 @@ module ExpressAdmin
     }
 
     def resource_link
+      @config[:resource_link] ||
       "{{resource_path(#{collection_member_name}.id)}}"
     end
 

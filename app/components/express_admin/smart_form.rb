@@ -47,6 +47,7 @@ module ExpressAdmin
       end
 
       def action_path
+        @config[:action] ||
         "{{resource.persisted? ? resource_path(resource.id) : collection_path}}"
       end
 
