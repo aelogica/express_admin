@@ -47,7 +47,8 @@ module ExpressAdmin
       def form_args
         {           id: resource_name,
                 action: action_path,
-         resource_name: resource_name }
+         resource_name: resource_name,
+         resource_namespace: namespace }
       end
 
       def action_path

@@ -25,6 +25,14 @@ end
 
 Rails.application.load_generators
 
+# this is placed here so we can test form components with
+# namespaced modules without adding extra namespaced models
+# to our dummy app
 module ExampleEngine
-  class Widget < ::Widget ; end
+  class Widget < ::Widget
+    belongs_to :category, class_name: 'ExampleEngine::Category'
+  end
+  class Category < ::Category
+    has_many :widgets, class_name: 'ExampleEngine::Widget'
+  end
 end

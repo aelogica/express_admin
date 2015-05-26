@@ -68,6 +68,17 @@ module ExpressAdmin
       assert_match action_attrib, compiled_widget_form(namespace: "example_engine")
     end
 
+    test "options_from_collection_for_select used for the related collection" do
+      assert_match 'options_from_collection_for_select(Category.all.select(:id, :name).order(:name)',
+                    compiled_widget_form
+    end
+
+    test "options_from_collection_for_select use when a namespace is specified" do
+      assert_match 'options_from_collection_for_select(ExampleEngine::Category.all.select(:id, :name).order(:name)',
+                    compiled_widget_form(namespace: "example_engine")
+    end
+
+
 
   end
 end
