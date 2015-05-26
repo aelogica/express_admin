@@ -52,7 +52,7 @@ module ExpressAdmin
       end
 
       def resource_name
-        @config[:id].to_s.singularize
+        @config[:id].to_s
       end
 
       def columns
@@ -66,9 +66,14 @@ module ExpressAdmin
         end
       end
 
+      def namespace
+        @config[:namespace]
+      end
+
       def resource_class
-        # TODO: Module namespace needs to be guessed somehow
-        @config[:class_name] || "ExpressCms::#{resource_name.classify}"
+        class_name = ["#{@config[:id].to_s.classify}"]
+        class_name.unshift("#{namespace}") unless namespace.nil?
+        class_name.join("::")
       end
 
   end

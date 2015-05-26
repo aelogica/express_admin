@@ -9,7 +9,7 @@ module Components
     end
 
     test "renders 5 column headers with wrapping divs" do
-      matches = compiled_widget_table.scan /(<th class=\\"\w+\\">\s*<div>\s*\w+)/
+      matches = compiled_widget_table.scan /<th class=\\"\w+\\">\s*<div>\s*\w+/
       assert_equal 5, matches.length
     end
 
