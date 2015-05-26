@@ -24,3 +24,7 @@ if ActiveSupport::TestCase.respond_to?(:fixture_path=)
 end
 
 Rails.application.load_generators
+
+module ExampleEngine
+  class Widget < ::Widget ; end
+end

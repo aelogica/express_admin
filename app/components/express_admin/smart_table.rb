@@ -1,6 +1,10 @@
+require File.expand_path('../smart_support', __FILE__)
+
 module ExpressAdmin
   class SmartTable < ExpressTemplates::Components::Base
     include ExpressTemplates::Components::Capabilities::Configurable
+
+    include SmartSupport
 
     MAX_COLS_TO_SHOW_IDX = 4
 
@@ -21,14 +25,14 @@ module ExpressAdmin
         }
         tbody {
           for_each(collection_var) {
-            tr(id: row_id, 'data-resource-url': resource_link) {
+            tr(id: row_id, 'data-resource-url': "{{#{resource_path}}}") {
               display_columns.each do |column|
                 td.send(column.name) {
                   cell_value(column.name)
                 }
               end
               td {
-                link_to 'Delete', resource_link, method: :delete, data: {confirm: 'Are you sure?'}, class: 'button tiny secondary'
+                link_to 'Delete', "{{#{resource_path}}}", method: :delete, data: {confirm: 'Are you sure?'}, class: 'button tiny secondary'
               }
               show_hidden_column_cell if columns_hidden?
             }
@@ -47,25 +51,23 @@ module ExpressAdmin
       end
     }
 
-    def resource_link
-      @config[:resource_link] ||
-      "{{resource_path(#{collection_member_name}.id)}}"
-    end
 
     def row_id
       "#{collection_member_name}:{{#{collection_member_name}.id}}"
     end
 
-    def collection_member_name
-      @config[:id].to_s.singularize
-    end
-
-    def collection_var
-      "@#{collection_member_name.pluralize}".to_sym
-    end
-
     def cell_value(column_name)
-      "{{(#{collection_member_name}.#{column_name}).to_s.truncate(27)}}"
+      if relation_name = column_name.match(/(.*)_id$/).try(:[], 1)
+        reflection = resource_klass.reflect_on_association(relation_name.to_sym)
+      end
+
+      value = if reflection
+        relation = "#{collection_member_name}.#{relation_name}"
+        "#{relation}.try(:name) || #{relation}.to_s"
+      else
+        "#{collection_member_name}.#{column_name}"
+      end
+      "{{(#{value}).to_s.truncate(27)}}"
     end
 
     def display_columns
@@ -86,20 +88,5 @@ module ExpressAdmin
       td._more_columns_indicator
     end
 
-    def columns
-      resource_class.constantize.content_columns
-    end
-
-    private
-
-      def namespace
-        @config[:namespace]
-      end
-
-      def resource_class
-        class_name = ["#{collection_member_name.classify}"]
-        class_name.unshift("#{namespace}") unless namespace.nil?
-        class_name.join("::")
-      end
   end
 end

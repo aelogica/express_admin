@@ -12,7 +12,7 @@ module ExpressAdmin
     end
 
     test "uses inherited_resources path helpers to set correct action" do
-      action_attrib = 'action=\"{{resource.persisted? ? resource_path(resource.id) : collection_path}}\"'
+      action_attrib = 'action=\"{{@widget.try(:persisted?) ? widget_path(@widget.id) : widgets_path}}\"'
       assert_match action_attrib, compiled_widget_form
     end
 
@@ -62,6 +62,12 @@ module ExpressAdmin
     test "fields are wrapped in a div" do
       assert_match '<div class=\"field-wrapper\">', compiled_widget_form
     end
+
+    test "namespace option prepends namespace to path helper" do
+      action_attrib = 'action=\"{{@widget.try(:persisted?) ? example_engine.widget_path(@widget.id) : example_engine.widgets_path}}\"'
+      assert_match action_attrib, compiled_widget_form(namespace: "example_engine")
+    end
+
 
   end
 end

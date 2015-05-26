@@ -1,7 +1,11 @@
 require 'rails/generators/generated_attribute'
+require File.expand_path('../smart_support', __FILE__)
+
 module ExpressAdmin
   class SmartForm < ExpressTemplates::Components::Base
     include ExpressTemplates::Components::Capabilities::Configurable
+
+    include SmartSupport
 
     emits -> {
       express_form(form_args) {
@@ -48,15 +52,7 @@ module ExpressAdmin
 
       def action_path
         @config[:action] ||
-        "{{resource.persisted? ? resource_path(resource.id) : collection_path}}"
-      end
-
-      def resource_name
-        @config[:id].to_s
-      end
-
-      def columns
-        resource_class.constantize.columns
+        "{{@#{resource_name}.try(:persisted?) ? #{resource_path} : #{collection_path}}}"
       end
 
       def attributes
@@ -64,16 +60,6 @@ module ExpressAdmin
           field_definition = [attrib.name, attrib.type] # index not important here for now
           Rails::Generators::GeneratedAttribute.parse(field_definition.join(":"))
         end
-      end
-
-      def namespace
-        @config[:namespace]
-      end
-
-      def resource_class
-        class_name = ["#{@config[:id].to_s.classify}"]
-        class_name.unshift("#{namespace}") unless namespace.nil?
-        class_name.join("::")
       end
 
   end
