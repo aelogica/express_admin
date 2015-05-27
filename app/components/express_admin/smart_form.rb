@@ -52,7 +52,7 @@ module ExpressAdmin
 
       def action_path
         @config[:action] ||
-        "{{@#{resource_name}.try(:persisted?) ? #{resource_path} : #{collection_path}}}"
+        "{{@#{resource_name}.try(:persisted?) ? #{resource_path(ivar: true)} : #{collection_path}}}"
       end
 
       def attributes

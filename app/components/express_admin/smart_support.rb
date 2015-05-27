@@ -88,7 +88,7 @@ module ExpressAdmin
         end
       end
 
-      def resource_path
+      def resource_path(ivar=false)
         if @config[:resource_path]
           @config[:resource_path]
         else
@@ -96,7 +96,7 @@ module ExpressAdmin
             "#{namespace.underscore}.#{resource_name_with_prefix}_path" :
             "#{resource_name_with_prefix}_path"
 
-          "#{full_path_helper}(@#{resource_name}.id)"
+          "#{full_path_helper}(#{ivar ? '@' : ''}#{resource_name}.id)"
         end
       end
 
