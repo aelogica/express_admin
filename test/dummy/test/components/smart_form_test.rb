@@ -68,6 +68,9 @@ module ExpressAdmin
       assert_match action_attrib, compiled_widget_form(namespace: "example_engine")
     end
 
-
+    test 'path prefix is provided' do
+      action_attrib = 'action=\"{{@widget.try(:persisted?) ? admin_widget_path(@widget.id) : admin_widgets_path}}\"'
+      assert_match action_attrib, compiled_widget_form(path_prefix: 'admin')
+    end
   end
 end

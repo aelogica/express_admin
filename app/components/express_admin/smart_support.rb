@@ -1,7 +1,60 @@
 module ExpressAdmin
   module SmartSupport
+    def namespace
+      @config[:namespace] || infer_namespace
+    end
+
+    def path_prefix
+      @config[:path_prefix] || infer_path_prefix
+    end
 
     private
+
+      def infer_namespace
+        expander = @args.last
+        if expander.respond_to?(:template)
+          path_parts = expander.template.virtual_path.split('/')
+
+          case
+          when path_parts.size == 4
+            path_parts.first
+          when path_parts.size == 3
+            mod = path_parts.first.classify.constantize
+            if mod.const_defined?(:Engine)
+              path_parts.first
+            else
+              nil
+            end
+          else
+            nil
+          end
+        else
+          nil
+        end
+      end
+
+      def infer_path_prefix
+        expander = @args.last
+        if expander.respond_to?(:template)
+          path_parts = expander.template.virtual_path.split('/')
+
+          case
+          when path_parts.size == 4
+            path_parts[1]
+          when path_parts.size == 3
+            mod = path_parts.first.classify.constantize
+            if mod.const_defined?(:Engine)
+              nil
+            else
+              path_parts.first
+            end
+          else
+            nil
+          end
+        else
+          nil
+        end
+      end
 
       def resource_name
         @config[:id].to_s.singularize
@@ -21,14 +74,18 @@ module ExpressAdmin
 
       def collection_path
         if namespace
-          "#{namespace}.#{collection_name}_path"
+          "#{namespace}.#{collection_name_with_prefix}_path"
         else
-          "#{collection_name}_path"
+          "#{collection_name_with_prefix}_path"
         end
       end
 
-      def namespace
-        @config[:namespace]
+      def collection_name_with_prefix
+        if path_prefix
+          "#{path_prefix}_#{collection_name}"
+        else
+          collection_name
+        end
       end
 
       def resource_path
@@ -36,10 +93,18 @@ module ExpressAdmin
           @config[:resource_path]
         else
           full_path_helper = namespace ?
-            "#{namespace.underscore}.#{resource_name}_path" :
-            "#{resource_name}_path"
+            "#{namespace.underscore}.#{resource_name_with_prefix}_path" :
+            "#{resource_name_with_prefix}_path"
 
           "#{full_path_helper}(@#{resource_name}.id)"
+        end
+      end
+
+      def resource_name_with_prefix
+        if path_prefix
+          "#{path_prefix}_#{resource_name}"
+        else
+          resource_name
         end
       end
 
