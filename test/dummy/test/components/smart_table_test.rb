@@ -32,7 +32,7 @@ module Components
     end
 
     SHOW_ON_CLICK_JS = "$(document).on('click', 'tr', function(e){"
-    SHOW_ON_CLICK_ATTR = 'data-resource-url=\"{{widget_path(@widget.id)}}\"'
+    SHOW_ON_CLICK_ATTR = 'data-resource-url=\"{{widget_path(widget.id)}}\"'
 
     test "does not include show_on_click js handler by default" do
       assert_no_match SHOW_ON_CLICK_JS, compiled_widget_table
@@ -49,7 +49,7 @@ module Components
     end
 
     test "namespace option prepends namespace to path helper" do
-      assert_match 'data-resource-url=\"{{example_engine.widget_path(@widget.id)}}\"',
+      assert_match 'data-resource-url=\"{{example_engine.widget_path(widget.id)}}\"',
                     compiled_widget_table(namespace: "example_engine")
     end
 
