@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'bourbon', '~> 3.2'
-  s.add_dependency 'express_templates', '~> 0.3'
+  s.add_dependency 'express_templates', '~> 0.4.1'
   s.add_dependency 'foundation-rails', '~> 5.5.0'
   s.add_dependency 'jquery-rails'
 
