@@ -93,14 +93,14 @@ module ExpressAdmin
           @config[:resource_path]
         else
           full_path_helper = namespace ?
-            "#{namespace.underscore}.#{resource_name_with_prefix}_path" :
-            "#{resource_name_with_prefix}_path"
+            "#{namespace.underscore}.#{resource_name_with_path_prefix}_path" :
+            "#{resource_name_with_path_prefix}_path"
 
           "#{full_path_helper}(#{ivar ? '@' : ''}#{resource_name}.id)"
         end
       end
 
-      def resource_name_with_prefix
+      def resource_name_with_path_prefix
         if path_prefix
           "#{path_prefix}_#{resource_name}"
         else
