@@ -8,6 +8,16 @@ module ExpressAdmin
       @config[:path_prefix] || infer_path_prefix
     end
 
+    def resource_class
+      if @config[:class_name]
+        return @config[:class_name]
+      else
+        class_name = ["#{resource_name.classify}"]
+        class_name.unshift("#{namespace.classify}") unless namespace.nil?
+        class_name.join("::")
+      end
+    end
+
     private
 
       def infer_namespace
@@ -56,6 +66,8 @@ module ExpressAdmin
         end
       end
 
+      # TODO: this can now be inferred from the template.virtual_path
+      # if not supplied...
       def resource_name
         @config[:id].to_s.singularize
       end
@@ -106,12 +118,6 @@ module ExpressAdmin
         else
           resource_name
         end
-      end
-
-      def resource_class
-        class_name = ["#{collection_member_name.classify}"]
-        class_name.unshift("#{namespace.classify}") unless namespace.nil?
-        class_name.join("::")
       end
 
       def resource_klass

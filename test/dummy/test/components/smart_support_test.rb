@@ -6,9 +6,9 @@ module ExpressAdmin
 
     attr_accessor :virtual_path
 
-    def initialize(virtual_path)
+    def initialize(virtual_path, config = {})
       @virtual_path = virtual_path
-      @config = {}
+      @config = config
       @args = [self]
     end
 
@@ -39,9 +39,14 @@ module ExpressAdmin
     end
 
     test 'no namespace, no prefix within an app' do
-      smart_thing = SmartThing.new('something/index')
+      smart_thing = SmartThing.new('somethings/index')
       assert_equal nil, smart_thing.namespace
       assert_equal nil, smart_thing.path_prefix
+    end
+
+    test "#resource_class returns class_name option if specified" do
+      assert_equal 'FooBar', SmartThing.new('somethings/index', class_name: 'FooBar').resource_class
+      assert_equal 'Something', SmartThing.new('somethings/index', id: :something).resource_class
     end
   end
 end
