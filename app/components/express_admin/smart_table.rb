@@ -44,7 +44,7 @@ module ExpressAdmin
           %Q(
             $(document).on('click', 'tr', function(e){
               e.preventDefault();
-              Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false, change: ['#{collection_member_name}', e.currentTarget.id] });
+              Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false, change: '#{collection_member_name.dasherize}-box' });
             })
           )
         }
