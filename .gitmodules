@@ -1,0 +1,3 @@
+[submodule "vendor/gems/express_templates"]
+	path = vendor/gems/express_templates
+	url = git@github.com:aelogica/express_templates.git
