@@ -9,8 +9,16 @@ module ExpressAdmin
 
     emits -> {
       express_form(form_args) {
-        attributes.each do |attrib|
+        hidden(:id)
+        editable_attributes.each do |attrib|
           form_field_for(attrib)
+        end
+        timestamp_attributes.each do |timestamp|
+          div {
+            label {
+              "#{timestamp.name.titleize}: {{@#{resource_name}.try(:#{timestamp.name})}}"
+            }
+          }
         end
         submit(class: "button right tight tiny")
       }
@@ -23,21 +31,10 @@ module ExpressAdmin
                                   'datetime_select' => 'datetime',
                                   'check_box'       => 'checkbox'}
       field_type = attrib.field_type.to_s.sub(/_field$/,'')
-      case
-      when attrib.name.eql?('id')
-        hidden(:id)
-      when TIMESTAMPS.include?(attrib.name)
-        div {
-          label {
-            "#{attrib.name.titleize}: {{@#{resource_name}.try(:#{attrib.name})}}"
-          }
-        }
+      if attrib.name.match(/_id$/)
+        select(attrib.name)
       else
-        if attrib.name.match(/_id$/)
-          select(attrib.name)
-        else
-          self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
-        end
+        self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
       end
     end
 
@@ -61,6 +58,14 @@ module ExpressAdmin
           field_definition = [attrib.name, attrib.type] # index not important here for now
           Rails::Generators::GeneratedAttribute.parse(field_definition.join(":"))
         end
+      end
+
+      def editable_attributes
+        attributes.reject {|attrib| TIMESTAMPS.include?(attrib.name) || attrib.name.eql?('id') }
+      end
+
+      def timestamp_attributes
+        attributes.select {|attrib| TIMESTAMPS.include?(attrib.name) }
       end
 
   end
