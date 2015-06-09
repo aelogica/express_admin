@@ -71,11 +71,17 @@ module ExpressAdmin
     end
 
     def display_columns
-      columns.slice(0..MAX_COLS_TO_SHOW_IDX)
+      specified_columns || columns.slice(0..MAX_COLS_TO_SHOW_IDX)
     end
 
     def columns_hidden?
-      columns.size > MAX_COLS_TO_SHOW_IDX+1
+      !!specified_columns || columns.size > MAX_COLS_TO_SHOW_IDX+1
+    end
+
+    def specified_columns
+      if @config[:columns]
+        columns.select { |column| @config[:columns].include?(column.name.to_sym) }
+      end
     end
 
     def show_hidden_columns_header_indicator

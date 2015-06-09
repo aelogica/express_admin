@@ -59,6 +59,16 @@ module Components
       assert_match '{{(widget.category.try(:name) || widget.category.to_s).to_s.truncate(27)}}', compiled_widget_table
     end
 
+    test "table displays only columns specified if columns option provided" do
+      compiled = compiled_widget_table(columns: [:column3, :column4])
+      assert_match 'column3', compiled
+      assert_match 'column3', compiled
+      refute_match 'column2', compiled
+      refute_match 'category_id', compiled
+      refute_match 'column5', compiled
+      refute_match 'column6', compiled
+    end
+
   end
 
 end
