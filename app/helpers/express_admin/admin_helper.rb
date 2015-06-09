@@ -68,15 +68,15 @@ module ExpressAdmin
     end
 
     def admin_menus
-      addons = ExpressAdmin::Engine.all_addons.map do |engine|
+      menus = ExpressAdmin::Engine.all_addons.map do |engine|
         ExpressAdmin::Menu[engine.addon_name.to_s] rescue nil
       end.compact
 
-      addons.sort do |addonA, addonB|
-        if addonA.position == addonB.position
-          addonA.title <=> addonB.title
+      menus.sort do |menuA, menuB|
+        if menuA.position == menuB.position
+          menuA.title <=> menuB.title
         else
-          addonA.position <=> addonB.position
+          menuA.position <=> menuB.position
         end
       end
     end
