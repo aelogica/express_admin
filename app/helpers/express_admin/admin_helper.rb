@@ -79,6 +79,10 @@ module ExpressAdmin
           menuA.position <=> menuB.position
         end
       end
+
+      application_menu = ExpressAdmin::Menu['admin'] rescue nil
+      menus.unshift application_menu if application_menu
+      menus
     end
 
     def menu_item(name, path)
