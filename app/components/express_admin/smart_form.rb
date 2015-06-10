@@ -20,6 +20,9 @@ module ExpressAdmin
             }
           }
         end
+        has_many_through_associations.each do |assoc|
+          select(assoc.name, nil, multiple: true)
+        end
         submit(class: "button right tight tiny")
       }
     }
@@ -66,6 +69,10 @@ module ExpressAdmin
 
       def timestamp_attributes
         attributes.select {|attrib| TIMESTAMPS.include?(attrib.name) }
+      end
+
+      def has_many_through_associations
+        resource_klass.reflect_on_all_associations(:has_many).select {|assoc| assoc.options.keys.include?(:through) }
       end
 
   end

@@ -1,0 +1,10 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+kids_lego:
+  widget: lego
+  tag: kids
+
+plastic_lego:
+  widget: lego
+  tag: plastic

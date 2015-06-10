@@ -1,0 +1,14 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+expensive:
+  name: expensive
+
+kids:
+  name: kids
+
+adults:
+  name: adults
+
+plastic:
+  name: plastic

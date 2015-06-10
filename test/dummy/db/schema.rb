@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525221228) do
+ActiveRecord::Schema.define(version: 20150610081204) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -19,10 +19,13 @@ ActiveRecord::Schema.define(version: 20150525221228) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "express_admin_settings", force: :cascade do |t|
-    t.string "setting"
-    t.string "value"
-    t.string "type"
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "widget_tags", force: :cascade do |t|
+    t.integer "widget_id"
+    t.integer "tag_id"
   end
 
   create_table "widgets", force: :cascade do |t|
