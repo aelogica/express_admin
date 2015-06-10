@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks'
   s.add_dependency 'responders', '~> 2.0'
   s.add_dependency 'inherited_resources', '~> 1.6'
+  s.add_dependency 'select2-rails'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'pry'

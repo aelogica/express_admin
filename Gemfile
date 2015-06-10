@@ -14,3 +14,4 @@ gemspec
 # gem 'debugger'
 
 gem 'express_templates', path: 'vendor/gems/express_templates'
+gem 'select2-rails', github: "frodrigo/select2-rails", branch: 'v4'
