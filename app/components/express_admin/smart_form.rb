@@ -13,15 +13,15 @@ module ExpressAdmin
         editable_attributes.each do |attrib|
           form_field_for(attrib)
         end
+        has_many_through_associations.each do |assoc|
+          select(assoc.name, nil, multiple: true, include_blank: false)
+        end
         timestamp_attributes.each do |timestamp|
           div {
             label {
               "#{timestamp.name.titleize}: {{@#{resource_name}.try(:#{timestamp.name})}}"
             }
           }
-        end
-        has_many_through_associations.each do |assoc|
-          select(assoc.name, nil, multiple: true)
         end
         submit(class: "button right tight tiny")
       }
