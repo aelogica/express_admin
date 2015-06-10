@@ -6,7 +6,7 @@ module ExpressAdmin
 
     include SmartSupport
 
-    MAX_COLS_TO_SHOW_IDX = 4
+    MAX_COLS_TO_SHOW_IDX = 5
 
     emits -> {
       table(my[:id], 'data-turbolinks-permanent': nil)._table_hover {
@@ -71,7 +71,7 @@ module ExpressAdmin
     end
 
     def display_columns
-      specified_columns || columns.slice(0..MAX_COLS_TO_SHOW_IDX)
+      specified_columns || columns.slice(1..MAX_COLS_TO_SHOW_IDX)
     end
 
     def columns_hidden?
