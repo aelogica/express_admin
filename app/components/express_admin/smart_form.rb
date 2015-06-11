@@ -1,5 +1,4 @@
 require 'rails/generators/generated_attribute'
-require File.expand_path('../smart_support', __FILE__)
 
 module ExpressAdmin
   class SmartForm < ExpressTemplates::Components::Base

@@ -1,5 +1,3 @@
-require File.expand_path('../smart_support', __FILE__)
-
 module ExpressAdmin
   class SmartTable < ExpressTemplates::Components::Base
     include ExpressTemplates::Components::Capabilities::Configurable
