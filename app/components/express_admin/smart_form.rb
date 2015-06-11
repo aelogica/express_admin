@@ -48,6 +48,7 @@ module ExpressAdmin
         {           id: resource_name,
                 action: action_path,
          resource_name: resource_name,
+        resource_class: resource_class,
              namespace: namespace}
       end
 
