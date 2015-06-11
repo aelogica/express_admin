@@ -3,8 +3,7 @@ require File.expand_path('../smart_support', __FILE__)
 module ExpressAdmin
   class SmartTable < ExpressTemplates::Components::Base
     include ExpressTemplates::Components::Capabilities::Configurable
-
-    include SmartSupport
+    include ExpressTemplates::Components::Capabilities::Resourceful
 
     MAX_COLS_TO_SHOW_IDX = 5
 

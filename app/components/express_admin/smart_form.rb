@@ -4,8 +4,7 @@ require File.expand_path('../smart_support', __FILE__)
 module ExpressAdmin
   class SmartForm < ExpressTemplates::Components::Base
     include ExpressTemplates::Components::Capabilities::Configurable
-
-    include SmartSupport
+    include ExpressTemplates::Components::Capabilities::Resourceful
 
     emits -> {
       express_form(form_args) {
