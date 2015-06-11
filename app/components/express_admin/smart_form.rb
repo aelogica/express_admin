@@ -46,7 +46,7 @@ module ExpressAdmin
         {           id: resource_name,
                 action: action_path,
          resource_name: resource_name,
-        resource_class: resource_class,
+        resource_class: @config[:resource_class],
              namespace: namespace}
       end
 
@@ -86,7 +86,7 @@ module ExpressAdmin
       end
 
       def has_many_through_associations
-        resource_klass.reflect_on_all_associations(:has_many).select {|assoc| assoc.options.keys.include?(:through) }
+        resource_class.reflect_on_all_associations(:has_many).select {|assoc| assoc.options.keys.include?(:through) }
       end
 
   end

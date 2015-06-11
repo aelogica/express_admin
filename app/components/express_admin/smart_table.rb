@@ -55,7 +55,7 @@ module ExpressAdmin
 
     def cell_value(column_name)
       if relation_name = column_name.match(/(.*)_id$/).try(:[], 1)
-        reflection = resource_klass.reflect_on_association(relation_name.to_sym)
+        reflection = resource_class.reflect_on_association(relation_name.to_sym)
       end
 
       value = if reflection
