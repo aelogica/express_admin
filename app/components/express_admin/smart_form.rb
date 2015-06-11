@@ -65,7 +65,22 @@ module ExpressAdmin
       end
 
       def editable_attributes
-        attributes.reject {|attrib| TIMESTAMPS.include?(attrib.name) || attrib.name.eql?('id') }
+        attributes.reject do |attrib|
+          TIMESTAMPS.include?(attrib.name) ||
+          excluded_attributes.map(&:to_s).include?(attrib.name)
+        end + virtual_attributes
+      end
+
+      def virtual_attributes
+        (@config[:virtual]||[]).map do |attrib_name|
+          Rails::Generators::GeneratedAttribute.parse("#{attrib_name}:string")
+        end
+      end
+
+      def excluded_attributes
+        excl = [:id]
+        excl += @config[:exclude] if @config[:exclude]
+        excl
       end
 
       def timestamp_attributes

@@ -87,5 +87,12 @@ module ExpressAdmin
       assert_match /select_tag.*tag_ids.*multiple: true/, compiled_widget_form
     end
 
+    test "excluded fields are excluded" do
+      refute_match 'column3', compiled_widget_form(exclude: [:column3])
+    end
+
+    test "virtual attributes may be included" do
+      assert_match 'password', compiled_widget_form(virtual: [:password])
+    end
   end
 end
