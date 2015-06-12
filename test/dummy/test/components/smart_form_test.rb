@@ -83,8 +83,8 @@ module ExpressAdmin
                     compiled_widget_form(namespace: "example_engine")
     end
 
-    test "multi-select with collection_ids is used for has_many_through associations" do
-      assert_match /select_tag.*tag_ids.*multiple: true/, compiled_widget_form
+    test "collection_select with collection_ids is used for has_many_through associations" do
+      assert_match /collection_select.*tag_ids.*multiple: true/, compiled_widget_form
     end
 
     test "excluded fields are excluded" do
