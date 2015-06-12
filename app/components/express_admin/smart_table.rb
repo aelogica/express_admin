@@ -6,7 +6,7 @@ module ExpressAdmin
     MAX_COLS_TO_SHOW_IDX = 5
 
     emits -> {
-      table(my[:id], 'data-turbolinks-permanent': nil)._table_hover {
+      table(my[:id])._table_hover {
         thead {
           tr {
             display_columns.each do |column|
@@ -22,7 +22,7 @@ module ExpressAdmin
         }
         tbody {
           for_each(collection_var) {
-            tr(id: row_id, 'data-resource-url': "{{#{resource_path}}}") {
+            tr(id: row_id, 'data-resource-url': "{{#{resource_path}}}", class: row_class) {
               display_columns.each do |column|
                 td.send(column.name) {
                   cell_value(column.name)
@@ -41,12 +41,16 @@ module ExpressAdmin
           %Q(
             $(document).on('click', 'tr', function(e){
               e.preventDefault();
-              Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false, change: '#{collection_member_name.dasherize}-box' });
+              Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false, change: ['#{collection_member_name.dasherize}-box', '#{my[:id]}'] });
             })
           )
         }
       end
     }
+
+    def row_class
+      "{{#{collection_member_name}.eql?(@#{resource_name}) ? 'current' : ''}}"
+    end
 
 
     def row_id

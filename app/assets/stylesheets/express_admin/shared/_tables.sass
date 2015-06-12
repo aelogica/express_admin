@@ -56,6 +56,9 @@ table, .table
       td:last-child
         border-bottom-right-radius: 5px
 
+    tr.current
+      background-color: #f0f0f0
+
   tr
     th
       background-color: #f4f4f4
@@ -72,4 +75,6 @@ table, .table
   &.table-hover
     tr:hover
       cursor: pointer
-      background-color: #f0f0f0
+
+      td
+        color: $blue-color
