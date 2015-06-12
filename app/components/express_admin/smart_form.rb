@@ -12,7 +12,7 @@ module ExpressAdmin
           form_field_for(attrib)
         end
         has_many_through_associations.each do |assoc|
-          select(assoc.name, nil, multiple: true, include_blank: false)
+          select_collection(assoc.name)
         end
         timestamp_attributes.each do |timestamp|
           div {
