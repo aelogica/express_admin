@@ -4,8 +4,9 @@ module ExpressAdmin
   class SmartTreeTest < ActiveSupport::TestCase
 
     class Node
-      attr :children
+      attr :children, :name
       def initialize(name, children = [])
+        @name = name
         @children = children
       end
     end
@@ -20,15 +21,19 @@ module ExpressAdmin
            ])])
     end
 
+    def tree_items
+      [tree_item]
+    end
+
     def expected
       "
-<ul id=\"tree_item\" class=\"tree_items tree\">
-  <li>{{tree_item.name}}</li>
-  <li>{{tree_item.name}}
-    <ul id=\"tree_item\" class=\"tree_items tree\">
-      <li>{{tree_item.name}}</li>
-      <li>{{tree_item.name}}</li>
-      <li>{{tree_item.name}}</li>
+<ul>
+  <li>Child1</li>
+  <li>Child2
+    <ul>
+      <li>Grandchild1</li>
+      <li>Grandchild2</li>
+      <li>Grandchild3</li>
     </ul>
   </li>
 </ul>
@@ -40,8 +45,13 @@ module ExpressAdmin
     end
 
     test "smart_tree outputs expected markup" do
-      code = SmartTree.new(:tree_item).compile
-      assert_equal expected, eval(code)
+      view_code = ExpressTemplates.compile {
+        smart_tree(:tree_item) {
+          "{{node.name}}"
+        }
+      }
+      STDERR.puts view_code
+      assert_equal expected.gsub(/\s+/, ''), eval(view_code)
     end
 
 

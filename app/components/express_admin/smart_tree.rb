@@ -36,7 +36,7 @@ module ExpressAdmin
 
     include ExpressTemplates::Components::Capabilities::Configurable
     include ExpressTemplates::Components::Capabilities::Resourceful
-    # include ExpressTemplates::Components::Capabilities::Parenting
+    include ExpressTemplates::Components::Capabilities::Parenting
     # include ExpressTemplates::Components::Capabilities::AnonymouslyRecursing
 
     def compile
@@ -47,16 +47,28 @@ module ExpressAdmin
 
       # My next step is to see if this can be improved via some
       # Y/Z combinator.
-      return %Q(
-(func = -> (tree_item, indent, func) { %Q[
-\#{'  '*indent}<ul id="#{resource_name}" class="#{collection_name} tree">]+
-((-> {tree_item.children}.call).each_with_index.map do |tree_item, tree_item_index|
-"
-\#{'  '*(indent+1)}<li>{{tree_item.name}}"+(tree_item.children.any? ? func.call(tree_item, indent+2, func) : '')+"</li>"
-end).join+"
-\#{'  '*indent}</ul>
-\#{('  '*(indent-1)) if indent > 1}" } ; func.call(tree_item, 0, func) )
-)
+
+      # Update: Okay this is getting a little better/cleaner.
+      #
+      # We are close.  There is more to explor here.
+
+      wrap = -> (tag, *things) { "<#{tag}>"+things.join+"</#{tag}>" }
+
+      visitor = -> (node, visitor, body) {
+        if node.children.any?
+          wrap.(:ul, node.children.map { |node|
+            wrap.(:li, body.call(node), visitor.call(node, visitor, body))
+          })
+        end
+      }
+
+      %Q(
+      wrap = #{wrap.source}
+      -> (node, visitor, body) {
+        visitor.call(node, visitor, body)
+      }.call(#{config[:id]},
+             #{visitor.source},
+             -> (node) {#{compile_children}}))
     end
 
     def css_classes
