@@ -18,22 +18,20 @@ module ExpressAdmin
                 }
               }
             end
-            th.actions { 'Actions' }
-            show_hidden_columns_header_indicator if columns_hidden?
+            actions_header if should_show_actions?
+            hidden_columns_header_indicator if columns_hidden?
           }
         }
         tbody {
-          for_each(collection_var) {
-            tr(id: row_id, 'data-resource-url': "{{#{resource_path}}}", class: row_class) {
+          for_each(collection, as: collection_member_name) {
+            tr(row_args) {
               display_columns.each do |column|
                 td.send(column.name) {
                   cell_value(column.accessor)
                 }
               end
-              td {
-                link_to 'Delete', "{{#{resource_path}}}", method: :delete, data: {confirm: 'Are you sure?'}, class: 'button tiny secondary'
-              }
-              show_hidden_column_cell if columns_hidden?
+              actions_column if should_show_actions?
+              hidden_column_cell if columns_hidden?
             }
           }
         }
@@ -43,15 +41,39 @@ module ExpressAdmin
           %Q(
             $(document).on('click', 'tr', function(e){
               e.preventDefault();
-              Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false, change: ['#{collection_member_name.dasherize}-box', '#{my[:id]}'] });
+              Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false });
             })
           )
         }
       end
+
+      scroll_table if !!@config[:scroll_table]
     }
 
+    def scroll_table
+      script {
+        %Q($('\##{my[:id]}').scrollTableBody())
+      }
+    end
+
+    def actions_header
+      th.actions { 'Actions' }
+    end
+
+    def should_show_actions?
+      @config[:actions].nil? || !!@config[:actions]
+    end
+
+    def actions_column
+      td {
+        link_to 'Delete', "{{#{resource_path}}}", method: :delete, data: {confirm: 'Are you sure?'}, class: 'button tiny secondary'
+      }
+    end
+
     def row_class
-      "{{#{collection_member_name}.eql?(@#{resource_name}) ? 'current' : ''}}"
+      @config[:row_class].try(:respond_to?, :call) ? 
+        "{{#{@config[:row_class].source}.call(#{collection_member_name})}}" : 
+        "{{#{collection_member_name}.eql?(@#{resource_name}) ? 'current' : ''}}"
     end
 
 
@@ -59,9 +81,15 @@ module ExpressAdmin
       "#{collection_member_name}:{{#{collection_member_name}.id}}"
     end
 
+    def row_args
+      row_args = {id: row_id, class: row_class}
+      row_args.merge!('data-resource-url': "{{#{resource_path}}}") if !!@config[:show_on_click]
+      row_args
+    end
+
     def cell_value(accessor)
       if accessor.respond_to?(:call)
-        value = "(#{accessor.source}.call(#{collection_member_name}) rescue 'Error')"
+        value = "(begin #{accessor.source}.call(#{collection_member_name}).to_s rescue 'Error: '+$!.to_s ; end)"
       else
         if relation_name = accessor.to_s.match(/(.*)_id$/).try(:[], 1)
           reflection = resource_class.reflect_on_association(relation_name.to_sym)
@@ -74,7 +102,9 @@ module ExpressAdmin
           "#{collection_member_name}.#{accessor}"
         end
       end
-      "{{(#{value}).to_s.truncate(27)}}"
+      span {
+        "{{#{value}}}"
+      }
     end
 
     def display_columns
@@ -106,13 +136,13 @@ module ExpressAdmin
       @config[:columns]
     end
 
-    def show_hidden_columns_header_indicator
+    def hidden_columns_header_indicator
       th._more_columns_indicator {
         "..."
       }
     end
 
-    def show_hidden_column_cell
+    def hidden_column_cell
       td._more_columns_indicator
     end
 

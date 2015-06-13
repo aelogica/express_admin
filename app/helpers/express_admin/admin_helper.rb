@@ -43,7 +43,7 @@ module ExpressAdmin
     end
 
     def current_user_gravatar
-      if defined?(current_user) && !current_user.nil?
+      if defined?(current_user) && !current_user.nil? && !current_user.email.match(/example.com/)
         gravatar_image_tag current_user.email
       end
     end

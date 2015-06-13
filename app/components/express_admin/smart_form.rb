@@ -86,7 +86,9 @@ module ExpressAdmin
       end
 
       def has_many_through_associations
-        resource_class.reflect_on_all_associations(:has_many).select {|assoc| assoc.options.keys.include?(:through) }
+        resource_class.reflect_on_all_associations(:has_many).select do |assoc|
+          assoc.options.keys.include?(:through) && !excluded_attributes.include?(assoc.name.to_sym)
+        end
       end
 
   end

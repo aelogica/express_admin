@@ -1,0 +1,49 @@
+.h_box
+  flex-direction: row
+  top-margin: 1em
+  bottom-margin: 1em
+
+.v_box
+  flex-direction: column
+
+.container
+  flex-wrap: wrap
+  display: flex
+  justify-content: flex-start
+  align-content: flex-start
+
+  .panel
+    &.half_width, &.one_half
+      min-width: 50%
+      max-width: 50%
+
+    &.full_width
+      min-width: 100%
+      max-width: 100%
+
+    &.one_third
+      min-width: 33.33%
+      max-width: 33.33%
+
+    &.two_thirds
+      min-width: 66.66%
+      max-width: 66.66%
+
+    max-height: 50em
+
+    margin-right: 0em
+    margin-bottom: 0em
+
+    background: #F8F8F8
+
+
+    table:
+      overflow: scroll
+
+    .header
+      display: flex
+      justify-content: space-between
+      padding-right: 1em
+
+.space-between
+  justify-content: space-between

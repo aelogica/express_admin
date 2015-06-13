@@ -34,7 +34,6 @@ table, .table
       th
         border-bottom: 1px solid $border-color
 
-
   tbody
     tr
       td:last-child
@@ -62,6 +61,13 @@ table, .table
   tr
     th
       background-color: #f4f4f4
+
+  tr.red
+    td
+      background-color: lighten($red-color, 21)
+  tr.green
+    td
+      background-color: lighten($green-color, 42)
 
   td
     .button
