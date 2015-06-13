@@ -4,6 +4,8 @@ module Components
 
   class SmartTableTest < ActiveSupport::TestCase
 
+    fixtures :widgets
+
     def compiled_widget_table(*args)
       ExpressAdmin::SmartTable.new(:widgets, *args).compile
     end
@@ -67,6 +69,49 @@ module Components
       refute_match 'category_id', compiled
       refute_match 'column5', compiled
       refute_match 'column6', compiled
+    end
+
+    test "table column titles may be customized" do
+      compiled = compiled_widget_table(columns: {"Column3 is the Best" => :column3})
+      assert_match /<th class=\\"column3\\">\s+<div>Column3 is the Best/, compiled
+    end
+
+    def widget_table_with_proc_column
+      return -> {
+         smart_table(:widgets, columns: {
+           "This column will error" => -> (widget) { doesnt_work },
+           "This column will be fine" => -> (widget) { widget.column2.upcase },
+         })
+      }
+    end
+
+    def compiled_widget_table_with_proc_column
+      ExpressTemplates.compile(&widget_table_with_proc_column)
+    end
+
+
+    test "table cell values may be specified as procs" do
+      assert_match '-> (widget) { doesnt_work }', compiled_widget_table_with_proc_column
+    end
+
+    class DummyView
+      def initialize
+        @widgets = Widget.all
+      end
+      def widget_path(*args) ; "does not matter" ; end
+      def link_to(*args) ; widget_path(*args) ; end
+    end
+
+    test "table cell has 'Error' if a value specified as a proc throws an exception" do
+      assert_match 'Error', DummyView.new.instance_eval(compiled_widget_table_with_proc_column)
+    end
+
+    test "table cell contains result of proc.call if no exception is raised" do
+      assert_match 'LEGO', DummyView.new.instance_eval(compiled_widget_table_with_proc_column)
+    end
+
+    test "table cell class is valid when proc is used" do
+      assert_match 'class=\"this_column_will_error\"', compiled_widget_table_with_proc_column
     end
 
   end

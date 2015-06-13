@@ -56,7 +56,7 @@ module ExpressAdmin
       end
 
       def attributes
-        columns.map do |attrib|
+        super.map do |attrib|
           field_definition = [attrib.name, attrib.type] # index not important here for now
           Rails::Generators::GeneratedAttribute.parse(field_definition.join(":"))
         end
