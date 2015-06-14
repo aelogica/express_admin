@@ -82,7 +82,7 @@ module ExpressAdmin
       end
 
       def timestamp_attributes
-        attributes.select {|attrib| TIMESTAMPS.include?(attrib.name) }
+        attributes.select {|attrib| (TIMESTAMPS - (@config[:exclude]||[]).map(&:to_s)).include?(attrib.name) }
       end
 
       def has_many_through_associations
