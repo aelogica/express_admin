@@ -114,6 +114,24 @@ module Components
       assert_match 'class=\"this_column_will_error\"', compiled_widget_table_with_proc_column
     end
 
+    test "attribute accessor appended with _link generates a link" do
+      fragment = -> {
+          smart_table(:widgets, columns: {
+              'A link column' => :column3_link
+            })
+        }
+      assert_match 'link_to widget.column3, widget_path(widget.id)', ExpressTemplates.compile(&fragment)
+    end
+
+    test "timestamp accessor appeneded with _in_words generates code that uses time_ago_in_words" do
+      fragment = -> {
+          smart_table(:widgets, columns: {
+              'Created' => :created_at_in_words
+            })
+        }
+      assert_match "\(widget.created_at \? time_ago_in_words\(widget.created_at\)\+' ago' : 'never'\)", ExpressTemplates.compile(&fragment)
+    end
+
   end
 
 end

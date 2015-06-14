@@ -90,6 +90,10 @@ module ExpressAdmin
     def cell_value(accessor)
       if accessor.respond_to?(:call)
         value = "(begin #{accessor.source}.call(#{collection_member_name}).to_s rescue 'Error: '+$!.to_s ; end)"
+      elsif attrib = accessor.to_s.match(/(\w+)_link$/).try(:[], 1)
+        value = "(link_to #{collection_member_name}.#{attrib}, #{collection_member_name}_path(#{collection_member_name}.id))"
+      elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
+        value = "(#{collection_member_name}.#{attrib} ? time_ago_in_words(#{collection_member_name}.#{attrib})+' ago' : 'never')"
       else
         if relation_name = accessor.to_s.match(/(.*)_id$/).try(:[], 1)
           reflection = resource_class.reflect_on_association(relation_name.to_sym)
