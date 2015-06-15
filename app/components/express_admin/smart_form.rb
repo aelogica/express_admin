@@ -4,6 +4,7 @@ module ExpressAdmin
   class SmartForm < ExpressTemplates::Components::Base
     include ExpressTemplates::Components::Capabilities::Configurable
     include ExpressTemplates::Components::Capabilities::Resourceful
+    include ExpressTemplates::Components::Forms::FormSupport
 
     emits -> {
       express_form(form_args) {
@@ -39,20 +40,14 @@ module ExpressAdmin
       end
     end
 
-
     protected
 
       def form_args
         {           id: resource_name,
-                action: action_path,
+                action: form_action,
          resource_name: resource_name,
         resource_class: @config[:resource_class],
              namespace: namespace}
-      end
-
-      def action_path
-        @config[:action] ||
-        "{{@#{resource_name}.try(:persisted?) ? #{resource_path(ivar: true)} : #{collection_path}}}"
       end
 
       def attributes
