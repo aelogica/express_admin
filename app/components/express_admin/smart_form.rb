@@ -9,13 +9,13 @@ module ExpressAdmin
     emits -> {
       express_form(form_args) {
         hidden(:id)
-        editable_attributes.each do |attrib|
+        filter_by_name(editable_attributes).each do |attrib|
           form_field_for(attrib)
         end
-        has_many_through_associations.each do |assoc|
+        filter_by_name(has_many_through_associations).each do |assoc|
           select_collection(assoc.name)
         end
-        timestamp_attributes.each do |timestamp|
+        filter_by_name(timestamp_attributes).each do |timestamp|
           div {
             label {
               "#{timestamp.name.titleize}: {{@#{resource_name}.try(:#{timestamp.name})}}"
@@ -58,10 +58,7 @@ module ExpressAdmin
       end
 
       def editable_attributes
-        attributes.reject do |attrib|
-          TIMESTAMPS.include?(attrib.name) ||
-          excluded_attributes.map(&:to_s).include?(attrib.name)
-        end + virtual_attributes
+        non_timestamp_attributes + virtual_attributes
       end
 
       def virtual_attributes
@@ -77,13 +74,28 @@ module ExpressAdmin
       end
 
       def timestamp_attributes
-        attributes.select {|attrib| (TIMESTAMPS - (@config[:exclude]||[]).map(&:to_s)).include?(attrib.name) }
+        attributes.select {|attrib| TIMESTAMPS.include?(attrib.name) }
+      end
+
+      def non_timestamp_attributes
+        attributes.reject {|attrib| TIMESTAMPS.include?(attrib.name) }
       end
 
       def has_many_through_associations
         resource_class.reflect_on_all_associations(:has_many).select do |assoc|
-          assoc.options.keys.include?(:through) && !excluded_attributes.include?(assoc.name.to_sym)
+          assoc.options.keys.include?(:through)
         end
+      end
+
+      def filter_by_name(attribs)
+        if @config[:only]
+          # if using :only, we respect the order
+          @config[:only].map do |only|
+            attribs.detect {|attrib| only.to_s.eql?(attrib.name)} || nil
+          end.compact
+        else
+          attribs
+        end.reject {|attrib| (excluded_attributes).map(&:to_s).include? attrib.name }
       end
 
   end
