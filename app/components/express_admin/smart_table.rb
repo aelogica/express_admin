@@ -114,7 +114,7 @@ module ExpressAdmin
       if accessor.respond_to?(:call)
         value = "(begin #{accessor.source}.call(#{collection_member_name}).to_s rescue 'Error: '+$!.to_s ; end)"
       elsif attrib = accessor.to_s.match(/(\w+)_link$/).try(:[], 1)
-        value = "(link_to #{collection_member_name}.#{attrib}, #{collection_member_name}_path(#{collection_member_name}.id))"
+        value = "(link_to #{collection_member_name}.#{attrib}, #{collection_member_name}_path(#{collection_member_name}))"
       elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
         value = "(#{collection_member_name}.#{attrib} ? time_ago_in_words(#{collection_member_name}.#{attrib})+' ago' : 'never')"
       else

@@ -34,7 +34,7 @@ module Components
     # end
 
     SHOW_ON_CLICK_JS = "$(document).on('click', 'tr', function(e){"
-    SHOW_ON_CLICK_ATTR = 'data-resource-url=\"{{widget_path(widget.id)}}\"'
+    SHOW_ON_CLICK_ATTR = 'data-resource-url=\"{{widget_path(widget)}}\"'
 
     test "does not include show_on_click js handler by default" do
       assert_no_match SHOW_ON_CLICK_JS, compiled_widget_table
@@ -51,7 +51,7 @@ module Components
     end
 
     test "namespace option prepends namespace to path helper" do
-      assert_match 'data-resource-url=\"{{example_engine.widget_path(widget.id)}}\"',
+      assert_match 'data-resource-url=\"{{widget_path(widget)}}\"',
                     compiled_widget_table(namespace: "example_engine", show_on_click: true)
     end
 
@@ -120,7 +120,7 @@ module Components
               'A link column' => :column3_link
             })
         }
-      assert_match 'link_to widget.column3, widget_path(widget.id)', ExpressTemplates.compile(&fragment)
+      assert_match 'link_to widget.column3, widget_path(widget)', ExpressTemplates.compile(&fragment)
     end
 
     test "timestamp accessor appeneded with _in_words generates code that uses time_ago_in_words" do

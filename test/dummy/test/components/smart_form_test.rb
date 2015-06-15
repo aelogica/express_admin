@@ -12,7 +12,7 @@ module ExpressAdmin
     end
 
     test "uses inherited_resources path helpers to set correct action" do
-      action_attrib = 'action=\"{{@widget.try(:persisted?) ? widget_path(@widget.id) : widgets_path}}\"'
+      action_attrib = 'action=\"{{@widget.try(:persisted?) ? widget_path(@widget) : widgets_path}}\"'
       assert_match action_attrib, compiled_widget_form
     end
 
@@ -69,7 +69,7 @@ module ExpressAdmin
     end
 
     test 'path prefix is provided' do
-      action_attrib = 'action=\"{{@widget.try(:persisted?) ? admin_widget_path(@widget.id) : admin_widgets_path}}\"'
+      action_attrib = 'action=\"{{@widget.try(:persisted?) ? admin_widget_path(@widget) : admin_widgets_path}}\"'
       assert_match action_attrib, compiled_widget_form(path_prefix: 'admin')
     end
 
