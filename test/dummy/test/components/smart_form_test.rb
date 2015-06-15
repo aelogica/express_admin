@@ -63,11 +63,6 @@ module ExpressAdmin
       assert_match '<div class=\"field-wrapper\">', compiled_widget_form
     end
 
-    test "namespace option prepends namespace to path helper" do
-      action_attrib = 'action=\"{{@widget.try(:persisted?) ? example_engine.widget_path(@widget.id) : example_engine.widgets_path}}\"'
-      assert_match action_attrib, compiled_widget_form(namespace: "example_engine")
-    end
-
     test 'path prefix is provided' do
       action_attrib = 'action=\"{{@widget.try(:persisted?) ? admin_widget_path(@widget) : admin_widgets_path}}\"'
       assert_match action_attrib, compiled_widget_form(path_prefix: 'admin')
