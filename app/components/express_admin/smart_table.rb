@@ -8,7 +8,7 @@ module ExpressAdmin
     attr :columns
 
     emits -> {
-      table(my[:id])._table_hover {
+      table(my[:id], options)._table_hover {
         thead {
           tr {
             display_columns.each do |column|
@@ -36,15 +36,27 @@ module ExpressAdmin
           }
         }
       }
-      if !!@config[:show_on_click]
-        script {
-          %Q(
-            $(document).on('click', 'tr', function(e){
-              e.preventDefault();
-              Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false });
-            })
-          )
-        }
+      if @config[:show_on_click]
+        if is_permanent?
+          script {
+            %Q(
+              $(document).on('click', 'tr', function(e){
+                e.preventDefault();
+                Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false });
+              })
+            )
+          }
+        else
+          script {
+            %Q(
+              $(document).on('click', 'tr', function(e){
+                e.preventDefault();
+                Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false, change: 'main' });
+              })
+            )
+          }
+        end
+
       end
 
       scroll_table if !!@config[:scroll_table]
@@ -54,6 +66,14 @@ module ExpressAdmin
       script {
         %Q($('\##{my[:id]}').scrollTableBody())
       }
+    end
+
+    def options
+      if is_permanent?
+        {'data-turbolinks-permanent': nil}
+      else
+        nil
+      end
     end
 
     def actions_header
@@ -76,6 +96,9 @@ module ExpressAdmin
         "{{#{collection_member_name}.eql?(@#{resource_name}) ? 'current' : ''}}"
     end
 
+    def is_permanent?
+      @config[:permanent].nil? || (@config[:permanent].present? && @config[:permanent])
+    end
 
     def row_id
       "#{collection_member_name}:{{#{collection_member_name}.id}}"
