@@ -1,20 +1,62 @@
 # navigation styled for Zurb Foundation 5
 # the syntax for data-topbar may need to change for Zurb Foundation 5
-nav._top_bar(data: {topbar: true, options: "is_hover:false"}) {
-  title_partial_or_express_admin
-  div._top_bar_section {
-    ul {
-      li.divider
-      mega_menu_component
-    }
-  }
-  section._top_bar_section {
-    ul.left {
-      li.divider
-      li {
-        a(href: '/') { "View Site" }
+# nav._top_bar(data: {topbar: true, options: "is_hover:false"}) {
+#   title_partial_or_express_admin
+#   div._top_bar_section {
+#     ul {
+#       li.divider
+#       mega_menu_component
+#     }
+#   }
+#   section._top_bar_section {
+#     ul.left {
+#       li.divider
+#       li {
+#         a(href: '/') { "View Site" }
+#       }
+#     }
+#     render partial: 'shared/express_admin/navigation_bar_profile'
+#   }
+# }
+#
+# nav {
+#   ul.dark._menu_bar {
+#     title_partial_or_express_admin
+#     li {
+#       link_to 'Manage', '#'
+#     }
+#     li {
+#       a(href: '/') { "View Site" }
+#     }
+#     render partial: 'shared/express_admin/navigation_bar_profile'
+#     # mega_menu_component
+#   }
+# }
+
+nav {
+  div._menu_group.dark {
+    div._menu_group_left {
+      ul._icon_left._menu_bar.dark {
+        li {
+          a(href: '#') {
+            image_tag 'express_admin/appexpress_logo_dark.png', class: 'nav-logo'
+          }
+        }
+        li { link_to 'Manage', '#' }
+        li { link_to 'View Site', '/' }
       }
     }
-    render partial: 'shared/express_admin/navigation_bar_profile'
+    div._menu_group_right {
+      ul._icon_left._menu_bar.dark {
+        li {
+          a {
+            current_user_gravatar
+            span {'Profile' }
+          }
+          sign_in_or_sign_out
+        }
+      }
+    }
   }
 }
+
