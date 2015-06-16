@@ -15,13 +15,11 @@ html {
       header {
         render('shared/express_admin/navigation_bar')
       }
-      # addon_sidebar_component
       div._grid_block {
-        flash_message_component
-        div.row._page_header {
-          page_header_component
+        div.sidebar {
+          addon_sidebar_component
         }
-        div.row._page_body {
+        div._page_body {
           yield
         }
       }
@@ -29,3 +27,14 @@ html {
     yield(:page_javascript)
   }
 }
+
+# # addon_sidebar_component
+# div._grid_block {
+#   flash_message_component
+#   div.row._page_header {
+#     page_header_component
+#   }
+#   div.row._page_body {
+#     yield
+#   }
+# }

@@ -1,3 +1,7 @@
+.page-body
+  @include breakpoint(medium)
+    @include grid_block(11)
+
 .main-container
   padding-top: 55px
   @include clearfix
@@ -40,23 +44,7 @@
     .page-header, .page-body
       padding: 10px 20px 0
 
-    .page-body
-      padding-bottom: 60px
-      & > .row
-        margin: 0
 
-        & > .columns
-          padding: 0
-
-        .column#main
-          @extend .large-6
-          @extend .columns
-
-          padding-right: 20px
-
-        .column#sidebar
-          @extend .large-6
-          @extend .columns
 
 
 #main

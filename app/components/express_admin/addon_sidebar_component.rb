@@ -19,14 +19,10 @@ module ExpressAdmin
                            },
 
           menu_wrapper: -> {
-                             div._sidebar_wrapper {
-                               aside.sidebar {
-                                 h1 {
-                                   menu_name
-                                 }
-                                 ul {
-                                   _yield
-                                 }
+                             section._module_sidebar {
+                               ul._menu_bar.vertical {
+                                 li.title { menu_name }
+                                 _yield
                                }
                              }
                            }
