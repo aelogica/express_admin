@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), 'layout_component')
 
 module ExpressAdmin
-  class Panel < LayoutComponent
+  class Pane < LayoutComponent
 
     emits -> {
       div(dom_id, class: classes) {
