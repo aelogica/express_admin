@@ -19,8 +19,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'bourbon', '~> 3.2'
   s.add_dependency 'express_templates', '~> 0.4.2'
-  s.add_dependency 'foundation-rails', '~> 5.5.0'
   s.add_dependency 'jquery-rails'
+  s.add_dependency 'foundation_apps_styles', '~> 1.1.0'
 
   s.add_dependency 'gravatar_image_tag'
   s.add_dependency 'kaminari'
