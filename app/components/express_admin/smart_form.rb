@@ -33,8 +33,12 @@ module ExpressAdmin
                                   'datetime_select' => 'datetime',
                                   'check_box'       => 'checkbox'}
       field_type = attrib.field_type.to_s.sub(/_field$/,'')
-      if attrib.name.match(/_id$/)
-        select(attrib.name)
+      if relation = attrib.name.match(/(\w+)_id$/).try(:[], 1)
+        if opts = @config["#{relation}_collection".to_sym]
+          select(attrib.name, opts)
+        else
+          select(attrib.name)
+        end
       else
         self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
       end
