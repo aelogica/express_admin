@@ -1,6 +1,6 @@
 nav._top_bar {
-  div._menu_group_left {
-    ul._icon_left._menu_bar.dark {
+  div._main_menu {
+    ul._menu_items {
       li {
         a(href: '#') {
           image_tag 'express_admin/appexpress_logo_dark.png', class: 'nav-logo'
@@ -10,8 +10,8 @@ nav._top_bar {
       li { link_to 'View Site', '/' }
     }
   }
-  div._menu_group_right {
-    ul._icon_left._menu_bar.dark {
+  div._secondary_menu {
+    ul._menu_items {
       li {
         a {
           current_user_gravatar
