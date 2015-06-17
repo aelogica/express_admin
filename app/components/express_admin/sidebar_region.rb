@@ -1,10 +1,8 @@
 module ExpressAdmin
   class SidebarRegion < ExpressTemplates::Components::Container
     emits -> {
-      div(:sidebar) {
-        div._container {
-          _yield
-        }
+      div._sidebar_region {
+        _yield
       }
     }
   end

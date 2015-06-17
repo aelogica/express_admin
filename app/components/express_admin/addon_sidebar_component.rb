@@ -20,7 +20,7 @@ module ExpressAdmin
 
           menu_wrapper: -> {
                              section._module_sidebar {
-                               ul._menu_bar.vertical {
+                               ul._menu_items {
                                  li.title { menu_name }
                                  _yield
                                }

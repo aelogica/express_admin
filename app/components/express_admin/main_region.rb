@@ -1,7 +1,7 @@
 module ExpressAdmin
   class MainRegion < ExpressTemplates::Components::Container
     emits -> {
-      div(:main) {
+      div._main_region {
         _yield
       }
     }

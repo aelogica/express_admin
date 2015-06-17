@@ -1,0 +1,10 @@
+.module-sidebar
+  @include grid-block($orientation: vertical)
+
+  .menu-items
+    @extend .menu-bar
+    @include menu-bar-layout($orientation: vertical)
+
+    > .title
+      background: #f4f4f4
+

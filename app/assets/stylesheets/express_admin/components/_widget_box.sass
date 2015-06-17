@@ -1,0 +1,13 @@
+.widget-box
+  @include grid_block($orientation: vertical)
+  border: 1px #ccc solid
+
+  > .title
+    @include grid_block($size: shrink)
+    background-color: #f4f4f4
+    border-bottom: 1px #ccc solid
+    font-weight: bold
+    padding: 1rem
+
+  > .widget-body
+    @include grid_content
