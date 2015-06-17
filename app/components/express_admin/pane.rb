@@ -5,15 +5,17 @@ module ExpressAdmin
 
     emits -> {
       div(dom_id, class: classes) {
-        header if title || status
+        heading if title || status
         _yield
       }
     }
 
-    def header
-      div.header {
-        h2(title)
-        div.status(status)
+    def heading
+      header {
+        h2.title {
+          null_wrap { title }
+          span.status(status)
+        }
       }
     end
 
