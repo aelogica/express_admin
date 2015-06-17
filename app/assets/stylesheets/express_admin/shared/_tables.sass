@@ -1,86 +1,13 @@
-.table-wrapper
-  margin-bottom: 20px
-  overflow: auto
-
-  .table-content
-    padding-right: 20px
-
-table, .table
-  border-collapse: separate
-  border-spacing: 0
+.table
   width: 100%
 
   thead
-    tr
-      background-color: #fff
+    background: $title-background
 
-      th:first-child
-        border-left: 1px solid $border-color
-
-      th:last-child
-        border-right: 1px solid $border-color
-
-    tr:first-child
-      th
-        border-top: 1px solid $border-color
-
-      th:first-child
-        border-top-left-radius: 5px
-
-      th:last-child
-        border-top-right-radius: 5px
-
-    tr:last-child
-      th
-        border-bottom: 1px solid $border-color
+    th
+      padding: 0.5rem
+      text-align: left
 
   tbody
-    tr
-      td:last-child
-        border-right: 1px solid $border-color
-
-      td:first-child
-        border-left: 1px solid $border-color
-
-    tr:first-child
-      td
-
-    tr:last-child
-      td
-        border-bottom: 1px solid $border-color
-
-      td:first-child
-        border-bottom-left-radius: 5px
-
-      td:last-child
-        border-bottom-right-radius: 5px
-
-    tr.current
-      background-color: #f0f0f0
-
-  tr
-    th
-      background-color: #f4f4f4
-
-  tr.red
     td
-      background-color: lighten($red-color, 21)
-  tr.green
-    td
-      background-color: lighten($green-color, 42)
-
-  td
-    .button
-      margin: 0 rem-calc(5)
-
-  th, td
-    input[type='checkbox'],
-    .inline-list
-      margin: 0
-
-  &.table-hover
-    tr:hover
-      cursor: pointer
-
-      td
-        color: $blue-color
+      padding: 0.5rem

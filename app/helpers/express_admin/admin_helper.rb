@@ -15,7 +15,7 @@ module ExpressAdmin
     def sign_in_or_sign_out
       if self.respond_to?(:user_signed_in?)
         if user_signed_in?
-          link_to 'Sign out', main_app.destroy_user_session_path, method: :delete
+          link_to 'Logout', main_app.destroy_user_session_path, method: :delete
         else
           link_to 'Sign in', main_app.user_session_path
         end

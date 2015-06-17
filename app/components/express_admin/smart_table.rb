@@ -8,14 +8,12 @@ module ExpressAdmin
     attr :columns
 
     emits -> {
-      table(my[:id], options)._table_hover {
+      table(my[:id], options).table {
         thead {
           tr {
             display_columns.each do |column|
               th.send(column.name) {
-                div { # wrap in div so we can use overflow
-                  column.title
-                }
+                column.title
               }
             end
             actions_header if should_show_actions?
@@ -70,9 +68,7 @@ module ExpressAdmin
 
     def options
       if is_permanent?
-        {'data-turbolinks-permanent': nil}
-      else
-        nil
+        {'data-turbolinks-permanent' => nil}
       end
     end
 
@@ -86,7 +82,7 @@ module ExpressAdmin
 
     def actions_column
       td {
-        link_to 'Delete', "{{#{resource_path}}}", method: :delete, data: {confirm: 'Are you sure?'}, class: 'button tiny secondary'
+        link_to 'Delete', "{{#{resource_path}}}", method: :delete, data: {confirm: 'Are you sure?'}, class: 'button small secondary'
       }
     end
 

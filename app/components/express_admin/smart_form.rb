@@ -22,7 +22,7 @@ module ExpressAdmin
             }
           }
         end
-        submit(class: "button right tight tiny")
+        submit(class: 'button')
       }
     }
 
