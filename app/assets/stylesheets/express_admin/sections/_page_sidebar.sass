@@ -1,0 +1,8 @@
+.page-sidebar
+  @include breakpoint(medium)
+    @include grid-block(1)
+  border-right: #dedede 1px solid
+
+  > .module-sidebar
+    @include grid-block($orientation: vertical)
+
