@@ -1,6 +1,9 @@
 .pane
   @include grid_content
   @include clearfix
+  border:
+    right: 1px solid $border-color
 
   .status
     @extend .label
+    @include label-style($background: $dark-blue)

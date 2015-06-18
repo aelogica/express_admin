@@ -1,33 +1,4 @@
-button, .button, .button.tiny
+.button
   margin-bottom: 0
-  padding-left: 10px
-  padding-right: 10px
+  background: $dark-blue
 
-  &.secondary
-    &:hover, &:focus
-      background-color: #d4d4d4
-
-  &.gray
-    background-color: $silver
-    color: #333
-    border: none
-
-    &:hover
-      background-color: darken($silver, 10%)
-      color: #222
-
-  &.success
-    background-color: $green
-
-    &:hover
-      background-color: darken($green, 10%)
-
-  .icon
-    position: relative
-    display: inline-block
-
-.button-bar
-  margin-bottom: rem-calc(20)
-
-.header-action-button
-  top: -6px
