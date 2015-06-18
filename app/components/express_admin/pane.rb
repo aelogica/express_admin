@@ -11,11 +11,9 @@ module ExpressAdmin
     }
 
     def heading
-      header {
-        h2.title {
-          null_wrap { title }
-          span.status(status)
-        }
+      h2.title {
+        null_wrap { title }
+        span.status(status) if status
       }
     end
 
@@ -28,7 +26,7 @@ module ExpressAdmin
     end
 
     def status
-      @config[:status] || ''
+      @config[:status] || nil
     end
 
     def classes

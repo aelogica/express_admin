@@ -1,6 +1,4 @@
 $(function() {
-  $(document).foundation();
-
   // Table Row as links
   $('.table-hover tr[data-url]').on('click', function() {
     window.location.href = $(this).attr('data-url');

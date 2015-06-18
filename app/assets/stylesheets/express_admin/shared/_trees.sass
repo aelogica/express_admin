@@ -1,16 +1,27 @@
-main
-  ul.tree
-    list-style-type: none
+.tree
+  a
+    display: block
+    padding: 1rem
 
+    &:hover
+      background: $light-gray
+
+  .selected
+    background: $blue
+    font:
+      weight: bold
+
+    a
+      color: $light-gray
+
+      &:hover
+        background: transparent
+
+  ul
     li
-      line-height: 1.8rem
-      font-size: 1.3rem
-
-    ul
-      list-style-type: none
-
-    div
-      padding: 0em 2em
-
-    .selected
-      font-weight: bold
+      a
+        padding:
+          left: 3rem
+      &:last-child
+        border:
+          bottom: 0
