@@ -8,7 +8,7 @@ module ExpressAdmin
     attr :columns
 
     emits -> {
-      table(my[:id], options).table {
+      table(my[:id], options).table.striped {
         thead {
           tr {
             display_columns.each do |column|

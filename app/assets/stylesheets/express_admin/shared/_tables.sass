@@ -2,7 +2,8 @@
   width: 100%
 
   thead
-    background: $title-background
+    border:
+      bottom: 2px solid $dark
 
     th
       padding: 0.5rem
@@ -11,3 +12,9 @@
   tbody
     td
       padding: 0.5rem
+
+
+  &.striped
+    tbody
+      > tr:nth-of-type(odd)
+        background: $light-gray
