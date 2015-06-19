@@ -18,3 +18,15 @@
     tbody
       > tr:nth-of-type(odd)
         background: $light-blue-background
+
+// Still a bit hacky. Need to polish this more
+// This was done to contain the giant table in rbac's routes#index
+.large-table-container
+  @include breakpoint(small)
+    height: 500px
+
+  @include breakpoint(medium)
+    height: 800px
+
+  @include breakpoint(large)
+    height: 1000px
