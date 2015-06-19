@@ -32,29 +32,22 @@ module ExpressAdmin
                       },
 
               empty_state: -> {
-                div._empty_state_wrapper {
-                  p.lead._text_muted "No modules added yet."
-                }
+                p.lead._text_muted "No modules added yet."
               },
 
               menu_wrapper: -> {
-                li.megamenu._has_dropdown {
-                  a("Manage", href: '#', onClick: 'return false;')
-                  ul.dropdown._dropdown_wrapper {
-                    li._megamenu_overlay {
-                      div._megamenu_container {
-                        div.main {
-                          h1 "Modules"
-                          nav {
-                            ul {
-                              _yield
-                            }
-                          }
-                        }
-                        div.extra {
-                          extra_menu
-                        }
-                      }
+                li._has_sub_menu {
+                  a._sub_menu_expander(href: '#', onClick: 'return false;') {
+                    span.item { 'Manage' }
+                    i._ion_arrow_down_b
+                  }
+                  div._sub_menu.hidden {
+                    ul._sub_menu_items {
+                      li.title { 'Modules' }
+                      _yield
+                    }
+                    ul._sub_menu_items {
+                      extra_menu
                     }
                   }
                 }

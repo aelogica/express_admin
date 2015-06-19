@@ -6,8 +6,8 @@ nav._top_bar {
           image_tag 'express_admin/appexpress_logo_dark.png', class: 'nav-logo'
         }
       }
-      li { link_to 'Manage', '#' }
-      li { link_to 'View Site', '/' }
+      mega_menu_component
+      li { link_to 'View Site', '/', target: '_blank' }
     }
   }
   div._secondary_menu {

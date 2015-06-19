@@ -2,7 +2,7 @@ module ExpressAdmin
   class FlashMessageComponent < ExpressTemplates::Components::Base
 
     helper(:safe_message) {|message| message[1] }
-    helper(:classes) {|message| "flash nav-alert alert-box #{flash_class(message[0])}" }
+    helper(:classes) {|message| "flash nav-alert alert-box " }
 
     emits -> {
       div {
