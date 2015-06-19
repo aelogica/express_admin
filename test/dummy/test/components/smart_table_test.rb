@@ -10,11 +10,6 @@ module Components
       ExpressAdmin::SmartTable.new(:widgets, *args).compile
     end
 
-    test "renders 5 column headers with wrapping divs" do
-      matches = compiled_widget_table.scan /<th class=\\"\w+\\">\s*<div>\s*\w+/
-      assert_equal 5, matches.length
-    end
-
     test "should have hidden columns" do
       assert_match 'more-columns-indicator', compiled_widget_table
       assert_no_match 'column7', compiled_widget_table
@@ -32,28 +27,6 @@ module Components
     # test "truncates cell values by default" do
     #   assert_match /\{\{\(widget.column3\).to_s.truncate\(27\)\}\}/, compiled_widget_table
     # end
-
-    SHOW_ON_CLICK_JS = "$(document).on('click', 'tr', function(e){"
-    SHOW_ON_CLICK_ATTR = 'data-resource-url=\"{{widget_path(widget)}}\"'
-
-    test "does not include show_on_click js handler by default" do
-      assert_no_match SHOW_ON_CLICK_JS, compiled_widget_table
-    end
-
-    test "show_on_click option adds some javascript and attrs" do
-      assert_match SHOW_ON_CLICK_JS, compiled_widget_table(show_on_click: true)
-      assert_match SHOW_ON_CLICK_ATTR, compiled_widget_table(show_on_click: true)
-    end
-
-    test "resource_path option respected" do
-      assert_match 'data-resource-url=\"{{other_path_helper}}\"', 
-                    compiled_widget_table(resource_path: "other_path_helper", show_on_click: true)
-    end
-
-    test "namespace option prepends namespace to path helper" do
-      assert_match 'data-resource-url=\"{{widget_path(widget)}}\"',
-                    compiled_widget_table(namespace: "example_engine", show_on_click: true)
-    end
 
     test "table cell shows related item name or display name" do
       # note this will move to a helper that will intelligently look
@@ -73,7 +46,7 @@ module Components
 
     test "table column titles may be customized" do
       compiled = compiled_widget_table(columns: {"Column3 is the Best" => :column3})
-      assert_match /<th class=\\"column3\\">\s+<div>Column3 is the Best/, compiled
+      assert_match /<th class=\\"column3\\">Column3 is the Best/, compiled
     end
 
     def widget_table_with_proc_column
@@ -120,7 +93,7 @@ module Components
               'A link column' => :column3_link
             })
         }
-      assert_match 'link_to widget.column3, widget_path(widget)', ExpressTemplates.compile(&fragment)
+      assert_match 'link_to widget.column3, widget_path(widget.id)', ExpressTemplates.compile(&fragment)
     end
 
     test "timestamp accessor appeneded with _in_words generates code that uses time_ago_in_words" do

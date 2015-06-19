@@ -8,7 +8,7 @@ module ExpressAdmin
     attr :columns
 
     emits -> {
-      table(my[:id], options).table.striped {
+      table(my[:id]).table.striped {
         thead {
           tr {
             display_columns.each do |column|
@@ -34,28 +34,6 @@ module ExpressAdmin
           }
         }
       }
-      if @config[:show_on_click]
-        if is_permanent?
-          script {
-            %Q(
-              $(document).on('click', 'tr', function(e){
-                e.preventDefault();
-                Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false });
-              })
-            )
-          }
-        else
-          script {
-            %Q(
-              $(document).on('click', 'tr', function(e){
-                e.preventDefault();
-                Turbolinks.visit($(this).attr('data-resource-url'), { cacheRequest: false, change: 'main' });
-              })
-            )
-          }
-        end
-
-      end
 
       scroll_table if !!@config[:scroll_table]
     }
@@ -64,12 +42,6 @@ module ExpressAdmin
       script {
         %Q($('\##{my[:id]}').scrollTableBody())
       }
-    end
-
-    def options
-      if is_permanent?
-        {'data-turbolinks-permanent' => nil}
-      end
     end
 
     def actions_header
@@ -101,16 +73,14 @@ module ExpressAdmin
     end
 
     def row_args
-      row_args = {id: row_id, class: row_class}
-      row_args.merge!('data-resource-url': "{{#{resource_path}}}") if !!@config[:show_on_click]
-      row_args
+      {id: row_id, class: row_class}
     end
 
     def cell_value(accessor)
       if accessor.respond_to?(:call)
         value = "(begin #{accessor.source}.call(#{collection_member_name}).to_s rescue 'Error: '+$!.to_s ; end)"
       elsif attrib = accessor.to_s.match(/(\w+)_link$/).try(:[], 1)
-        value = "(link_to #{collection_member_name}.#{attrib}, #{collection_member_name}_path(#{collection_member_name}))"
+        value = "(link_to #{collection_member_name}.#{attrib}, #{collection_member_name}_path(#{collection_member_name}.id))"
       elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
         value = "(#{collection_member_name}.#{attrib} ? time_ago_in_words(#{collection_member_name}.#{attrib})+' ago' : 'never')"
       else
