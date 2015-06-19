@@ -3,7 +3,11 @@
   @include clearfix
   border:
     right: 1px solid $border-color
+    bottom: 1px solid $border-color
 
   .status
-    @extend .label
-    @include label-style($background: $dark-blue)
+    @extend .float-right
+    font:
+      size: 1rem
+      weight: normal
+    padding: 1rem 0
