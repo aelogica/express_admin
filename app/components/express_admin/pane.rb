@@ -11,7 +11,7 @@ module ExpressAdmin
     }
 
     def heading
-      h2.title {
+      h4.title {
         null_wrap { title }
         span.status(status) if status
       }
