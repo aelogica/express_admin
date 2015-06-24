@@ -1,7 +1,7 @@
 .sidebar-region
   @include breakpoint(small)
-    @include grid_block
+    @include grid_block($orientation: vertical)
   @include breakpoint(medium)
-    @include grid_block(4)
+    @include grid_block(4, $orientation: vertical)
   @include breakpoint(large)
-    @include grid_block(3)
+    @include grid_block(3, $orientation: vertical)
