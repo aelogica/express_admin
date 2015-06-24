@@ -36,3 +36,5 @@ test/tmp/config/routes.rb
 .ruby-gemset
 Gemfile.lock
 .DS_Store
+
+*.gem
