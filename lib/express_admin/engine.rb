@@ -1,12 +1,13 @@
-require "express_admin/menu"
-require "express_admin/version"
-require "express_templates"
-require "jquery-rails"
-require "foundation_apps_styles"
-require "bourbon"
-require "gravatar_image_tag"
-require "kaminari"
-require "responders"
+require 'express_admin/menu'
+require 'express_admin/version'
+require 'express_templates'
+require 'jquery-rails'
+require 'foundation_apps_styles'
+require 'bourbon'
+require 'gravatar_image_tag'
+require 'kaminari'
+require 'responders'
+require 'tinymce-rails'
 require 'inherited_resources'
 
 # should be a way to add this folder to rails' autoload paths

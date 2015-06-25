@@ -1,0 +1,29 @@
+default:
+  menubar: false
+  theme: 'modern'
+  height: 400
+  toolbar:
+    - bold italic underline strikethrough | link unlink | bullist numlist | table | nonbreaking hr | formatselect | blockquote | alignleft aligncenter alignright alignjustify | outdent indent | image media | forecolor charmap | sp
+  relative_urls: false
+  remove_script_host: false
+  convert_urls: true
+  plugins:
+    - advlist
+    - anchor
+    - anchor
+    - autolink
+    - charmap
+    - code
+    - fullscreen
+    - hr
+    - image
+    - link
+    - lists
+    - media
+    - nonbreaking
+    - paste
+    - searchreplace
+    - spellchecker
+    - table
+    - textcolor
+    - wordcount

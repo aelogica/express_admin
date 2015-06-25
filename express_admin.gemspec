@@ -21,11 +21,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'express_templates', '~> 0.5.0'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'foundation_apps_styles', '~> 1.1.0'
+  s.add_dependency 'tinymce-rails', '~> 4.1.6'
 
   s.add_dependency 'gravatar_image_tag'
   s.add_dependency 'kaminari'
   s.add_dependency 'rails', '~> 4.2'
-  # s.add_dependency 'turbolinks'
   s.add_dependency 'responders', '~> 2.0'
   s.add_dependency 'inherited_resources', '~> 1.6'
   s.add_dependency 'select2-rails'
