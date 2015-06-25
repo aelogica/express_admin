@@ -1,5 +1,9 @@
 .main-container
-  @include grid_frame($orientation: vertical)
+  @include grid-frame($orientation: vertical)
 
   > .main-page
-    @include grid_block
+    @include grid-block
+    @include breakpoint(small)
+      @include grid-orient(vertical)
+    @include breakpoint(medium)
+      @include grid-orient(horizontal)

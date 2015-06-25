@@ -1,2 +1,7 @@
 .page-body
-  @include grid_block
+  @include grid-block
+  @include breakpoint(small)
+    @include grid-orient(vertical)
+  @include breakpoint(medium)
+    @include grid-orient(horizontal)
+    @include grid-size(10)
