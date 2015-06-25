@@ -27,15 +27,15 @@ module ExpressAdmin
     end
 
     test "string field column2 is an input" do
-      assert_match 'text_field(:widget, :column2)', compiled_widget_form
+      assert_match 'text_field(:widget, :column2, {})', compiled_widget_form
     end
 
     test "text field column3 is a text_area" do
-      assert_match 'text_area(:widget, :column3)', compiled_widget_form
+      assert_match 'text_area(:widget, :column3, {})', compiled_widget_form
     end
 
     test "datetime field column4 is a datetime_field" do
-      assert_match 'datetime_field(:widget, :column4)', compiled_widget_form
+      assert_match 'datetime_field(:widget, :column4, {})', compiled_widget_form
     end
 
     test "boolean field column4 is a checkbox" do
@@ -43,7 +43,7 @@ module ExpressAdmin
     end
 
     test "integer column is a number_field" do
-      assert_match 'number_field(:widget, :column7)', compiled_widget_form
+      assert_match 'number_field(:widget, :column7, {})', compiled_widget_form
     end
 
     test "timestamps are not editable" do
