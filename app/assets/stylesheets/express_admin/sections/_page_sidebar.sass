@@ -1,5 +1,9 @@
 .page-sidebar
   @include grid-block
+  @include breakpoint(small)
+    @include grid-size(12)
   @include breakpoint(medium)
     @include grid-size(2)
+  @include breakpoint(xlarge)
+    @include grid-size(1)
   border-right: #dedede 1px solid
