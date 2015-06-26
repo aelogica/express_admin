@@ -16,7 +16,7 @@ module ExpressAdmin
       end
 
       def box_title
-        "{{resource.persisted? ? 'Edit #{resource_name}' : 'New #{resource_name}'}}"
+        @config[:title] || "{{resource.persisted? ? 'Edit #{resource_name}' : 'New #{resource_name}'}}"
       end
   end
 end
