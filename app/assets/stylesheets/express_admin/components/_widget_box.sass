@@ -1,10 +1,10 @@
 .widget-box
-  @include grid-block($orientation: vertical)
-  border: 1px $border-color solid
+  @include grid-content
+  padding: 0
 
   > .title
-    @include grid-block($size: shrink)
     @include title
 
   > .widget-body
     @include grid-content
+    padding: 1rem
