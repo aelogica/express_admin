@@ -40,7 +40,11 @@ module ExpressAdmin
           select(attrib.name)
         end
       else
-        self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
+        if field_type == 'text_area'
+          textarea attrib.name.to_sym, rows: 10
+        else
+          self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
+        end
       end
     end
 
