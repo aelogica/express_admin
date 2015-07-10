@@ -35,9 +35,9 @@ module ExpressAdmin
       field_type = attrib.field_type.to_s.sub(/_field$/,'')
       if relation = attrib.name.match(/(\w+)_id$/).try(:[], 1)
         if opts = @config["#{relation}_collection".to_sym]
-          select(attrib.name, opts)
+          select(attrib.name, opts, select2: true)
         else
-          select(attrib.name)
+          select(attrib.name, nil, select2: true)
         end
       else
         if field_type == 'text_area'

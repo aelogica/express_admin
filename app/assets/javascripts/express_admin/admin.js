@@ -1,4 +1,6 @@
 $(function() {
+  $('.select2').select2();
+
   // Table Row as links
   $('.table-hover tr[data-url]').on('click', function() {
     window.location.href = $(this).attr('data-url');

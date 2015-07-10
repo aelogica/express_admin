@@ -24,6 +24,7 @@ module ExpressAdmin
 
     test "category field is a select" do
       assert_match 'select_tag("widget[category_id]"', compiled_widget_form
+      assert_match 'class: "select2"', compiled_widget_form
     end
 
     test "string field column2 is an input" do
