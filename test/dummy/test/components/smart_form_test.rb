@@ -31,7 +31,7 @@ module ExpressAdmin
     end
 
     test "text field column3 is a text_area" do
-      assert_match 'text_area(:widget, :column3, {})', compiled_widget_form
+      assert_match 'text_area(:widget, :column3, rows: 10)', compiled_widget_form
     end
 
     test "datetime field column4 is a datetime_field" do
