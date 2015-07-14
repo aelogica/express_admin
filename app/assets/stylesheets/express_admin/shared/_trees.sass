@@ -21,7 +21,11 @@
     li
       &:last-child
         border:
-          bottom: 1
-      div
-        ::before
-          content: "— "
+          bottom: 0
+      a::before
+        content: "– "
+      > ul li
+        a::before
+          content: "– – "
+        > ul li a::before
+          content: "– – – "
