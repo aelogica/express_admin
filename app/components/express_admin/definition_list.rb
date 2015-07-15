@@ -1,6 +1,5 @@
 module ExpressAdmin
-  class DefinitionList < ExpressTemplates::Components::Base
-    include ExpressTemplates::Components::Capabilities::Configurable
+  class DefinitionList < ExpressTemplates::Components::Configurable
     include ExpressTemplates::Components::Capabilities::Resourceful
 
     emits -> {

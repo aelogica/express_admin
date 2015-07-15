@@ -1,8 +1,8 @@
 module ExpressAdmin
-  class MainRegion < ExpressTemplates::Components::Container
-    emits -> {
-      div._main_region {
-        _yield
+  class MainRegion < ExpressTemplates::Components::Configurable
+    emits -> (block) {
+      div(class: 'main-region') {
+        block.call(self) if block
       }
     }
   end

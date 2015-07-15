@@ -10,34 +10,18 @@ module ExpressAdmin
   #         %li
   #           = link_to item.name, eval(item.path)
 
-    helper :menu_name, &-> { current_menu_name }
-
-    emits menu_item:    -> {
-                             li {
-                               link_to "{{item.title}}", "{{eval(item.path)}}"
-                             }
-                           },
-
-          menu_wrapper: -> {
-                             section._module_sidebar {
-                               ul._menu_items {
-                                 li.title { menu_name }
-                                 _yield
-                               }
-                             }
-                           }
-
-    for_each -> { current_menu.items || [] }, as: :item, emit: :menu_item
-
-    wrap_with :menu_wrapper
-
-    def compile
-      %Q(begin
-        render(partial: "shared/\#\{current_module_path_name\}/sidebar")
-      rescue => e
-        #{super}
-      end)
-    end
+    emits -> {
+       section(class: 'module-sidebar') {
+         ul(class: 'menu-items') {
+           li(class: 'title') { current_menu_name }
+           helpers.current_menu.items.each do |item|
+             li {
+               link_to item.title, helpers.instance_eval(item.path)
+             }
+           end
+         }
+       }
+     }
 
   end
 end
