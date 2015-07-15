@@ -1,14 +1,7 @@
 module ExpressAdmin
-  class LayoutComponent < ExpressTemplates::Components::Base
-    include ExpressTemplates::Components::Capabilities::Configurable
-    include ExpressTemplates::Components::Capabilities::Parenting
-
+  class LayoutComponent < ExpressTemplates::Components::Configurable
     def dom_id
-      @config.try(:[], :id)
-    end
-
-    def classes
-      ([macro_name] + (@config.try(:[], :class)||[])).join(" ")
+      config.try(:[], :id)
     end
   end
 end

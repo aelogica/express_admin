@@ -1,10 +1,8 @@
 require 'rails/generators/generated_attribute'
 
 module ExpressAdmin
-  class SmartForm < ExpressTemplates::Components::Base
-    include ExpressTemplates::Components::Capabilities::Configurable
+  class SmartForm < ExpressTemplates::Components::Configurable
     include ExpressTemplates::Components::Capabilities::Resourceful
-    include ExpressTemplates::Components::Forms::FormSupport
 
     emits -> {
       express_form(form_args) {
@@ -18,7 +16,7 @@ module ExpressAdmin
         filter_by_name(timestamp_attributes).each do |timestamp|
           div {
             label {
-              "#{timestamp.name.titleize}: {{@#{resource_name}.try(:#{timestamp.name})}}"
+              "#{timestamp.name.titleize}: #{helpers.resource.try(timestamp.name.to_sym)}"
             }
           }
         end
@@ -54,11 +52,16 @@ module ExpressAdmin
         {           id: resource_name,
                 action: form_action,
          resource_name: resource_name,
-        resource_class: @config[:resource_class],
+        resource_class: config[:resource_class],
              namespace: namespace}
       end
 
-      def attributes
+      # from express_form - perhaps move back to shared module
+      def form_action
+        config[:action] || (helpers.resource.try(:persisted?) ? resource_path(ivar: true) : collection_path)
+      end
+
+      def resource_attributes
         super.map do |attrib|
           field_definition = [attrib.name, attrib.type] # index not important here for now
           Rails::Generators::GeneratedAttribute.parse(field_definition.join(":"))
@@ -70,23 +73,23 @@ module ExpressAdmin
       end
 
       def virtual_attributes
-        (@config[:virtual]||[]).map do |attrib_name|
+        (config[:virtual]||[]).map do |attrib_name|
           Rails::Generators::GeneratedAttribute.parse("#{attrib_name}:string")
         end
       end
 
       def excluded_attributes
         excl = [:id]
-        excl += @config[:exclude] if @config[:exclude]
+        excl += config[:exclude] if config[:exclude]
         excl
       end
 
       def timestamp_attributes
-        attributes.select {|attrib| TIMESTAMPS.include?(attrib.name) }
+        resource_attributes.select {|attrib| TIMESTAMPS.include?(attrib.name) }
       end
 
       def non_timestamp_attributes
-        attributes.reject {|attrib| TIMESTAMPS.include?(attrib.name) }
+        resource_attributes.reject {|attrib| TIMESTAMPS.include?(attrib.name) }
       end
 
       def has_many_through_associations
@@ -96,9 +99,9 @@ module ExpressAdmin
       end
 
       def filter_by_name(attribs)
-        if @config[:only]
+        if config[:only]
           # if using :only, we respect the order
-          @config[:only].map do |only|
+          config[:only].map do |only|
             attribs.detect {|attrib| only.to_s.eql?(attrib.name)} || nil
           end.compact
         else

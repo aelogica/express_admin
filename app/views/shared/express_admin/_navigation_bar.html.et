@@ -1,6 +1,6 @@
-nav._top_bar {
-  div._main_menu {
-    ul._menu_items {
+nav(class: 'top-bar') {
+  div(class: 'main-menu') {
+    ul(class: 'menu-items') {
       li {
         a(href: '#') {
           image_tag 'express_admin/appexpress_logo_dark.png', class: 'nav-logo'
@@ -8,10 +8,11 @@ nav._top_bar {
       }
       mega_menu_component
       li { link_to 'View Site', '/', target: '_blank' }
+      li { flash_message_component }
     }
   }
-  div._secondary_menu {
-    ul._menu_items {
+  div(class: 'secondary_menu') {
+    ul(class: 'menu-items') {
       li {
         a {
           current_user_gravatar

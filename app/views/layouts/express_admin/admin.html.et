@@ -1,4 +1,4 @@
-doctype
+'<!DOCTYPE html>'.html_safe+
 html {
   head {
     title { title_content }
@@ -9,16 +9,15 @@ html {
     csrf_meta_tags
   }
   body {
-    main(role: 'main')._main_container {
+    div(id: 'main', role: 'main', class: 'main-container') {
       render('shared/express_admin/navigation_bar')
-      div._main_page {
-        div._page_sidebar {
+      div(class: 'main-page') {
+        div(class: 'page-sidebar') {
           addon_sidebar_component
         }
-        div._page_body {
-          #     page_header_component
-          #   flash_message_component
-          yield
+        div(class: 'page-body') {
+          page_header_component
+          current_arbre_element.add_child yield
         }
       }
     }
