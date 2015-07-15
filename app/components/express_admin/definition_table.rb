@@ -3,7 +3,7 @@ module ExpressAdmin
     include ExpressTemplates::Components::Capabilities::Resourceful
 
     emits -> {
-      table.definitions {
+      table(class: 'definitions') {
         tbody {
           definitions.each do |label, content|
             tr {
@@ -16,19 +16,19 @@ module ExpressAdmin
     }
 
     def definitions
-      if @args.first.kind_of?(Array)
+      if @args.nil?
+        definitions_from_hash(config)
+      elsif @args.first.try(:kind_of?, Array)
         definitions_from_array(@args.first)
-      elsif @args.first.kind_of?(Hash)
-        definitions_from_hash(@args.first)
       end
     end
 
     def definitions_from_hash(hash)
       processed = hash.map do |k,v|
         if v.kind_of? Symbol
-          [promptify(k), "{{resource.#{v}}}"]
+          [promptify(k), resource.send(v)]
         else
-          [promptify(k), v]
+          [promptify(k), helpers.instance_eval("(#{v.source}).call(resource).to_s").html_safe]
         end
       end
       Hash[processed]
