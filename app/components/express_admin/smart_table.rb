@@ -80,7 +80,7 @@ module ExpressAdmin
     def cell_value(item, accessor)
       if accessor.respond_to?(:call)
         value = begin
-            accessor.call(item).to_s
+            helpers.instance_eval "(#{accessor.source}).call(item).to_s"
           rescue
             'Error: '+$!.to_s
           end
@@ -101,9 +101,7 @@ module ExpressAdmin
           item.send(accessor)
         end
       end
-      span {
-        value
-      }
+      current_arbre_element.add_child value
     end
 
     def display_columns
