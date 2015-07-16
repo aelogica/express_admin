@@ -16,7 +16,7 @@ module ExpressAdmin
         filter_by_name(timestamp_attributes).each do |timestamp|
           div {
             label {
-              "#{timestamp.name.titleize}: #{helpers.resource.try(timestamp.name.to_sym)}"
+              "#{timestamp.name.titleize}: #{resource.try(timestamp.name.to_sym)}"
             }
           }
         end
