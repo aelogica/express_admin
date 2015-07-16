@@ -32,11 +32,7 @@ module ExpressAdmin
                                   'check_box'       => 'checkbox'}
       field_type = attrib.field_type.to_s.sub(/_field$/,'')
       if relation = attrib.name.match(/(\w+)_id$/).try(:[], 1)
-        if opts = @config["#{relation}_collection".to_sym]
-          select(attrib.name, opts, select2: true)
-        else
-          select(attrib.name, nil, select2: true)
-        end
+          select(attrib.name, config["#{relation}_collection".to_sym], select2: true)
       else
         if field_type == 'text_area'
           textarea attrib.name.to_sym, rows: 10

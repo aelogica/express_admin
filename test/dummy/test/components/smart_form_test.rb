@@ -56,7 +56,7 @@ module ExpressAdmin
     end
 
     test "text field column3 is a text_area" do
-      assert_match /<textarea.*name="widget\[column3\]".*rows="10"/, widget_form
+      assert_match /<textarea.*rows="10".*name="widget\[column3\]"/, widget_form
     end
 
     test "datetime field column4 is a datetime_field" do
@@ -103,7 +103,7 @@ module ExpressAdmin
     end
 
     test "multiple select is used for has_many_through associations" do
-      assert_match /select multiple="multiple" name="widget\[tag_ids\]\[\]"/, widget_form
+      assert_match /select.*multiple="multiple".*name="widget\[tag_ids\]\[\]"/, widget_form
     end
 
     test "excluded fields are excluded" do
