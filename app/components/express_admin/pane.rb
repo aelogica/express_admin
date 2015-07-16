@@ -3,17 +3,19 @@ require File.join(File.dirname(__FILE__), 'layout_component')
 module ExpressAdmin
   class Pane < LayoutComponent
 
-    emits -> {
-      div(dom_id, class: classes) {
+    emits -> (block) {
+      div(id: dom_id, class: pane_classes) {
         heading if title || status
-        _yield
+        block.call(self) if block
       }
     }
 
     def heading
-      h4.title {
-        null_wrap { title }
-        span.status(status) if status
+      h4(class: 'title') {
+        current_arbre_element.add_child title
+        if status
+          span(class: 'status') { status }
+        end
       }
     end
 
@@ -22,15 +24,16 @@ module ExpressAdmin
     end
 
     def title
-      @config[:title] || ''
+      config[:title] || ''
     end
 
     def status
-      @config[:status] || nil
+      config[:status] || nil
     end
 
-    def classes
-      super << " #{@config[:id]}"
+    def pane_classes
+      add_class config[:id].to_s
+      class_names
     end
 
   end

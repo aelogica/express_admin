@@ -1,13 +1,11 @@
 module ExpressAdmin
   class SidebarRegion < LayoutComponent
-    emits -> {
-      div(dom_id, class: classes) {
-        _yield
+    emits -> (block) {
+      add_class('sidebar-region')
+      add_class(config.try(:[], :class))
+      div(id: dom_id, class: class_names) {
+        block.call(self) if block
       }
     }
-
-    def classes
-      %w(sidebar-region).join @config.try(:[], :class)
-    end
   end
 end

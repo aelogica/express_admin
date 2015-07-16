@@ -1,6 +1,5 @@
 module ExpressAdmin
-  class SmartTable < ExpressTemplates::Components::Base
-    include ExpressTemplates::Components::Capabilities::Configurable
+  class SmartTable < ExpressTemplates::Components::Configurable
     include ExpressTemplates::Components::Capabilities::Resourceful
 
     MAX_COLS_TO_SHOW_IDX = 5
@@ -8,11 +7,11 @@ module ExpressAdmin
     attr :columns
 
     emits -> {
-      table(my[:id]).table.striped {
+      table(id: config[:id], class: 'table striped') {
         thead {
           tr {
             display_columns.each do |column|
-              th.send(column.name) {
+              th(class: column.name) {
                 column.title
               }
             end
@@ -21,21 +20,21 @@ module ExpressAdmin
           }
         }
         tbody {
-          for_each(collection, as: collection_member_name) {
-            tr(row_args) {
+          helpers.collection.each do |item|
+            tr(id: row_id(item), class: row_class(item)) {
               display_columns.each do |column|
-                td.send(column.name) {
-                  cell_value(column.accessor)
+                td(class: column.name) {
+                  cell_value(item, column.accessor)
                 }
               end
-              actions_column if should_show_actions?
+              actions_column(item) if should_show_actions?
               hidden_column_cell if columns_hidden?
             }
-          }
+          end ; nil
         }
       }
 
-      scroll_table if !!@config[:scroll_table]
+      scroll_table if !!config[:scroll_table]
     }
 
     def scroll_table
@@ -45,60 +44,64 @@ module ExpressAdmin
     end
 
     def actions_header
-      th.actions { 'Actions' }
+      th(class: 'actions') { 'Actions' }
     end
 
     def should_show_actions?
-      @config[:actions].nil? || !!@config[:actions]
+      config[:actions].nil? || !!config[:actions]
     end
 
-    def actions_column
+    def resource_path(item)
+      helpers.send(resource_path_helper, item.to_param)
+    end
+
+    def actions_column(item)
       td {
-        link_to 'Delete', "{{#{resource_path}}}", method: :delete, data: {confirm: 'Are you sure?'}, class: 'button small secondary'
+        link_to 'Delete', resource_path(item), method: :delete, data: {confirm: 'Are you sure?'}, class: 'button small secondary'
       }
     end
 
-    def row_class
-      @config[:row_class].try(:respond_to?, :call) ? 
-        "{{#{@config[:row_class].source}.call(#{collection_member_name})}}" : 
-        "{{#{collection_member_name}.eql?(@#{resource_name}) ? 'current' : ''}}"
+    def row_class(item)
+      if config[:row_class].try(:respond_to?, :call)
+        config[:row_class].call(item)
+      else
+        item.eql?(helpers.resource) ? 'current' : ''
+      end
     end
 
     def is_permanent?
-      @config[:permanent].nil? || (@config[:permanent].present? && @config[:permanent])
+      config[:permanent].nil? || (config[:permanent].present? && config[:permanent])
     end
 
-    def row_id
-      "#{collection_member_name}:{{#{collection_member_name}.id}}"
+    def row_id(item)
+      "#{collection_member_name}:#{item.to_param}"
     end
 
-    def row_args
-      {id: row_id, class: row_class}
-    end
-
-    def cell_value(accessor)
+    def cell_value(item, accessor)
       if accessor.respond_to?(:call)
-        value = "(begin #{accessor.source}.call(#{collection_member_name}).to_s rescue 'Error: '+$!.to_s ; end)"
+        value = begin
+            helpers.instance_eval "(#{accessor.source}).call(item).to_s"
+          rescue
+            'Error: '+$!.to_s
+          end
       elsif attrib = accessor.to_s.match(/(\w+)_link$/).try(:[], 1)
         # TODO: only works with non-namespaced routes
-        value = "(link_to #{collection_member_name}.#{attrib}, #{collection_member_name}_path(#{collection_member_name}.id))"
+        value = helpers.link_to item.send(attrib), helpers.resource_path(item)
       elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
-        value = "(#{collection_member_name}.#{attrib} ? time_ago_in_words(#{collection_member_name}.#{attrib})+' ago' : 'never')"
+        value = item.send(attrib) ? (helpers.time_ago_in_words(item.send(attrib))+' ago') : 'never'
       else
         if relation_name = accessor.to_s.match(/(.*)_id$/).try(:[], 1)
           reflection = resource_class.reflect_on_association(relation_name.to_sym)
         end
 
         value = if reflection
-          relation = "#{collection_member_name}.#{relation_name}"
-          "#{relation}.try(:name) || #{relation}.to_s"
+          relation = item.send(relation_name)
+          relation.try(:name) || relation.to_s
         else
-          "#{collection_member_name}.#{accessor}"
+          item.send(accessor)
         end
       end
-      span {
-        "{{#{value}}}"
-      }
+      current_arbre_element.add_child value
     end
 
     def display_columns
@@ -127,17 +130,17 @@ module ExpressAdmin
     end
 
     def specified_columns
-      @config[:columns]
+      config[:columns]
     end
 
     def hidden_columns_header_indicator
-      th._more_columns_indicator {
+      th(class: 'more-columns-indicator') {
         "..."
       }
     end
 
     def hidden_column_cell
-      td._more_columns_indicator
+      td(class: 'more-columns-indicator')
     end
 
     private
@@ -150,7 +153,7 @@ module ExpressAdmin
             specified_columns.map { |title, accessor| Column.new(accessor, title) }
 
           else
-            attributes.map { |column| Column.new(column.name.to_sym) }
+            resource_attributes.map { |column| Column.new(column.name.to_sym) }
           end
       end
 

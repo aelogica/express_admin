@@ -64,7 +64,7 @@ module ExpressAdmin
       a << stylesheet_link_tag("app_express/admin/application") if defined?(AppExpress)
       a << javascript_include_tag("express_admin", 'data-turbolinks-track' => true)
       a << javascript_include_tag("#{admin_path}/application", 'data-turbolinks-track' => true)
-      a.join()
+      a.join().html_safe
     end
 
     def admin_menus
