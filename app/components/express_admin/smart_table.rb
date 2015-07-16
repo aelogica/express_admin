@@ -86,9 +86,9 @@ module ExpressAdmin
           end
       elsif attrib = accessor.to_s.match(/(\w+)_link$/).try(:[], 1)
         # TODO: only works with non-namespaced routes
-        value = link_to item.send(attrib), resource_path(item)
+        value = helpers.link_to item.send(attrib), helpers.resource_path(item)
       elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
-        value = item.send(attrib) ? (time_ago_in_words(item.send(attrib))+' ago') : 'never'
+        value = item.send(attrib) ? (helpers.time_ago_in_words(item.send(attrib))+' ago') : 'never'
       else
         if relation_name = accessor.to_s.match(/(.*)_id$/).try(:[], 1)
           reflection = resource_class.reflect_on_association(relation_name.to_sym)

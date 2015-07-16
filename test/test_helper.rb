@@ -10,6 +10,7 @@ require "minitest/rails"
 require "minitest/rails/capybara"
 require 'minitest/rg'
 
+require 'pry'
 
 # Filter out Minitest backtrace while allowing backtrace from other libraries
 # to be shown.
@@ -34,5 +35,38 @@ module ExampleEngine
   end
   class Category < ::Category
     has_many :widgets, class_name: 'ExampleEngine::Widget'
+  end
+end
+module AdditionalHelpers
+
+  def protect_against_forgery?
+    true
+  end
+
+  def form_authenticity_token
+    "AUTH_TOKEN"
+  end
+
+end
+
+module ActiveSupport
+  class TestCase
+    def arbre(assigns = {}, &block)
+      Arbre::Context.new assigns, helpers, &block
+    end
+    def mock_action_view(assigns = {})
+      controller = ActionView::TestCase::TestController.new
+      ActionView::Base.send :include, ActionView::Helpers
+      ActionView::Base.send :include, ActionView::Helpers::UrlHelper
+      ActionView::Base.send :include, AdditionalHelpers
+      view = ActionView::Base.new(ActionController::Base.view_paths, assigns, controller)
+      eigenklass = class << view
+        self
+      end
+      assigns.each do |helper_name,value|
+        eigenklass.send(:define_method, helper_name) { value }
+      end
+      view
+    end
   end
 end
