@@ -47,7 +47,6 @@ module ExpressAdmin
     end
 
     test "category field is a select" do
-      assert_match /<select.*name="widget\[category_id\]"/, widget_form
       assert_match /<select.*name="widget\[category_id\]".*class="select2"/, widget_form
     end
 
