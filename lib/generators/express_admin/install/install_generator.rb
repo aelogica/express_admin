@@ -29,6 +29,13 @@ module ExpressAdmin
           File.join('app/views/layouts', @project_name, 'admin.html.et')
       end
 
+      def create_custom_devise_login
+        if defined?(Devise)
+          template 'views/devise/sessions/new.html.et', 
+            File.join('app/views/devise/sessions/new.html.et')
+        end
+      end
+
       def create_application_js
         empty_directory("app/assets/javascripts/#{@project_name}/admin")
         template 'assets/javascripts/application.js',
