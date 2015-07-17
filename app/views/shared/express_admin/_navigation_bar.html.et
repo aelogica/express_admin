@@ -11,7 +11,7 @@ nav(class: 'top-bar') {
       li { flash_message_component }
     }
   }
-  div(class: 'secondary_menu') {
+  div(class: 'secondary-menu') {
     ul(class: 'menu-items') {
       li {
         a {
