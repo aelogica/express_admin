@@ -22,7 +22,7 @@ module ExpressAdmin
     def definitions_from_hash(hash)
       processed = hash.map do |k,v|
         if v.kind_of? Symbol
-          [k, "{{resource.#{v}}}"]
+          [k, resource.send(v)]
         else
           [k, v]
         end
@@ -31,7 +31,7 @@ module ExpressAdmin
     end
 
     def definitions_from_array(fields)
-      Hash[fields.map {|field| ["#{field.to_s.titleize}:", "{{resource.#{field}}}"]}]
+      Hash[fields.map {|field| ["#{field.to_s.titleize}:", resource.send(field)]}]
     end
 
   end
