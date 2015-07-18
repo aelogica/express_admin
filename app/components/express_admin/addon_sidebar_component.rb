@@ -10,9 +10,7 @@ module ExpressAdmin
         section(class: 'module-sidebar') {
           ul(class: 'menu-items') {
             li(class: 'title') { current_menu_name }
-            li {
-              menu_list(helpers.current_menu.items)
-            }
+            menu_list(helpers.current_menu.items)
           }
         }
       end
@@ -25,7 +23,9 @@ module ExpressAdmin
     end
 
     def menu_list_item(item)
-      link_to item.title.html_safe, helpers.instance_eval(item.path)
+      li {
+        link_to item.title.html_safe, helpers.instance_eval(item.path)
+      }
     end
 
   end
