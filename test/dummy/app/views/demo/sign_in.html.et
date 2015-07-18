@@ -1,17 +1,17 @@
-div._devise_form_wrapper {
-  div._devise_form._form_container._medium_6._large_4.columns._large_centered._medium_centered {
-    div._form_header {
+div(class: 'devise-form-wrapper') {
+  div(class: 'devise-form form-container medium-6 large-4 columns large-centered medium-centered') {
+    div(class: 'form-header') {
       h3 "Sign In"
     }
-    form.new_user('accept-charset' => "UTF-8", :action => "/users/sign_in", id: "new_user", method: "post") {
+    form(class: 'new_user', 'accept-charset' => "UTF-8", :action => "/users/sign_in", id: "new_user", method: "post") {
       div(style: "display:none") {
         input name: "utf8", type: "hidden", value: "✓"
         input name: "authenticity_token", type: "hidden", value: "Zp9VllF7siBJvRs2etlWJdCBwxy9fbKoY01B33d1B50="
       }
         
-      label.hide "Email", for: "user_email"
+      label(class: 'hide', for: "user_email") { "Email" }
       input autofocus: "autofocus", id: "user_email", name: "user[email]", placeholder: "Email", type: "email", value: ""
-      label.hide "Password", for: "user_password"
+      label(class: 'hide', for: "user_password") { "Password" }
       input autocomplete: "off", id: "user_password", name: "user[password]", placeholder: "Password", type: "password"
       input class: "button radius expand small", name: "commit", type: "submit", value: "Sign in"
       label class: "hide", for: "user_remember_me"
