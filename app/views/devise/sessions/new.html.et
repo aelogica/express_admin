@@ -1,40 +1,40 @@
-div._grid_container{  
-  div._large.columns {
-    div._login_box {
-      div._row{
-        div._form_header {
+div(class: 'grid-container') {
+  div(class: 'large columns') {
+    div(class: 'login-box') {
+      div(class: 'row') {
+        div(class: 'form-header') {
           h3 "Log In"
         }
         
-        div._large_12.columns{
-          form.new_user('accept-charset' => "UTF-8", :action => "/users/sign_in", id: "new_user", method: "post") {
+        div(class: 'large-12 columns') {
+          form(:class => 'new_user', 'accept-charset' => "UTF-8", :action => "/users/sign_in", id: "new_user", method: "post") {
 
             div(style: "display:none") {
               input name: "utf8", type: "hidden", value: "✓"
               input name: "authenticity_token", type: "hidden", value: "Zp9VllF7siBJvRs2etlWJdCBwxy9fbKoY01B33d1B50="
             }
             
-            div._row{
-              div._large_12_columns{  
-                label.hide "Email", for: "user_email"
+            div(class: 'row') {
+              div(class: 'large-12 columns') {
+                label(class: 'hide', for: "user_email") { "Email" }
                 input autofocus: "autofocus", id: "user_email", name: "user[email]", placeholder: "Email", type: "email", value: ""
               }
             }
             
-            div._row{
-              div._large_12_columns{
-                label.hide "Password", for: "user_password"
+            div(class: 'row') {
+              div(class: 'large-12 columns') {
+                label(class: 'hide', for: "user_password") { "Password" }
                 input autocomplete: "off", id: "user_password", name: "user[password]", placeholder: "Password", type: "password"
               }
             }
 
             input class: "button radius expand small", name: "commit", type: "submit", value: "Sign in"
             br
-             div._row{
-              div._large_12_columns{
-                div._row{
-                  div._large_12_columns{
-                    label.hide "user_remember_me"
+             div(class: 'row') {
+              div(class: 'large-12 columns') {
+                div(class: 'row') {
+                  div(class: 'large-12 columns') {
+                    label(class: 'hide', for: "user_remember_me")
                     input name: "user[remember_me]", type: "hidden", value: "0"
                     input checked: "checked", id: "user_remember_me", name: "user[remember_me]", type: "checkbox", value: "1"
                     span " Remember me"
@@ -42,8 +42,8 @@ div._grid_container{
                   }
                 }
                 br
-                div._row{
-                  div._large_12_columns{
+                div(class: 'row') {
+                  div(class: 'large-12 columns') {
                     a(class: "gray-link", href: "/users/password/new") { "Forgot password?" }
                   }
                 }
@@ -51,7 +51,7 @@ div._grid_container{
             }
 
             hr
-            div._services_container {
+            div(class: 'services container') {
               a(href: "/users/auth/appexpress") { "Sign in with appexpress" }
               br
             }
