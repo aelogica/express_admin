@@ -20,7 +20,7 @@ module ExpressAdmin
           }
         }
         tbody {
-          helpers.collection.each do |item|
+          collection.each do |item|
             tr(id: row_id(item), class: row_class(item)) {
               display_columns.each do |column|
                 td(class: column.name) {
@@ -80,13 +80,13 @@ module ExpressAdmin
     def cell_value(item, accessor)
       if accessor.respond_to?(:call)
         value = begin
-            helpers.instance_eval "(#{accessor.source}).call(item).to_s"
+            eval "(#{accessor.source}).call(item).to_s"
           rescue
             'Error: '+$!.to_s
           end
       elsif attrib = accessor.to_s.match(/(\w+)_link$/).try(:[], 1)
         # TODO: only works with non-namespaced routes
-        value = helpers.link_to item.send(attrib), helpers.resource_path(item)
+        value = helpers.link_to item.send(attrib), resource_path(item)
       elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
         value = item.send(attrib) ? (helpers.time_ago_in_words(item.send(attrib))+' ago') : 'never'
       else
