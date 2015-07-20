@@ -4,7 +4,7 @@ module ExpressAdmin
   class Pane < LayoutComponent
 
     emits -> (block) {
-      div(id: dom_id, class: pane_classes) {
+      div(container_div_attributes) {
         heading if title || status
         block.call(self) if block
       }
@@ -31,9 +31,9 @@ module ExpressAdmin
       config[:status] || nil
     end
 
-    def pane_classes
-      add_class config[:id].to_s
-      class_names
+    def component_options
+      super +
+        [:title, :status]
     end
 
   end
