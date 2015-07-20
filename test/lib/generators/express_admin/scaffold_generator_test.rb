@@ -18,11 +18,10 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
     assert_migration "db/migrate/create_agents.rb"
 
     # View
-    assert_file "app/views/admin/agents/index.html.et"
+    assert_file "app/views/agents/index.html.et"
 
     # Controller
-    assert_file "app/controllers/admin/agents_controller.rb" do |content|
-      assert_match(/module Admin/, content)
+    assert_file "app/controllers/agents_controller.rb" do |content|
       assert_match(/class AgentsController < AdminController/, content)
 
       assert_match(/defaults resource_class: Agent/, content)
@@ -32,7 +31,6 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
     # Routes
     assert_file "config/routes.rb" do |content|
       assert_match(/Dummy::Engine.routes.draw/, content)
-      assert_match(/namespace :admin do/, content)
       assert_match(/resources :agents/, content)
     end
   end
@@ -44,10 +42,10 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
     assert_no_file "app/models/dummy/agent.rb"
 
     # View
-    assert_no_file "app/views/dummy/admin/agents/index.html.et"
+    assert_no_file "app/views/dummy/agents/index.html.et"
 
     # Controller
-    assert_no_file "app/controllers/dummy/admin/agents_controller.rb"
+    assert_no_file "app/controllers/dummy/agents_controller.rb"
 
     # Route
     assert_file "config/routes.rb" do |route|

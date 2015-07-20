@@ -10,7 +10,7 @@ class ExpressAdmin::Generators::InstallGeneratorTest < Rails::Generators::TestCa
   def test_install_on_invoke
     run_generator
 
-    assert_file 'app/controllers/tmp/admin/admin_controller.rb' do |content|
+    assert_file 'app/controllers/tmp/admin_controller.rb' do |content|
       assert_match /module Tmp/, content
       assert_match /class AdminController < ApplicationController/, content
       assert_match /before_filter :authenticate_user! if defined\?\(Devise\)/, content

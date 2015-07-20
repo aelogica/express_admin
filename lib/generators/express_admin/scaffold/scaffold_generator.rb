@@ -20,7 +20,7 @@ module ExpressAdmin
       end
 
       def generate_controller
-        controller_file_path = File.join(["app/controllers", project_name, admin_controller_path, "#{controller_file_name}_controller.rb"].compact)
+        controller_file_path = File.join(["app/controllers", project_name, "#{controller_file_name}_controller.rb"].compact)
         template "controller/controller.rb", controller_file_path
       end
 
@@ -30,23 +30,9 @@ module ExpressAdmin
           inject_into_file 'config/routes.rb', "        resources :#{controller_file_name}\n",
             after: "scope '#{project_path}' do\n"
         else
-          # this whole thing needs reworking for admin controllers
-          # in applications
-          if module_name # <-- should be namespaced?
-            admin_route = <<-EOD
-  namespace :admin do
-    scope '#{module_name}' do
-      resources :#{controller_file_name}, except: [:edit]
-    end
-  end
+          admin_route = <<-EOD
+  resources :#{controller_file_name}, except: [:edit]
 EOD
-          else
-            admin_route = <<-EOD
-  namespace :admin do
-    resources :#{controller_file_name}, except: [:edit]
-  end
-EOD
-          end
           inject_into_file 'config/routes.rb', admin_route,
             after: "#{namespaced?}::Engine.routes.draw do\n"
         end
@@ -54,7 +40,7 @@ EOD
 
       def add_menu_item
         path = if namespaced?
-          "#{namespaced?.to_s.underscore}.#{project_name}_admin_#{controller_file_name}_path"
+          "#{controller_file_name}_path"
         else
           "admin_#{controller_file_name}_path"
         end
@@ -95,17 +81,6 @@ menu_entry = %Q(
           controller_class_path.last if controller_class_path.size.eql?(2)
         end
 
-        def admin_controller_path
-          # place the generated controller into an Admin module
-          acp = controller_class_path.dup
-          if acp.empty?
-            acp.push 'admin'
-          else
-            acp.insert(1,'admin').compact.slice(1..-1)
-          end
-          File.join acp
-        end
-
         def model_class_name
           class_path_parts = class_name.split("::")
           class_path_parts.unshift namespace.to_s if namespaced?
@@ -113,7 +88,7 @@ menu_entry = %Q(
         end
 
         def admin_view_path
-          path_parts = ["app/views", project_name, admin_controller_path, controller_file_name]
+          path_parts = ["app/views", project_name, controller_file_name]
           File.join path_parts.compact
         end
 

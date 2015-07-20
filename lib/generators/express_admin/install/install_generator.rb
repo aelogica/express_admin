@@ -21,7 +21,7 @@ module ExpressAdmin
 
       def create_admin_controller
         template 'controllers/admin_controller.rb.erb',
-          File.join('app/controllers', @project_name, 'admin', 'admin_controller.rb')
+          File.join('app/controllers', @project_name, 'admin_controller.rb')
       end
 
       def create_admin_layout
