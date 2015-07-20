@@ -2,7 +2,7 @@
 html {
   head {
     title { title_content }
-    meta(name: "description", content: "#{description_meta_content}")
+    meta(name: "description", content: "#{helpers.description_meta_content}")
     meta(name: "viewport", content: "width=device-width, initial-scale=1.0")
     admin_javascript_and_css_includes
     yield(:page_css)
