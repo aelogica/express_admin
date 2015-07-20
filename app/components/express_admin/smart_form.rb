@@ -32,7 +32,8 @@ module ExpressAdmin
                                   'check_box'       => 'checkbox'}
       field_type = attrib.field_type.to_s.sub(/_field$/,'')
       if relation = attrib.name.match(/(\w+)_id$/).try(:[], 1)
-          select(attrib.name, config["#{relation}_collection".to_sym], select2: true)
+          # TODO: should allow select2 override
+          select(attrib.name, options: config["#{relation}_collection".to_sym], select2: true)
       else
         if field_type == 'text_area'
           textarea attrib.name.to_sym, rows: 10
