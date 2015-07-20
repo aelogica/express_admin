@@ -55,9 +55,21 @@ module ExpressAdmin
       helpers.send(resource_path_helper, item.to_param)
     end
 
+    def should_show_delete?(item)
+      if item.respond_to?(:can_delete?) && item.can_delete?
+        true
+      elsif !item.respond_to?(:can_delete?)
+        true
+      else
+        false
+      end
+    end
+
     def actions_column(item)
       td {
-        link_to 'Delete', resource_path(item), method: :delete, data: {confirm: 'Are you sure?'}, class: 'button small secondary'
+        if should_show_delete?(item)
+          link_to 'Delete', resource_path(item), method: :delete, data: {confirm: 'Are you sure?'}, class: 'button small secondary'
+        end
       }
     end
 
