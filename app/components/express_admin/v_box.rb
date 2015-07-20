@@ -1,5 +1,5 @@
 module ExpressAdmin
-  class Vertical < LayoutComponent
+  class VBox < LayoutComponent
 
     emits -> (contents) {
       div(container_div_attributes) {
