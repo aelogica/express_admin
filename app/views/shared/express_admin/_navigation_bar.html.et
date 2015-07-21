@@ -7,8 +7,11 @@ nav(class: 'top-bar') {
         }
       }
       mega_menu_component
-      li { link_to 'View Site', '/', target: '_blank' }
-      li { flash_message_component }
+      li {
+        icon_link(icon_name: 'android-open', text: 'View Site', href: '/', target: '_blank')
+      }
+      render(partial: 'shared/nav_bar_actions')
+      li { flash_message_component } unless helpers.flash.empty?
     }
   }
   div(class: 'secondary-menu') {
@@ -16,7 +19,7 @@ nav(class: 'top-bar') {
       li {
         a {
           current_user_gravatar
-            span {'Profile' }
+          span {'Profile' }
         }
         sign_in_or_sign_out
       }
