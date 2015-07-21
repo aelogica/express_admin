@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'bourbon', '~> 3.2'
-  s.add_dependency 'express_templates', '~> 0.7.0'
+  s.add_dependency 'express_templates', '~> 0.7.1'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'foundation_apps_styles', '~> 1.1.0'
   s.add_dependency 'tinymce-rails', '~> 4.1.6'
