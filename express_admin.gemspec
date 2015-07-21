@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib,vendor}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
-  s.test_files = Dir['test/**/*']
+  s.test_files = Dir["test/**/*"] - Dir["test/log/*", "test/tmp/*", "test/dummy/tmp/**/*", "test/dummy/log/*"]
 
   s.add_dependency 'bourbon', '~> 3.2'
   s.add_dependency 'express_templates', '~> 0.7.1'
