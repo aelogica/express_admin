@@ -3,7 +3,7 @@ module ExpressAdmin
     emits -> (block) {
       add_class('sidebar-region')
       add_class(config.try(:[], :class))
-      div(id: dom_id, class: class_names) {
+      div(attributes.merge(id: dom_id)) {
         block.call(self) if block
       }
     }

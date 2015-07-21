@@ -1,22 +1,26 @@
 module ExpressAdmin
   class MegaMenuComponent < ExpressTemplates::Components::Base
-    # %h1 "Modules"
 
-    # - if admin_menus.any?
-    #   %nav
-    #     %ul
-    #       - admin_menus.each do |menu|
-    #         %li
-    #           = link_to eval(menu.main.path) do
-    #             %i.icon{class: "icon-express_#{menu.main.title.downcase}"}
-    #             %span= menu.main.title
-    # - else
-    #   .empty-state-wrapper
-    #     %p.lead.text-muted No modules added yet.
-    #     %p
-    #       = link_to app_express.addons_path, class: 'button success radius' do
-    #         %span.icon.ion-plus
-    #           Add Module
+    # idea
+    # tag_name :li
+
+    # has_defaults -> {
+    #   add_class('has-sub-menu')
+    # }
+
+    # contains -> {
+    #   menu_wrapper {
+    #     if helpers.admin_menus.any?
+    #       helpers.admin_menus.each do |menu|
+    #         menu_item(menu)
+    #       end
+    #     else
+    #       para(class: 'lead text-muted') {
+    #         "No modules added yet."
+    #       }
+    #     end
+    #   }
+    # }
 
     emits -> {
       menu_wrapper {
