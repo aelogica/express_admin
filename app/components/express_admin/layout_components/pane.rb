@@ -1,5 +1,3 @@
-require File.join(File.dirname(__FILE__), 'layout_component')
-
 module ExpressAdmin
   class Pane < LayoutComponent
 
