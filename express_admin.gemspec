@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails'
   s.add_dependency 'foundation_apps_styles', '~> 1.1.0'
   s.add_dependency 'tinymce-rails', '~> 4.1.6'
+  s.add_dependency 'request_store', '~> 1.2'
 
   s.add_dependency 'gravatar_image_tag'
   s.add_dependency 'kaminari'
