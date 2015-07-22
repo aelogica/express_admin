@@ -1,12 +1,17 @@
 module ExpressAdmin
   class WidgetBox < ExpressTemplates::Components::Configurable
-    emits -> (block) {
-      div(class: 'widget-box', id: "#{config[:id].to_s.dasherize}-box") {
-        header(class: 'title') { box_title }
-        div(class: 'widget-body') {
-          block.call(self) if block
-        }
+
+    has_option :title, "The title to be displayed."
+
+    contains -> (&block) {
+      header(class: 'title') { box_title }
+      div(class: 'widget-body') {
+        block.call(self) if block
       }
+    }
+
+    before_build -> {
+      set_attribute(:id, "#{config[:id].to_s.dasherize}-box")
     }
 
     protected

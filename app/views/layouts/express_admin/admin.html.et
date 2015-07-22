@@ -13,10 +13,10 @@ html {
       render('shared/express_admin/navigation_bar')
       div(class: 'main-page') {
         div(class: 'page-sidebar') {
-          addon_sidebar_component
+          module_sidebar
         }
         div(class: 'page-body') {
-          page_header_component
+          page_header
           current_arbre_element.add_child yield
         }
       }

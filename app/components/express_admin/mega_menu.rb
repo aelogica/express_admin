@@ -1,28 +1,13 @@
 module ExpressAdmin
-  class MegaMenuComponent < ExpressTemplates::Components::Base
+  class MegaMenu < ExpressTemplates::Components::Base
 
-    # idea
-    # tag_name :li
+    tag :li
 
-    # has_defaults -> {
-    #   add_class('has-sub-menu')
-    # }
+    before_build -> {
+      add_class('has-sub-menu')
+    }
 
-    # contains -> {
-    #   menu_wrapper {
-    #     if helpers.admin_menus.any?
-    #       helpers.admin_menus.each do |menu|
-    #         menu_item(menu)
-    #       end
-    #     else
-    #       para(class: 'lead text-muted') {
-    #         "No modules added yet."
-    #       }
-    #     end
-    #   }
-    # }
-
-    emits -> {
+    contains -> {
       menu_wrapper {
         if helpers.admin_menus.any?
           helpers.admin_menus.each do |menu|
