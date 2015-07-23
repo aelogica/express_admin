@@ -4,7 +4,7 @@ module ExpressAdmin
     has_option :title, 'The title of the pane', default: ''
     has_option :status, 'Status of the pane'
 
-    contains -> (block) {
+    contains -> (&block) {
       heading if title || status
       block.call(self) if block
     }

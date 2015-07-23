@@ -1,6 +1,6 @@
 module ExpressAdmin
   class SidebarRegion < LayoutComponent
-    contains -> (block) {
+    contains -> (&block) {
       block.call(self) if block
     }
   end
