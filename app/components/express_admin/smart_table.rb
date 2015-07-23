@@ -12,6 +12,15 @@ module ExpressAdmin
     has_option :show_actions, 'Set to true if table has actions for each row'
     has_option :row_class, 'Add a class to each table row'
 
+
+    column_defs = {}
+    column_defs[:array] = {description: "List of fields to include in the table as columns",
+                           options: -> {resource.columns.map(&:name)} }
+    column_defs[:hash] = {description: "Hash of column names (titles) and how to calculate the cell values."}
+
+    has_option :columns, 'Specify the columns.  May provide as a hash with values used to provide cell values as a proc.',
+                         type: [:array, :hash]
+
     contains -> {
       thead {
         tr {
