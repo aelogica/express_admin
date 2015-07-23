@@ -20,9 +20,9 @@ module ExpressAdmin
     }
 
     def definitions
-      if config[:for].kind_of?(Array)
+      if config[:list].kind_of?(Array)
         definitions_from_array(@args.first)
-      elsif config[:for].kind_of?(Hash)
+      elsif config[:list].kind_of?(Hash)
         definitions_from_hash(@args.first)
       end
     end

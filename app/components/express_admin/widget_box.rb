@@ -1,7 +1,7 @@
 module ExpressAdmin
   class WidgetBox < ExpressTemplates::Components::Configurable
 
-    has_option :title, "The title to be displayed."
+    has_option :title, 'The title to be displayed.'
 
     contains -> (&block) {
       header(class: 'title') { box_title }

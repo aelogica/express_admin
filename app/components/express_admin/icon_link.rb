@@ -4,7 +4,7 @@ module ExpressAdmin
     tag :a
 
     has_option :text,    "Link text to accompany the icon."
-    
+
     has_option :right,   "Aligns the icon to the right of the text.",
                          default: false
     has_option :href,    "Link path, URL or anchor.",

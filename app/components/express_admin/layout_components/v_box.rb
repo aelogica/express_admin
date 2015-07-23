@@ -1,10 +1,7 @@
 module ExpressAdmin
   class VBox < LayoutComponent
-
-    emits -> (contents) {
-      div(container_div_attributes) {
-        contents.call(self) if contents
-      }
+    contains -> (block) {
+      block.call(self) if block
     }
   end
 end

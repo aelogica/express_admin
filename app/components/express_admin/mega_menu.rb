@@ -1,6 +1,5 @@
 module ExpressAdmin
   class MegaMenu < ExpressTemplates::Components::Base
-
     tag :li
 
     before_build -> {
@@ -51,6 +50,5 @@ module ExpressAdmin
         }
       }
     end
-
   end
 end

@@ -2,7 +2,6 @@ module ExpressAdmin
   # renders a sidebar partial if one is available
   # otherwise uses menu.yml
   class ModuleSidebar < ExpressTemplates::Components::Base
-
     tag :section
 
     contains -> {
@@ -31,6 +30,5 @@ module ExpressAdmin
         link_to item.title.html_safe, helpers.instance_eval(item.path)
       }
     end
-
   end
 end
