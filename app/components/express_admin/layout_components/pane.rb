@@ -18,5 +18,13 @@ module ExpressAdmin
       }
     end
 
+    def title
+      config[:title]
+    end
+
+    def status
+      config[:status]
+    end
+
   end
 end

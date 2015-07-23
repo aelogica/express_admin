@@ -1,6 +1,6 @@
 module ExpressAdmin
   class VBox < LayoutComponent
-    contains -> (block) {
+    contains -> (&block) {
       block.call(self) if block
     }
   end
