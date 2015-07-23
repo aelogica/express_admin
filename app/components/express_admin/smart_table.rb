@@ -2,44 +2,61 @@ module ExpressAdmin
   class SmartTable < ExpressTemplates::Components::Configurable
     include ExpressTemplates::Components::Capabilities::Resourceful
 
+    tag :table
+
     MAX_COLS_TO_SHOW_IDX = 5
 
     attr :columns
 
-    emits -> {
-      table(id: config[:id], class: 'table striped') {
-        thead {
-          tr {
-            display_columns.each do |column|
-              th(class: column.name) {
-                column.title
-              }
-            end
-            actions_header if should_show_actions?
-            hidden_columns_header_indicator if columns_hidden?
-          }
-        }
-        tbody {
-          collection.each do |item|
-            tr(id: row_id(item), class: row_class(item)) {
-              display_columns.each do |column|
-                td(class: column.name) {
-                  cell_value(item, column.accessor)
-                }
-              end
-              actions_column(item) if should_show_actions?
-              hidden_column_cell if columns_hidden?
+    has_option :scrollable, 'Set to true if the table should be scrollable'
+    has_option :show_actions, 'Set to true if table has actions for each row'
+    has_option :row_class, 'Add a class to each table row'
+
+
+    column_defs = {}
+    column_defs[:array] = {description: "List of fields to include in the table as columns",
+                           options: -> {resource.columns.map(&:name)} }
+    column_defs[:hash] = {description: "Hash of column names (titles) and how to calculate the cell values."}
+
+    has_option :columns, 'Specify the columns.  May provide as a hash with values used to provide cell values as a proc.',
+                         type: [:array, :hash]
+
+    contains -> {
+      thead {
+        tr {
+          display_columns.each do |column|
+            th(class: column.name) {
+              column.title
             }
-          end ; nil
+          end
+          actions_header if should_show_actions?
+          hidden_columns_header_indicator if columns_hidden?
         }
       }
+      tbody {
+        collection.each do |item|
+          tr(id: row_id(item), class: row_class(item)) {
+            display_columns.each do |column|
+              td(class: column.name) {
+                cell_value(item, column.accessor)
+              }
+            end
+            actions_column(item) if should_show_actions?
+            hidden_column_cell if columns_hidden?
+          }
+        end ; nil
+      }
 
-      scroll_table if !!config[:scroll_table]
+      scroll_table if !!config[:scrollable]
+    }
+
+    before_build -> {
+      add_class 'table striped'
     }
 
     def scroll_table
       script {
-        %Q($('\##{my[:id]}').scrollTableBody())
+        %Q($('\##{config[:id]}').scrollTableBody())
       }
     end
 
@@ -48,7 +65,7 @@ module ExpressAdmin
     end
 
     def should_show_actions?
-      config[:actions].nil? || !!config[:actions]
+      !!config[:show_actions]
     end
 
     def resource_path(item)
@@ -81,10 +98,6 @@ module ExpressAdmin
       end
     end
 
-    def is_permanent?
-      config[:permanent].nil? || (config[:permanent].present? && config[:permanent])
-    end
-
     def row_id(item)
       "#{collection_member_name}:#{item.to_param}"
     end
@@ -92,7 +105,7 @@ module ExpressAdmin
     def cell_value(item, accessor)
       if accessor.respond_to?(:call)
         value = begin
-            eval "(#{accessor.source}).call(item).to_s"
+            accessor.call(item).html_safe
           rescue
             'Error: '+$!.to_s
           end

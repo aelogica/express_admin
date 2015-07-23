@@ -1,7 +1,7 @@
 module ExpressAdmin
-  class FlashMessageComponent < ExpressTemplates::Components::Base
+  class Flash < ExpressTemplates::Components::Base
 
-    emits -> {
+    contains -> {
       helpers.flash.each do |flash_message|
         div(class:"flash nav-alert alert-box ", data: {alert: ''}) {
           span flash_message[1]
@@ -9,5 +9,6 @@ module ExpressAdmin
         }
       end
     }
+
   end
 end

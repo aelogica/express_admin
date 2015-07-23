@@ -1,20 +1,23 @@
 module ExpressAdmin
   # renders a sidebar partial if one is available
   # otherwise uses menu.yml
-  class AddonSidebarComponent < ExpressTemplates::Components::Base
+  class ModuleSidebar < ExpressTemplates::Components::Base
+    tag :section
 
-    emits -> {
+    contains -> {
+      ul(class: 'menu-items') {
+        li(class: 'title') { current_menu_name }
+        menu_list(helpers.current_menu.items)
+      }
+    }
+
+    def build(*args, &block)
       begin
         render("shared/#{helpers.current_module_path_name}/sidebar")
       rescue Exception => e
-        section(class: 'module-sidebar') {
-          ul(class: 'menu-items') {
-            li(class: 'title') { current_menu_name }
-            menu_list(helpers.current_menu.items)
-          }
-        }
+        super(*args, &block)
       end
-    }
+    end
 
     def menu_list(list)
       list.each do |item|
@@ -27,6 +30,5 @@ module ExpressAdmin
         link_to item.title.html_safe, helpers.instance_eval(item.path)
       }
     end
-
   end
 end

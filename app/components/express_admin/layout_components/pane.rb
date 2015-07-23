@@ -1,11 +1,12 @@
 module ExpressAdmin
   class Pane < LayoutComponent
 
-    emits -> (block) {
-      div(container_div_attributes) {
-        heading if title || status
-        block.call(self) if block
-      }
+    has_option :title, 'The title of the pane', default: ''
+    has_option :status, 'Status of the pane'
+
+    contains -> (&block) {
+      heading if title || status
+      block.call(self) if block
     }
 
     def heading
@@ -17,21 +18,12 @@ module ExpressAdmin
       }
     end
 
-    def dom_id
-      nil
-    end
-
     def title
-      config[:title] || ''
+      config[:title]
     end
 
     def status
-      config[:status] || nil
-    end
-
-    def component_options
-      super +
-        [:title, :status]
+      config[:status]
     end
 
   end

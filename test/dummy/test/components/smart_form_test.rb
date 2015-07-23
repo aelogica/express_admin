@@ -7,6 +7,7 @@ module ExpressAdmin
     def resource_assigns
       {resource: Widget.new, collection: Widget.all}
     end
+
     def helpers
       view = mock_action_view(resource_assigns)
       class << view
@@ -25,15 +26,14 @@ module ExpressAdmin
       view
     end
 
-
     def widget_form(*args)
       arbre {
-        smart_form(:widgets, *args)
+        smart_form(:widget, *args)
       }
     end
 
     test "renders a form correct id" do
-      assert_match '<form id="widget"', widget_form
+      assert_match /form.*id="widget"/, widget_form
     end
 
     test "uses inherited_resources path helpers to set correct action" do
@@ -71,8 +71,9 @@ module ExpressAdmin
     end
 
     test "timestamps are not editable" do
-      assert_match /Created At:.*\n/, widget_form
-      assert_match /Updated At:.*\n/, widget_form
+      form_with_timestamps = widget_form(show_timestamps: true)
+      assert_match /Created At:.*\n/, form_with_timestamps
+      assert_match /Updated At:.*\n/, form_with_timestamps
     end
 
     test "fields have labels" do

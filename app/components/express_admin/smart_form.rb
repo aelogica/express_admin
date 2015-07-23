@@ -1,18 +1,29 @@
 require 'rails/generators/generated_attribute'
 
 module ExpressAdmin
-  class SmartForm < ExpressTemplates::Components::Configurable
-    include ExpressTemplates::Components::Capabilities::Resourceful
+  class SmartForm < ExpressTemplates::Components::Forms::ExpressForm
+    TIMESTAMPS = %w(updated_at created_at)
 
-    emits -> {
-      express_form(form_args) {
-        hidden(:id)
-        filter_by_name(editable_attributes).each do |attrib|
-          form_field_for(attrib)
-        end
-        filter_by_name(has_many_through_associations).each do |assoc|
-          select_collection(assoc.name, nil, nil, class: 'select2')
-        end
+    has_option :virtual_attributes, 'Override the list of virtual attributes of the resource to be displayed'
+    has_option :exclude, 'Attributes not to be included in the form'
+    has_option :only, 'Respects the order the attributes are listed in'
+    has_option :show_timestamps, 'Set to true to show timestamps as labels'
+
+    contains {
+      # TODO: taken from express_form. should be inherited?
+      div(style: 'display:none') {
+        add_child helpers.utf8_enforcer_tag
+        add_child helpers.send(:method_tag, resource.persisted? ? :put : :post)
+        helpers.send(:token_tag)
+      }
+
+      filter_by_name(editable_attributes).each do |attrib|
+        form_field_for(attrib)
+      end
+      filter_by_name(has_many_through_associations).each do |assoc|
+        select_collection(assoc.name, nil, nil, class: 'select2')
+      end
+      if show_timestamps?
         filter_by_name(timestamp_attributes).each do |timestamp|
           div {
             label {
@@ -20,11 +31,10 @@ module ExpressAdmin
             }
           }
         end
-        submit(class: 'button')
-      }
+      end
+      submit(class: 'button')
     }
 
-    TIMESTAMPS = ['updated_at', 'created_at']
 
     def form_field_for(attrib)
       field_type_substitutions = {'text_area'       => 'textarea',
@@ -33,7 +43,7 @@ module ExpressAdmin
       field_type = attrib.field_type.to_s.sub(/_field$/,'')
       if relation = attrib.name.match(/(\w+)_id$/).try(:[], 1)
           # TODO: should allow select2 override
-          select(attrib.name, options: config["#{relation}_collection".to_sym], select2: true)
+          select(attrib.name.to_sym, options: config["#{relation}_collection".to_sym], select2: true)
       else
         if field_type == 'text_area'
           textarea attrib.name.to_sym, rows: 10
@@ -44,19 +54,6 @@ module ExpressAdmin
     end
 
     protected
-
-      def form_args
-        {           id: resource_name,
-                action: form_action,
-         resource_name: resource_name,
-        resource_class: config[:resource_class],
-             namespace: namespace}
-      end
-
-      # from express_form - perhaps move back to shared module
-      def form_action
-        config[:action] || (helpers.resource.try(:persisted?) ? resource_path(ivar: true) : collection_path)
-      end
 
       def resource_attributes
         super.map do |attrib|
@@ -83,6 +80,10 @@ module ExpressAdmin
 
       def timestamp_attributes
         resource_attributes.select {|attrib| TIMESTAMPS.include?(attrib.name) }
+      end
+
+      def show_timestamps?
+        !!config[:show_timestamps]
       end
 
       def non_timestamp_attributes
