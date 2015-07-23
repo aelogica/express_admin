@@ -8,7 +8,7 @@ nav(class: 'top-bar') {
       }
       mega_menu
       li {
-        icon_link(icon_name: 'android-open', text: 'View Site', href: '/', target: '_blank')
+        icon_link("android-open", text: 'View Site', href: '/', target: '_blank')
       }
       render(partial: 'shared/nav_bar_actions')
       li { flash_messages } unless helpers.flash.empty?

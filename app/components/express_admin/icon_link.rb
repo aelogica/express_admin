@@ -3,6 +3,10 @@ module ExpressAdmin
 
     tag :a
 
+    has_argument :id, "The name of the ionic icon withouth the ion- prefix. See http://ionicons.com/cheatsheet.html",
+                     as: :icon_name,
+                     type: [:symbol, :string]
+
     has_option :text,    "Link text to accompany the icon."
 
     has_option :right,   "Aligns the icon to the right of the text.",
@@ -27,6 +31,9 @@ module ExpressAdmin
       if config[:right]
         text_node config[:text]
         icon(config[:icon_name].to_sym)
+      else
+        icon(config[:icon_name].to_sym)
+        text_node config[:text]
       end
     }
 
