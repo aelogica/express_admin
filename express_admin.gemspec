@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = ExpressAdmin::VERSION
   s.authors     = ['Steven Talcott Smith']
   s.email       = ['steve@aelogica.com']
-  s.homepage    = ''
+  s.homepage    = 'https://rubygems.org/gems/express_admin'
   s.summary     = 'ExpressAdmin provides an admin menu framework based on Foundation.'
   s.description = 'ExpressAdmin is the admin menu framework used by appexpress.io, ExpressBlog, etc.'
   s.license     = 'MIT'
@@ -19,22 +19,22 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'bourbon', '~> 3.2'
   s.add_dependency 'express_templates', '~> 0.8.0'
-  s.add_dependency 'jquery-rails'
-  s.add_dependency 'foundation_apps_styles', '~> 1.1.0'
-  s.add_dependency 'tinymce-rails', '~> 4.1.6'
+  s.add_dependency 'jquery-rails', '~> 4.0'
+  s.add_dependency 'foundation_apps_styles', '~> 1.1', '>= 1.1.0'
+  s.add_dependency 'tinymce-rails', '~> 4.1', '>= 4.1.6'
   s.add_dependency 'request_store', '~> 1.2'
 
-  s.add_dependency 'gravatar_image_tag'
-  s.add_dependency 'kaminari'
-  s.add_dependency 'rails', '~> 4.2'
-  s.add_dependency 'responders', '~> 2.0'
+  s.add_dependency 'gravatar_image_tag', '~> 1.2'
+  s.add_dependency 'kaminari', '~> 0'
+  s.add_dependency 'rails', '~> 4.2', '>= 4.2.1'
+  s.add_dependency 'responders', '~> 2.1'
   s.add_dependency 'inherited_resources', '~> 1.6'
-  s.add_dependency 'select2-rails'
-  s.add_dependency 'coffee-script'
+  s.add_dependency 'select2-rails', '~> 4.0'
+  s.add_dependency 'coffee-script', '~> 2.4'
 
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'minitest-rails-capybara'
-  s.add_development_dependency 'minitest-rg'
-  s.add_development_dependency 'minitest-line'
+  s.add_development_dependency 'sqlite3', '~> 1.3'
+  s.add_development_dependency 'pry', '~> 0'
+  s.add_development_dependency 'minitest-rails-capybara', '~> 2.1'
+  s.add_development_dependency 'minitest-rg', '~> 5.1'
+  s.add_development_dependency 'minitest-line', '~> 0'
 end
