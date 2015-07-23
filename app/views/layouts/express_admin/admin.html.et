@@ -22,5 +22,12 @@ html {
       }
     }
     yield(:page_javascript)
+    div(id: 'my-modal', class: 'modal-overlay') {
+      aside(class: 'modal') {
+        a(class: 'close-button') { 'x' }
+        h3 { 'Back in my days' }
+        para { 'There were 3 Star wars movies' }
+      }
+    }
   }
 }

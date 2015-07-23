@@ -1,3 +1,6 @@
 .live-edit
-  &:hover
-    background-color: rgba(255,0,0,0.2)
+  &.current-component
+    z-index: 800
+    &:hover
+      transition: all ease 0.3s
+      box-shadow: 0 0 10px 10px $silver
