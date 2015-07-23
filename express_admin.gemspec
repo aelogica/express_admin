@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 4.2', '>= 4.2.1'
   s.add_dependency 'responders', '~> 2.1'
   s.add_dependency 'inherited_resources', '~> 1.6'
-  s.add_dependency 'select2-rails', '~> 4.0'
+  s.add_dependency 'select2-rails', '>= 3.5'
   s.add_dependency 'coffee-script', '~> 2.4'
 
   s.add_development_dependency 'sqlite3', '~> 1.3'
