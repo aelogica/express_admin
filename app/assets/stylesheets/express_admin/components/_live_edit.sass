@@ -1,6 +1,16 @@
 .live-edit
+
   &.current-component
     z-index: 800
     &:hover
       transition: all ease 0.3s
       box-shadow: 0 0 10px 10px $silver
+
+.current-component
+  position: relative
+
+  > .pop-up-modal
+    @extend .button
+    position: absolute
+    right: 0
+    top: 0
