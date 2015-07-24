@@ -84,7 +84,7 @@ module ExpressAdmin
     end
 
     test "fields are wrapped in a div" do
-      assert_match '<div class="field-wrapper">', widget_form
+      assert_match /<div class="[^"]*field-wrapper"/, widget_form
     end
 
     test 'path prefix is provided' do
