@@ -1,5 +1,5 @@
 module ExpressAdmin
-  class Flash < ExpressTemplates::Components::Base
+  class FlashMessages < ExpressTemplates::Components::Base
 
     contains -> {
       helpers.flash.each do |flash_message|
