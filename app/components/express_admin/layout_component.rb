@@ -1,5 +1,5 @@
 module ExpressAdmin
-  class LayoutComponent < ExpressTemplates::Components::Configurable
+  class LayoutComponent < ExpressTemplates::Components::Container
 
     has_option :style, 'Add inline styles to the element'
 

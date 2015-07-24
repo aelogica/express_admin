@@ -1,7 +1,4 @@
 module ExpressAdmin
-  class MainRegion < ExpressTemplates::Components::Configurable
-    contains -> (&block) {
-      block.call(self) if block
-    }
+  class MainRegion < ExpressTemplates::Components::Container
   end
 end
