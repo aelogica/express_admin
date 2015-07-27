@@ -12,7 +12,7 @@ module ExpressAdmin
     has_option :right,   "Aligns the icon to the right of the text.",
                          default: false
     has_option :href,    "Link path, URL or anchor.",
-                         required: true, attribute: true
+                         default: '#', attribute: true
     has_option :title,   "Title text for accessibility; appears on mouse hover.",
                          attribute: true
     has_option :confirm, "Should trigger a confirm message.",
