@@ -11,6 +11,8 @@ require 'responders'
 require 'tinymce-rails'
 require 'inherited_resources'
 
+require File.join(File.dirname(__FILE__), '..', '..', 'app', 'components', 'express_admin', 'definition_list')
+
 # should be a way to add this folder to rails' autoload paths
 components = Dir.glob(File.join(File.dirname(__FILE__), '..', '..', 'app', 'components', '**', '*.rb'))
 components.each {|component| require component }
