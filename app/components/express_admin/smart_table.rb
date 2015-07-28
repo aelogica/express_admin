@@ -51,6 +51,7 @@ module ExpressAdmin
     }
 
     before_build -> {
+      _initialize_columns
       add_class 'table striped'
     }
 
@@ -130,7 +131,7 @@ module ExpressAdmin
     end
 
     def display_columns
-      specified_columns? ? columns : columns.slice(1..MAX_COLS_TO_SHOW_IDX)
+      specified_columns? ? @columns : @columns.slice(1..MAX_COLS_TO_SHOW_IDX)
     end
 
     def columns_hidden?
@@ -144,10 +145,6 @@ module ExpressAdmin
         @accessor = accessor
         @title = title || @name.titleize
       end
-    end
-
-    def columns
-      @columns ||= _initialize_columns
     end
 
     def specified_columns?
