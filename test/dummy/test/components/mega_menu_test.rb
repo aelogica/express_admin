@@ -13,22 +13,22 @@ module ExpressAdmin
       end
     end
 
-  	def rendered_mega_menu
-  		arbre {
-  			mega_menu
-  		}
-  	end
+    def rendered_mega_menu
+      arbre {
+        mega_menu
+      }
+    end
 
-  	def helpers
+    def helpers
       OpenStruct.new(
-  		  admin_menus: [MenuItem.new('Big Menu', 'my_path'), MenuItem.new('Foo', 'another_path')],
+        admin_menus: [MenuItem.new('Big Menu', 'my_path'), MenuItem.new('Foo', 'another_path')],
         my_path: 'evaled_path',
         another_path: 'some_path'
-  		)
-	 end
+      )
+    end
 
-  	test "renders" do
-  		assert rendered_mega_menu
+    test "renders" do
+      assert rendered_mega_menu
     end	
 
     test "links menu to eval'd path" do
