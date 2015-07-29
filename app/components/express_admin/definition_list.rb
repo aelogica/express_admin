@@ -21,19 +21,22 @@ module ExpressAdmin
 
     def definitions
       if config[:list].kind_of?(Array)
-        definitions_from_array(@args.first)
+        definitions_from_array(config[:list])
       elsif config[:list].kind_of?(Hash)
-        definitions_from_hash(@args.first)
+        definitions_from_hash(config[:list])
       end
     end
 
     def definitions_from_hash(hash)
       processed = hash.map do |k,v|
-        if v.kind_of? Symbol
-          [promptify(k), resource.send(v)]
+        value = if v.kind_of? Symbol
+          resource.send(v)
+        elsif v.respond_to?(:call)
+          v.call(resource).html_safe
         else
-          [promptify(k), helpers.instance_eval("(#{v.source}).call(resource).to_s").html_safe]
+          v
         end
+        [promptify(k), value]
       end
       Hash[processed]
     end
