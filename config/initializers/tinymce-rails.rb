@@ -1,0 +1,1 @@
+Rails.application.config.tinymce.config_path = '../tinymce.yml'

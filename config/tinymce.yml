@@ -3,13 +3,15 @@ default:
   theme: 'modern'
   height: 400
   toolbar:
-    - bold italic underline strikethrough | link unlink | bullist numlist | table | nonbreaking hr | formatselect | blockquote | alignleft aligncenter alignright alignjustify | outdent indent | image media | forecolor charmap | sp
+    - bold italic underline strikethrough | link unlink | bullist numlist
+    - table | nonbreaking hr | formatselect | blockquote | alignleft aligncenter alignright alignjustify
+    - outdent indent | image media | forecolor charmap | spellchecker removeformat | pastetext searchreplace | undo redo | code | fullscreen
   relative_urls: false
   remove_script_host: false
   convert_urls: true
+  resize: false
   plugins:
     - advlist
-    - anchor
     - anchor
     - autolink
     - charmap
