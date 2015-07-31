@@ -4,7 +4,7 @@ module ExpressAdmin
   class SmartForm < ExpressTemplates::Components::Forms::ExpressForm
     TIMESTAMPS = %w(updated_at created_at)
 
-    has_option :virtual_attributes, 'Override the list of virtual attributes of the resource to be displayed'
+    has_option :virtual, 'Override the list of virtual attributes of the resource to be displayed'
     has_option :exclude, 'Attributes not to be included in the form'
     has_option :only, 'Respects the order the attributes are listed in'
     has_option :show_timestamps, 'Set to true to show timestamps as labels'
@@ -41,6 +41,7 @@ module ExpressAdmin
                                   'datetime_select' => 'datetime',
                                   'check_box'       => 'checkbox'}
       field_type = attrib.field_type.to_s.sub(/_field$/,'')
+      field_type = "password" if attrib.name.match(/password/)
       if relation = attrib.name.match(/(\w+)_id$/).try(:[], 1)
           # TODO: should allow select2 override
           select(attrib.name.to_sym, options: config["#{relation}_collection".to_sym], select2: true)
