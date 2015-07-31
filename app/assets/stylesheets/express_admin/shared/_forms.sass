@@ -1,4 +1,4 @@
-form
+.smart-form, .express-form
   margin:
     bottom: 1rem
 
@@ -7,6 +7,11 @@ form
 
   select[multiple]
     height: 6rem
+
+  .error
+    border: none
+    input, select, textarea, .select2-container
+      border: 1px solid $red
 
 .help
   color: $gray
