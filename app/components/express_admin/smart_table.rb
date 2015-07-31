@@ -8,7 +8,7 @@ module ExpressAdmin
 
     attr :columns
 
-    has_option :scrollable, 'Set to true if the table should be scrollable'
+    has_option :scrollable, 'Set to true if the table should be scrollable', type: :boolean, default: false
     has_option :show_actions, 'Set to true if table has actions for each row'
     has_option :row_class, 'Add a class to each table row'
 
