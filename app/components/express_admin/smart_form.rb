@@ -4,9 +4,10 @@ module ExpressAdmin
   class SmartForm < ExpressTemplates::Components::Forms::ExpressForm
     TIMESTAMPS = %w(updated_at created_at)
 
-    has_option :virtual, 'Override the list of virtual attributes of the resource to be displayed'
-    has_option :exclude, 'Attributes not to be included in the form'
-    has_option :only, 'Respects the order the attributes are listed in'
+    has_option :virtual, 'Override the list of virtual attributes of the resource to be displayed', type: :array,
+      values: -> (*) { resource_class.respond_to?(:virtual_attributes) ? resource_class.virtual_attributes : [] }
+    has_option :exclude, 'Attributes not to be included in the form', type: :array
+    has_option :only, 'Respects the order the attributes are listed in', type: :array
     has_option :show_timestamps, 'Set to true to show timestamps as labels'
 
     contains {
