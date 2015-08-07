@@ -13,7 +13,7 @@ class ExpressAdmin::Generators::InstallGeneratorTest < Rails::Generators::TestCa
     assert_file 'app/controllers/tmp/admin_controller.rb' do |content|
       assert_match /module Tmp/, content
       assert_match /class AdminController < ApplicationController/, content
-      assert_match /before_filter :authenticate_user! if defined\?\(Devise\)/, content
+      assert_match /include ::ExpressAdmin::AdminControllerMixin/, content
       assert_match /layout "tmp\/admin"/, content
     end
 
