@@ -5,7 +5,7 @@ module ExpressAdmin
   class DefinitionListTest < ActiveSupport::TestCase
 
     def assigns
-    	{list_types: list_types}
+      {list_types: list_types}
     end
 
     def helpers
@@ -13,21 +13,21 @@ module ExpressAdmin
     end
 
     def list_types
-    	@list_types ||= OpenStruct.new(
-    		array: ["field1", "field2"],
-    		hash: {term1: "def1",
-          		 term2: "def2",
-          		 term3: "def3"})
-    end	
+      @list_types ||= OpenStruct.new(
+        array: ["field1", "field2"],
+        hash: {term1: "def1",
+               term2: "def2",
+               term3: "def3"})
+    end
 
     def deflist(*args)
-    	arbre {
-    		definition_list(:deflist, *args)
-    	}.to_s
+      arbre {
+        definition_list(:deflist, *args)
+      }.to_s
     end
 
     test "accepts array as input" do
-    	assert deflist(list_types[:array])
+      assert deflist(list_types[:array])
     end
 
     test "accepts hash as input" do
@@ -64,7 +64,7 @@ HTML
 
     test "definition_list renders correct markup with array input" do
       assert_equal DEFLIST_MARKUP_ARR, deflist(list_types[:array])
-    end 
+    end
 
   end
 

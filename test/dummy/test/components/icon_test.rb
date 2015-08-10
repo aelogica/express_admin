@@ -24,7 +24,7 @@ module Components
 
     test "accepts symbol as input for icon name as id" do
       assert_match /i class="icon ion-beer"/, rendered_icon(:beer)
-    end    
+    end
 
   end
 

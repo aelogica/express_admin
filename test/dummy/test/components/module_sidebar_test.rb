@@ -3,7 +3,7 @@ require 'test_helper'
 module Components
 
   class ModuleSidebarTest < ActiveSupport::TestCase
-   
+
     class MenuItem
       attr_accessor :title, :path, :items
 
@@ -21,7 +21,7 @@ module Components
     end
 
     def assigns
-      { current_menu: current_menu, 
+      { current_menu: current_menu,
         current_menu_name: current_menu_name,
         foo_path: 'foo',
         bar_path: 'bar',

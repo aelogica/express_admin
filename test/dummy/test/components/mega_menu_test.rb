@@ -29,12 +29,12 @@ module ExpressAdmin
 
     test "renders" do
       assert rendered_mega_menu
-    end	
+    end
 
     test "links menu to eval'd path" do
       assert_match /href="evaled_path"/, rendered_mega_menu
       assert_match /href="some_path"/, rendered_mega_menu
-    end 
+    end
 
     test "replaces whitespace in menu title to underscore for icon class" do
       assert_match /icon-express_big_menu/, rendered_mega_menu
