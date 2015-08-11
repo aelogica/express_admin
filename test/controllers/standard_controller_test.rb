@@ -88,10 +88,21 @@ module ExpressAdmin
       end
     end
 
-    # test "it should provide collection and resource helpers"
+    test "it should provide collection and resource helpers" do
+      controller = widgets_controller
+      controller.index
+      assert controller.send(:collection).respond_to?(:count), "collection not provided by #index"
+      assert controller.send(:resource), "resource not provided by #index"
+    end
 
-    # test "it should provide a default strong params"
+    test "it should provide a default strong params" do
+      assert_raises(ActionController::ParameterMissing) do
+        widgets_controller.create
+      end
+      widgets_controller(widget: {column2: 'nothing'}).create
+    end
 
+    # TODO: Implement later
     # test "for nested resources it should try to expose a current method for parent resources"
   end
 end
