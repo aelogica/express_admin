@@ -1,0 +1,99 @@
+require 'test_helper'
+
+module ExpressAdmin
+
+  class StandardControllerTest < ActiveSupport::TestCase
+
+    class WidgetsController < StandardController
+      def resource_class
+        Widget
+      end
+    end
+
+    def widgets_controller(params = {})
+      @widgets_controller ||= WidgetsController.new
+      eigenclass = class << @widgets_controller ; self ; end
+      eigenclass.send(:define_method, :params) do
+        ActionController::Parameters.new(params.with_indifferent_access)
+      end
+      eigenclass.send(:define_method, :respond_to) do |&block|
+        block.call(ActionController::MimeResponds::Collector.new([], 'text/html'))
+      end
+      @widgets_controller
+    end
+
+    test "it should have all the standard actions" do
+      [:new, :create, :show, :index, :edit, :update, :destroy].each do |action|
+        assert StandardController.instance_methods.include?(action), "StandardController does not implement ##{action}"
+      end
+    end
+
+    test "should require a subclass for instantiation" do
+      assert_raises(RuntimeError) do
+        StandardController.new
+      end
+    end
+
+    def resource
+      widgets_controller.instance_variable_get(:@widget)
+    end
+
+    def collection
+      widgets_controller.instance_variable_get(:@widgets)
+    end
+
+    test "#new should expose a new instance of resource" do
+      widgets_controller.new
+      assert resource, "@widget not provided by #new"
+      refute resource.persisted?, "@widget should not be persisted"
+    end
+
+    test "#create should expose an instance of resource" do
+      widgets_controller.create
+      assert resource, "@widget not provided by #create"
+      assert resource.persisted?, "@widget not saved"
+    end
+
+    test "#show should expose an instance of resource if found" do
+      widgets_controller(id: widgets(:one).id).show
+      assert resource, "@widget not provided by #show"
+      assert resource.persisted?, "@widget not saved"
+    end
+
+    test "#index should expose a collection of resources" do
+      widgets_controller.index
+      assert collection, "@widgets not provided by #index"
+      refute collection.empty?, "@widgets is empty"
+    end
+
+    test "#edit should expose an instance of resource if found" do
+      widgets_controller(id: widgets(:one).id).edit
+      assert resource, "@widget not provided by #edit"
+      assert resource.persisted?, "@widget not saved"
+    end
+
+    test "#update should expose an updated instance of resource if found" do
+      widgets_controller(id: widgets(:one).id, widget: {column2: "Updated"}).update
+      assert resource, "@widget not provided by #update"
+      assert_equal "Updated", resource.column2
+      assert resource.persisted?, "@widget not saved"
+    end
+
+    test "#destroy destroys" do
+      @widget = Widget.create!(column2: 'Destroy Me')
+      assert @widget.persisted?
+      widgets_controller(id: @widget.id).destroy
+      assert_raises(ActiveRecord::RecordNotFound) do
+        Widget.find(@widget.id)
+      end
+    end
+
+    # test "it should provide collection and resource helpers"
+
+    # test "it should provide a default strong params"
+
+    # test "subclassing it should do the right thing"
+
+    # test "for nested resources it should try to expose a current method for parent resources"
+  end
+end
