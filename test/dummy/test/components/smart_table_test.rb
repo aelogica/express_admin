@@ -52,7 +52,7 @@ module Components
     test 'table displays only columns specified if columns option provided' do
       compiled = compiled_widget_table(columns: [:column3, :column4])
       assert_match 'column3', compiled
-      assert_match 'column3', compiled
+      assert_match 'column4', compiled
       refute_match 'column2', compiled
       refute_match 'category_id', compiled
       refute_match 'column5', compiled

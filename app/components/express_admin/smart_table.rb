@@ -12,14 +12,24 @@ module ExpressAdmin
     has_option :show_actions, 'Set to true if table has actions for each row'
     has_option :row_class, 'Add a class to each table row'
 
-
     column_defs = {}
     column_defs[:array] = {description: "List of fields to include in the table as columns",
-                           options: -> {resource.columns.map(&:name)} }
+                           options: -> { resource.columns.map(&:name)} }
     column_defs[:hash] = {description: "Hash of column names (titles) and how to calculate the cell values."}
 
     has_option :columns, 'Specify the columns.  May provide as a hash with values used to provide cell values as a proc.',
-                         type: [:array, :hash]
+                         type: [:array, :hash],
+                         values: -> (*) {
+                           options = resource_class.columns.map(&:name)
+                           resource_class.columns.map(&:name).each do |name|
+                             options << if name.match(/(\w+)_at$/)
+                                          "#{name}_in_words"
+                                        else
+                                          "#{name}_link"
+                                        end
+                           end
+                           options = options + resource_class.instance_methods.grep(/_count$/).map(&:to_s)
+                         }
 
     contains -> {
       thead {
@@ -100,29 +110,29 @@ module ExpressAdmin
     end
 
     def cell_value(item, accessor)
-      if accessor.respond_to?(:call)
-        value = begin
-            accessor.call(item).html_safe
-          rescue
-            'Error: '+$!.to_s
-          end
-      elsif attrib = accessor.to_s.match(/(\w+)_link$/).try(:[], 1)
-        # TODO: only works with non-namespaced routes
-        value = helpers.link_to item.send(attrib), resource_path(item)
-      elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
-        value = item.send(attrib) ? (helpers.time_ago_in_words(item.send(attrib))+' ago') : 'never'
-      else
-        if relation_name = accessor.to_s.match(/(.*)_id$/).try(:[], 1)
-          reflection = resource_class.reflect_on_association(relation_name.to_sym)
-        end
+      value = if accessor.respond_to?(:call)
+                begin
+                  accessor.call(item).html_safe
+                rescue
+                  'Error: '+$!.to_s
+                end
+              elsif attrib = accessor.to_s.match(/(\w+)_link$/).try(:[], 1)
+                # TODO: only works with non-namespaced routes
+                helpers.link_to item.send(attrib), resource_path(item)
+              elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
+                item.send(attrib) ? (helpers.time_ago_in_words(item.send(attrib))+' ago') : 'never'
+              else
+                if relation_name = accessor.to_s.match(/(.*)_id$/).try(:[], 1)
+                  reflection = resource_class.reflect_on_association(relation_name.to_sym)
+                end
 
-        value = if reflection
-          relation = item.send(relation_name)
-          relation.try(:name) || relation.to_s
-        else
-          item.send(accessor)
-        end
-      end
+                if reflection
+                  relation = item.send(relation_name)
+                  relation.try(:name) || relation.to_s
+                else
+                  item.send(accessor)
+                end
+              end
       current_arbre_element.add_child value
     end
 
