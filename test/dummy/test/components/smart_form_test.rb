@@ -5,7 +5,7 @@ module ExpressAdmin
   class SmartFormTest < ActiveSupport::TestCase
 
     def resource_assigns
-      {resource: Widget.new, collection: Widget.all}
+      {resource: Widget.new, collection: Widget.all, example_engine: ExampleEngine::MockRouteProxy.new}
     end
 
     def helpers

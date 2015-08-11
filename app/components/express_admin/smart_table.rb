@@ -69,10 +69,6 @@ module ExpressAdmin
       !!config[:show_actions]
     end
 
-    def resource_path(item)
-      helpers.send(resource_path_helper, item.to_param)
-    end
-
     def should_show_delete?(item)
       if item.respond_to?(:can_delete?) && item.can_delete?
         true

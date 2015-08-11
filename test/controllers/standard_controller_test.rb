@@ -49,7 +49,7 @@ module ExpressAdmin
     end
 
     test "#create should expose an instance of resource" do
-      widgets_controller.create
+      widgets_controller(widget: {column2: 'nothing'}).create
       assert resource, "@widget not provided by #create"
       assert resource.persisted?, "@widget not saved"
     end
@@ -91,8 +91,6 @@ module ExpressAdmin
     # test "it should provide collection and resource helpers"
 
     # test "it should provide a default strong params"
-
-    # test "subclassing it should do the right thing"
 
     # test "for nested resources it should try to expose a current method for parent resources"
   end

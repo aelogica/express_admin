@@ -36,6 +36,11 @@ module ExampleEngine
   class Category < ::Category
     has_many :widgets, class_name: 'ExampleEngine::Widget'
   end
+  class MockRouteProxy
+    def method_missing(*args)
+      return '/whatever'
+    end
+  end
 end
 module AdditionalHelpers
 

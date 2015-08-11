@@ -19,11 +19,6 @@ module ExpressAdmin
           File.join('test/lib/generators', @project_name, 'install', 'install_generator_test.rb')
       end
 
-      def create_admin_controller
-        template 'controllers/admin_controller.rb.erb',
-          File.join('app/controllers', @project_name, 'admin_controller.rb')
-      end
-
       def create_admin_layout
         template 'views/layouts/admin.html.et',
           File.join('app/views/layouts', @project_name, 'admin.html.et')

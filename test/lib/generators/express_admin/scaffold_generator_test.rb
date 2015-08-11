@@ -22,10 +22,7 @@ class ExpressAdmin::Generators::ScaffoldGeneratorTest < Rails::Generators::TestC
 
     # Controller
     assert_file "app/controllers/agents_controller.rb" do |content|
-      assert_match(/class AgentsController < AdminController/, content)
-
-      assert_match(/defaults resource_class: Agent/, content)
-      assert_match(/def agent_params()/, content)
+      assert_match(/class AgentsController < ExpressAdmin::StandardController/, content)
     end
 
     # Routes

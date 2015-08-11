@@ -44,10 +44,10 @@ module ExpressAdmin
       end
 
       def create
-        build_resource(params[resource_name])
+        build_resource(resource_params)
         if resource.save
           respond_to do |format|
-            format.html { redirect_to resource }
+            format.html { redirect_to resource_path }
           end
         else
           respond_to do |format|
@@ -75,7 +75,7 @@ module ExpressAdmin
         load_resource
         if resource.update_attributes(resource_params)
           respond_to do |format|
-            format.html { redirect_to :show }
+            format.html { redirect_to resource_path }
           end
         else
           respond_to do |format|
@@ -93,6 +93,17 @@ module ExpressAdmin
       end
 
       protected
+        def resource_path
+          namespace_route_proxy.send("#{resource_name}_path", resource)
+        end
+
+        def namespace_route_proxy
+          if parent_namespace = self.class.to_s.match(/(\w+)::/).try(:[], 1)
+            self.send(parent_namespace.underscore)
+          else
+            self
+          end
+        end
 
         def resource_params
           self.send("#{resource_name}_params")
