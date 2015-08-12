@@ -8,6 +8,9 @@ module ExpressAdmin
       def resource_class
         Widget
       end
+      def parent_resource_names
+        [] # skip nested resource handling
+      end
     end
 
     def widgets_controller(params = {})
