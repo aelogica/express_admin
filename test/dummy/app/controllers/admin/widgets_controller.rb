@@ -1,12 +1,11 @@
 module Admin
-  class WidgetsController < AdminController
+  class WidgetsController < ExpressAdmin::StandardController
 
-    defaults resource_class: Widget
+    protected
 
-    private
-
-      def widget_params
-        params.require(:widget).permit!
+      def resource_class
+        ::Widget
       end
+
   end
 end

@@ -1,0 +1,8 @@
+main_region {
+  smart_table(:parts)
+}
+sidebar_region {
+  widget_box(:part) {
+    smart_form(:part)
+  }
+}

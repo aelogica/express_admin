@@ -7,6 +7,8 @@ module ExpressAdmin
         include InstanceMethods
         helper_method :collection
         helper_method :resource
+        helper_method :resource_path
+        helper_method :collection_path
 
         class_attribute :defaults
         self.defaults = {layout: 'layouts/express_admin/admin'}
@@ -94,7 +96,15 @@ module ExpressAdmin
 
       protected
         def resource_path
-          namespace_route_proxy.send("#{resource_name}_path", resource)
+          if parent_resource_names.blank?
+            namespace_route_proxy.send("#{resource_name}_path", resource)
+          else
+            namespace_route_proxy.send(nested_path, resource_ids_hash)
+          end
+        end
+
+        def collection_path
+          namespace_route_proxy.send("#{nested_path}#{collection_name}_path")
         end
 
         def namespace_route_proxy
@@ -110,7 +120,12 @@ module ExpressAdmin
         end
 
         def load_collection
-          self.instance_variable_set(collection_ivar, resource_class.all)
+          if parent_resource_names.blank?
+            self.instance_variable_set(collection_ivar, resource_class.all)
+          else
+            # TODO: handle nested resources here
+            self.instance_variable_set(collection_ivar, resource_class.all)
+          end
         end
 
         def collection_ivar
@@ -149,7 +164,78 @@ module ExpressAdmin
         def resource_name
           self.class.resource_name
         end
-      end
 
+        def nested_path
+          (parent_resource_names + [resource_name, 'path']).join('_')
+        end
+
+        def expose_parent_resources
+          parent_resources = parent_resource_names
+          return if parent_resources.blank?
+          previous_parent = nil
+          parent_resources.each do |parent_name|
+            # TODO: optimize
+            parent_id = extract_path_info_from_routes["#{parent_name}_id".to_sym]
+            current_parent = "current_#{parent_name}".to_sym
+            unless self.respond_to?(current_parent)
+              if previous_parent.nil?
+                self.class_eval do
+                  define_method(current_parent) do
+                    "::#{parent_name.capitalize}".constantize.find(parent_id)
+                  end
+                end
+              else
+                self.class_eval do
+                  define_method(current_parent) do
+                    self.send(previous_parent).send(
+                      parent_name.pluralize).find(parent_id)
+                  end
+                end
+              end
+            end
+            previous_parent = current_parent
+          end
+        end
+
+        def parent_resource_names
+          path_info = extract_path_info_from_routes
+          unless path_info.nil?
+            path_info.keys.grep(/_id$/).map do |id|
+              id.to_s.gsub(/_id$/, '')
+            end
+          end
+        end
+
+        def extract_path_info_from_routes
+          recognized_path = nil
+          Rails::Engine.subclasses.each do |engine|
+            engine_instance = engine.instance
+            engine_route = Rails.application.routes.routes.find do |r|
+              r.app.app == engine_instance.class
+            end
+            next unless engine_route
+            path_for_engine = request.path.gsub(%r(^#{engine_route.path.spec.to_s}), "")
+            begin
+              recognized_path = engine_instance.routes.recognize_path(path_for_engine, method: request.method)
+            rescue ActionController::RoutingError => e
+            end
+          end
+          if recognized_path.nil?
+            begin
+              recognized_path = Rails.application.routes.recognize_path(request.path, method: request.method)
+            rescue ActionController::RoutingError => e
+            end
+          end
+          recognized_path
+        end
+
+        def resource_ids_hash
+          parent_resource_names.inject({id: resource.to_param}) do |hash, name|
+            hash["#{name}_id".to_sym] = self.send("current_#{name}".to_sym).to_param
+            hash
+          end
+        end
+
+    end
   end
 end

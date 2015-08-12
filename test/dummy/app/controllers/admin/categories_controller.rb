@@ -1,12 +1,11 @@
 module Admin
-  class CategoriesController < AdminController
+  class CategoriesController < ExpressAdmin::StandardController
 
-    defaults resource_class: Category
+    protected
 
-    private
-
-      def category_params
-        params.require(:category).permit!
+      def resource_class
+        ::Category
       end
+
   end
 end

@@ -3,5 +3,6 @@ class Widget < ActiveRecord::Base
 
   has_many :widget_tags, inverse_of: :widget
   has_many :tags, through: :widget_tags
+  has_many :parts
 
 end
