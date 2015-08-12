@@ -10,7 +10,7 @@ nav(class: 'top-bar') {
       li {
         icon_link("android-open", text: 'View Site', href: '/', target: '_blank')
       }
-      render(partial: 'shared/nav_bar_actions')
+      nav_bar_actions
       li { flash_messages } unless helpers.flash.empty?
     }
   }
