@@ -1,18 +1,37 @@
+TMP_ROOT = Pathname.new(File.expand_path('tmp'))
+
 module Rails
-  class << self
-    remove_possible_method :root
-    def root
-      @root ||= Pathname.new(File.expand_path('tmp'))
-    end
+  def self.tmp_root
+    @root ||= TMP_ROOT
   end
 end
 
 module GeneratorsTestHelper
   def self.included(base)
     base.class_eval do
-      destination Rails.root
+      destination TMP_ROOT
       setup :prepare_destination
     end
+  end
+
+
+  def set_rails_root
+    Rails.instance_eval do
+      alias :old_root :root
+      alias :root :tmp_root
+    end
+  end
+
+  def unset_rails_root
+    Rails.instance_eval do
+      alias :root :old_root
+    end
+  end
+
+  def within_destination_rails_root
+    set_rails_root
+    yield
+    unset_rails_root
   end
 
   def copy_routes
