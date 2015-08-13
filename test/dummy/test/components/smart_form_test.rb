@@ -87,11 +87,6 @@ module ExpressAdmin
       assert_match /<div class="[^"]*field-wrapper"/, widget_form
     end
 
-    test 'path prefix is provided' do
-      action_attrib = 'action="/admin/widgets"'
-      assert_match action_attrib, widget_form(path_prefix: 'admin')
-    end
-
     test "options for select come from the related collection" do
       assert_match /<option.*>Toys<\/option>/, widget_form
       assert_match /<option.*>Tools<\/option>/, widget_form

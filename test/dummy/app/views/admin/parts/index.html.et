@@ -3,6 +3,6 @@ main_region {
 }
 sidebar_region {
   widget_box(:part) {
-    smart_form(:part)
+    smart_form(:part, only: [:name])
   }
 }

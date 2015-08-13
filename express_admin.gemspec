@@ -34,6 +34,9 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'sqlite3', '~> 1.3'
   s.add_development_dependency 'pry', '~> 0'
+  s.add_development_dependency "binding_of_caller", "~> 0.7"
+  s.add_development_dependency "pry-stack_explorer", "~> 0.4"
+  s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'minitest-rails-capybara', '~> 2.1'
   s.add_development_dependency 'minitest-rg', '~> 5.1'
   s.add_development_dependency 'minitest-line', '~> 0'

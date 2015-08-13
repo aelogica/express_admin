@@ -12,6 +12,8 @@ module ExpressAdmin
 
         class_attribute :defaults
         self.defaults = {layout: 'layouts/express_admin/admin'}
+
+        before_filter :expose_parent_resources
       end
     end
 
@@ -97,21 +99,47 @@ module ExpressAdmin
       protected
         def resource_path
           if parent_resource_names.blank?
-            namespace_route_proxy.send("#{resource_name}_path", resource)
+            self.send(scoped_path_helper("#{resource_name}_path"), resource)
+          elsif proxy = route_proxy
+            proxy.send(scoped_path_helper(nested_resource_path_helper), resource_ids_hash)
           else
-            namespace_route_proxy.send(nested_path, resource_ids_hash)
+            self.send(scoped_path_helper(nested_resource_path_helper), resource_ids_hash)
           end
         end
 
-        def collection_path
-          namespace_route_proxy.send("#{nested_path}#{collection_name}_path")
+        def scoped_path_helper(path_helper)
+          [scope_name, path_helper].compact.join('_')
         end
 
-        def namespace_route_proxy
-          if parent_namespace = self.class.to_s.match(/(\w+)::/).try(:[], 1)
-            self.send(parent_namespace.underscore)
+        def collection_path
+          if parent_resource_names.blank?
+            self.send(scoped_path_helper("#{collection_name}_path"), resource)
+          elsif proxy = route_proxy
+            proxy.send(scoped_path_helper(nested_collection_path_helper), resource_ids_hash)
           else
-            self
+            self.send(scoped_path_helper(nested_collection_path_helper), resource_ids_hash)
+          end
+        end
+
+        def parent_module_name
+          self.class.to_s.match(/(\w+)::/).try(:[], 1)
+        end
+
+        def route_proxy
+          engine = "#{parent_module_name}::Engine".constantize rescue nil
+          if parent_module_name && engine
+            self.send(parent_module_name.underscore)
+          else
+            nil
+          end
+        end
+
+        def scope_name
+          engine = "#{parent_module_name}::Engine".constantize rescue nil
+          if parent_module_name && engine.nil?
+            return parent_module_name.underscore
+          else
+            nil
           end
         end
 
@@ -119,13 +147,24 @@ module ExpressAdmin
           self.send("#{resource_name}_params")
         end
 
-        def load_collection
-          if parent_resource_names.blank?
-            self.instance_variable_set(collection_ivar, resource_class.all)
+        def nested?
+          !parent_resource_names.empty?
+        end
+
+        def parent_resource
+          self.send("current_#{parent_resource_names.last}")
+        end
+
+        def end_of_association_chain
+          if nested?
+            parent_resource.send(resource_name.pluralize)
           else
-            # TODO: handle nested resources here
-            self.instance_variable_set(collection_ivar, resource_class.all)
+            resource_class
           end
+        end
+
+        def load_collection
+          self.instance_variable_set(collection_ivar, end_of_association_chain.all)
         end
 
         def collection_ivar
@@ -165,8 +204,12 @@ module ExpressAdmin
           self.class.resource_name
         end
 
-        def nested_path
+        def nested_resource_path_helper
           (parent_resource_names + [resource_name, 'path']).join('_')
+        end
+
+        def nested_collection_path_helper
+          (parent_resource_names + [collection_name, 'path']).join('_')
         end
 
         def expose_parent_resources
@@ -186,9 +229,11 @@ module ExpressAdmin
                 end
               else
                 self.class_eval do
+                  grandparent_accessor = previous_parent
                   define_method(current_parent) do
-                    self.send(previous_parent).send(
-                      parent_name.pluralize).find(parent_id)
+                    grandparent_resource = self.send(grandparent_accessor)
+                    parent_scope = grandparent_resource.send(parent_name.pluralize)
+                    parent_scope.find(parent_id)
                   end
                 end
               end

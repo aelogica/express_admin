@@ -15,7 +15,6 @@ module Components
         def widget_path(widget_id)
           "/widgets/#{widget_id.to_param}"
         end
-        alias resource_path widget_path
       end
       view
     end
