@@ -98,12 +98,12 @@ module ExpressAdmin
 
       protected
         def resource_path
+          proxy = route_proxy
+          proxy ||= self
           if parent_resource_names.blank?
-            self.send(scoped_path_helper("#{resource_name}_path"), resource)
-          elsif proxy = route_proxy
-            proxy.send(scoped_path_helper(nested_resource_path_helper), resource_ids_hash)
+            proxy.send(scoped_path_helper("#{resource_name}_path"), resource)
           else
-            self.send(scoped_path_helper(nested_resource_path_helper), resource_ids_hash)
+            proxy.send(scoped_path_helper(nested_resource_path_helper), resource_ids_hash)
           end
         end
 
@@ -112,12 +112,12 @@ module ExpressAdmin
         end
 
         def collection_path
+          proxy = route_proxy
+          proxy ||= self
           if parent_resource_names.blank?
-            self.send(scoped_path_helper("#{collection_name}_path"), resource)
-          elsif proxy = route_proxy
-            proxy.send(scoped_path_helper(nested_collection_path_helper), resource_ids_hash)
+            proxy.send(scoped_path_helper("#{collection_name}_path"), resource)
           else
-            self.send(scoped_path_helper(nested_collection_path_helper), resource_ids_hash)
+            proxy.send(scoped_path_helper(nested_collection_path_helper), resource_ids_hash)
           end
         end
 
