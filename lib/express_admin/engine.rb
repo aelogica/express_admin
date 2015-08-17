@@ -14,6 +14,7 @@ require File.join(File.dirname(__FILE__), '..', '..', 'app', 'components', 'expr
 
 # should be a way to add this folder to rails' autoload paths
 components = Dir.glob(File.join(File.dirname(__FILE__), '..', '..', 'app', 'components', '**', '*.rb'))
+components.sort!
 components.each {|component| require component }
 
 module ExpressAdmin
