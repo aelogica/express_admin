@@ -48,7 +48,15 @@ module ExpressAdmin
           select(attrib.name.to_sym, options: config["#{relation}_collection".to_sym], select2: true)
       else
         if field_type == 'text_area'
-          textarea attrib.name.to_sym, rows: 10
+          if attrib.name == 'definition'
+            # TODO allow other fields aside from layout.definition
+            base_styles = "position: relative; height: 300px;"
+            target = [attributes[:class].to_a.last, attrib.name].join("_")
+            textarea attrib.name.to_sym, rows: 10, class: "hide", hidden: true
+            content_tag(:div, '', id: "ace_#{attrib.name}", class: "ace-input", style: base_styles, data: { target: target })
+          else
+            textarea attrib.name.to_sym, rows: 10
+          end
         else
           self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
         end
