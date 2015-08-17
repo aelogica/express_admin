@@ -1,6 +1,7 @@
 class AceInput
   constructor: (editor)->
     @editor   = ace.edit(editor)
+    @editor.$blockScrolling = Infinity
     @session  = @editor.getSession()
     @renderer = @editor.renderer
     @textarea = $("##{$(editor).data('target')}")

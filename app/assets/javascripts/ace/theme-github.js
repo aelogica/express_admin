@@ -10,6 +10,7 @@ color: #AAA;\
 .ace-github  {\
 background: #fff;\
 color: #000;\
+margin-bottom: 15px;\
 }\
 .ace-github .ace_keyword {\
 font-weight: bold;\
