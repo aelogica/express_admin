@@ -220,15 +220,15 @@ module ExpressAdmin
             # TODO: optimize
             parent_id = extract_path_info_from_routes["#{parent_name}_id".to_sym]
             current_parent = "current_#{parent_name}".to_sym
-            unless self.respond_to?(current_parent)
+            unless self.methods.include?(current_parent)
               if previous_parent.nil?
                 self.class_eval do
                   define_method(current_parent) do
                     parent_class = parent_module_name.constantize
-                    current_class_name = parent_name.capitalize
+                    current_class_name = parent_name.camelize
                     current_class = parent_class.const_defined?(current_class_name) ?
                       parent_class.const_get(current_class_name) :
-                      "::#{parent_name.capitalize}".constantize
+                      "::#{parent_name.camelize}".constantize
                     current_class.find(parent_id)
                   end
                 end
