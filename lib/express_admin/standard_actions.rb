@@ -266,13 +266,13 @@ module ExpressAdmin
             next unless engine_route
             path_for_engine = request.path.gsub(%r(^#{engine_route.path.spec.to_s}), "")
             begin
-              recognized_path = engine_instance.routes.recognize_path(path_for_engine, method: request.method)
+              recognized_path = engine_instance.routes.recognize_path(path_for_engine)
             rescue ActionController::RoutingError => e
             end
           end
           if recognized_path.nil?
             begin
-              recognized_path = Rails.application.routes.recognize_path(request.path, method: request.method)
+              recognized_path = Rails.application.routes.recognize_path(request.path)
             rescue ActionController::RoutingError => e
             end
           end
