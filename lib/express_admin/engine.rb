@@ -9,7 +9,6 @@ require 'gravatar_image_tag'
 require 'kaminari'
 require 'responders'
 require 'tinymce-rails'
-require 'inherited_resources'
 
 require File.join(File.dirname(__FILE__), '..', '..', 'app', 'components', 'express_admin', 'definition_list')
 

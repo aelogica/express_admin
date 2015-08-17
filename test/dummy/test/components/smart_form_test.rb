@@ -36,7 +36,7 @@ module ExpressAdmin
       assert_match /form.*id="widget"/, widget_form
     end
 
-    test "uses inherited_resources path helpers to set correct action" do
+    test "uses StandardController path helpers to set correct action" do
       action_attrib = 'action="/widgets"'
       assert_match action_attrib, widget_form
     end

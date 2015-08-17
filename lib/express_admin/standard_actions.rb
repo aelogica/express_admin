@@ -115,7 +115,7 @@ module ExpressAdmin
           proxy = route_proxy
           proxy ||= self
           if parent_resource_names.blank?
-            proxy.send(scoped_path_helper("#{collection_name}_path"), resource)
+            proxy.send(scoped_path_helper("#{collection_name}_path"))
           else
             proxy.send(scoped_path_helper(nested_collection_path_helper), resource_ids_hash)
           end
@@ -224,7 +224,12 @@ module ExpressAdmin
               if previous_parent.nil?
                 self.class_eval do
                   define_method(current_parent) do
-                    "::#{parent_name.capitalize}".constantize.find(parent_id)
+                    parent_class = parent_module_name.constantize
+                    current_class_name = parent_name.capitalize
+                    current_class = parent_class.const_defined?(current_class_name) ?
+                      parent_class.const_get(current_class_name) :
+                      "::#{parent_name.capitalize}".constantize
+                    current_class.find(parent_id)
                   end
                 end
               else
