@@ -1,5 +1,6 @@
 require 'express_admin/menu'
 require 'express_admin/version'
+require 'express_admin/standard_actions'
 require 'express_templates'
 require 'jquery-rails'
 require 'select2-rails'
