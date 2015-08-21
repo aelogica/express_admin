@@ -1,10 +1,8 @@
-row {
-  main_region {
-    smart_table(:categories, show_on_click: true)
-  }
-  sidebar_region {
-    widget_box(:category) {
-      smart_form(:category)
-    }
+main_region {
+  smart_table(:categories, show_on_click: true)
+}
+sidebar_region {
+  widget_box(:category) {
+    smart_form(:category)
   }
 }
