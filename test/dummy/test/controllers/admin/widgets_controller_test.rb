@@ -16,5 +16,14 @@ module Admin
       refute_match /Hammer/, response.body
     end
 
+    test "nested resources should build from parent resource" do
+      post :create, category_id: categories(:toys).to_param, widget: {column2: 'Cars'}
+
+      response = get :index, category_id: categories(:toys).to_param
+      assert_match /Lego/, response.body
+      assert_match /Cars/, response.body
+      refute_match /Hammer/, response.body
+    end
+
   end
 end
