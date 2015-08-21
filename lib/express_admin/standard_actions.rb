@@ -184,7 +184,11 @@ module ExpressAdmin
         end
 
         def build_resource(*args)
-          self.instance_variable_set(resource_ivar, resource_class.new(*args))
+          if nested?
+            self.instance_variable_set(resource_ivar, end_of_association_chain.build(*args))
+          else
+            self.instance_variable_set(resource_ivar, resource_class.new(*args))
+          end
         end
 
         def load_resource
