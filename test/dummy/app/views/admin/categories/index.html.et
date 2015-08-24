@@ -1,5 +1,5 @@
 main_region {
-  smart_table(:categories, show_on_click: true)
+  smart_table(:categories)
 }
 sidebar_region {
   widget_box(:category) {
