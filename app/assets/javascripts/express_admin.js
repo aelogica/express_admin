@@ -4,6 +4,7 @@
 //= require jquery.loadingdotdotdot
 //= require tinymce-jquery
 //= require select2
+//= require dropzone
 //= require ace/ace
 //= require ace/worker-html
 //= require ace/mode-ruby
