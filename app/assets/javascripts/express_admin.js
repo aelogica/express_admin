@@ -1,6 +1,6 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/sortable
+//= require jquery-ui
 //= require jquery.loadingdotdotdot
 //= require tinymce-jquery
 //= require select2
