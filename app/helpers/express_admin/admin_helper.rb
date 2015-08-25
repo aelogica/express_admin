@@ -56,9 +56,9 @@ module ExpressAdmin
       content_for?(:description) ? yield(:description) : 'Testapp'
     end
 
-    def admin_javascript_and_css_includes
+    def admin_javascript_and_css_includes(admin_path = nil)
       current_module_path = current_module.to_s.underscore
-      admin_path = current_module_path.eql?('admin') ? "admin" : "#{current_module_path}/admin"
+      admin_path ||= current_module_path.eql?('admin') ? "admin" : "#{current_module_path}/admin"
       a = []
       a << stylesheet_link_tag("#{admin_path}/application")
       a << stylesheet_link_tag("app_express/admin/application") if defined?(AppExpress)
