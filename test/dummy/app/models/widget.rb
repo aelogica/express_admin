@@ -5,4 +5,6 @@ class Widget < ActiveRecord::Base
   has_many :tags, through: :widget_tags
   has_many :parts
 
+  attr :password
+
 end

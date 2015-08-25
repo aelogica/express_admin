@@ -157,14 +157,19 @@ module ExpressAdmin
 
         def end_of_association_chain
           if nested?
-            parent_resource.send(resource_name.pluralize)
+            parent_resource
           else
-            resource_class
+            nil
           end
         end
 
         def load_collection
-          self.instance_variable_set(collection_ivar, end_of_association_chain.all)
+          scope = if end_of_association_chain
+            end_of_association_chain.send(collection_name)
+          else
+            resource_class
+          end
+          self.instance_variable_set(collection_ivar, scope.all)
         end
 
         def collection_ivar
@@ -185,7 +190,7 @@ module ExpressAdmin
 
         def build_resource(*args)
           if nested?
-            self.instance_variable_set(resource_ivar, end_of_association_chain.build(*args))
+            self.instance_variable_set(resource_ivar, end_of_association_chain.send(collection_name).build(*args))
           else
             self.instance_variable_set(resource_ivar, resource_class.new(*args))
           end

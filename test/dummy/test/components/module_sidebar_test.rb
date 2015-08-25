@@ -20,28 +20,22 @@ module Components
       }
     end
 
-    def assigns
-      { current_menu: current_menu,
-        current_menu_name: current_menu_name,
-        foo_path: 'foo',
-        bar_path: 'bar',
-        baz_path: 'baz'
-      }
-    end
-
-    def current_menu
-      MenuItem.new('Big Menu', 'menu_path', [
-                      MenuItem.new('Foo', 'foo_path',[]),
-                      MenuItem.new('Bar', 'bar_path', []),
-                      MenuItem.new('Baz', 'baz_path', [])])
-    end
-
-    def current_menu_name
-      current_menu.title
-    end
-
     def helpers
-      mock_action_view(assigns)
+      mock_action_view do
+        def foo_path ; "foo" ; end
+        def bar_path ; "bar" ; end
+        def baz_path ; "baz" ; end
+        def current_menu
+          MenuItem.new('Big Menu', 'menu_path', [
+                          MenuItem.new('Foo', 'foo_path',[]),
+                          MenuItem.new('Bar', 'bar_path', []),
+                          MenuItem.new('Baz', 'baz_path', [])])
+        end
+        def current_menu_name
+          current_menu.title
+        end
+
+      end
     end
 
     test "renders the correct current menu name as sidebar title" do
@@ -49,7 +43,7 @@ module Components
     end
 
     test "evals the correct path" do
-      assert_equal "foo", helpers.instance_eval(current_menu.items.first.path)
+      assert_equal "foo", helpers.instance_eval(helpers.current_menu.items.first.path)
     end
 
   end

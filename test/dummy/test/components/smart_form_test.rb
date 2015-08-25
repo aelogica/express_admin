@@ -5,11 +5,11 @@ module ExpressAdmin
   class SmartFormTest < ActiveSupport::TestCase
 
     def resource_assigns
-      {resource: Widget.new, collection: Widget.all, example_engine: ExampleEngine::MockRouteProxy.new}
+      {example_engine: ExampleEngine::MockRouteProxy.new}
     end
 
     def helpers
-      view = mock_action_view(resource_assigns)
+      view = mock_action_view
       class << view
         def widget_path(widget_id)
           "/widgets/#{widget_id.to_param}"
@@ -27,7 +27,7 @@ module ExpressAdmin
     end
 
     def widget_form(*args)
-      arbre {
+      arbre(widget: Widget.new) {
         smart_form(:widget, *args)
       }
     end
@@ -55,7 +55,7 @@ module ExpressAdmin
     end
 
     test "text field column3 is a text_area" do
-      assert_match /<textarea.*rows="10".*name="widget\[column3\]"/, widget_form
+      assert_match /<textarea.*name="widget\[column3\]".*rows="10"/, widget_form
     end
 
     test "datetime field column4 is a datetime_field" do

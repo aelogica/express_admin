@@ -5,20 +5,17 @@ module Components
 
     fixtures :widgets, :categories
 
-    def resource_assigns
-      {resource: Widget.new, collection: Widget.all}
-    end
     def helpers
-      view = mock_action_view(resource_assigns)
-      class << view
+      view = mock_action_view do
         def widget_path(widget_id)
           "/widgets/#{widget_id.to_param}"
         end
       end
       view
     end
+
     def compiled_widget_table(*args)
-      arbre {
+      arbre(widget: Widget.first, widgets: Widget.all) {
         smart_table(:widgets, *args)
       }
     end
@@ -65,7 +62,7 @@ module Components
     end
 
     def compiled_widget_table_with_proc_column
-      arbre {
+      arbre(widget: Widget.first, widgets: Widget.all) {
          smart_table(:widgets, columns: {
            "This column will error" => -> (widget) { doesnt_work },
            "This column will be fine" => -> (widget) { widget.column2.upcase },
@@ -86,7 +83,7 @@ module Components
     end
 
     test 'attribute accessor appended with _link generates a link' do
-      fragment = arbre {
+      fragment = arbre(widget: Widget.first, widgets: Widget.all) {
           smart_table(:widgets, columns: {
               'A link column' => :column3_link
             })
@@ -95,7 +92,7 @@ module Components
     end
 
     test 'timestamp accessor appeneded with _in_words generates code that uses time_ago_in_words' do
-      fragment = arbre {
+      fragment = arbre(widget: Widget.first, widgets: Widget.all) {
           smart_table(:widgets, columns: {
               'Created' => :created_at_in_words
             })

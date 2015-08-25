@@ -21,7 +21,11 @@ module ExpressAdmin
       end
 
       def box_title
-        config[:title] || (helpers.resource.persisted? ? "Edit #{resource_name}" : "New #{resource_name}")
+        config[:title] || (resource.persisted? ? "Edit #{resource_name}" : "New #{resource_name}")
+      end
+
+      def resource
+        self.send(config[:id])
       end
   end
 end

@@ -9,7 +9,7 @@ module ExpressAdmin
     end
 
     def helpers
-      mock_action_view(assigns)
+      mock_action_view
     end
 
     def list_types

@@ -4,16 +4,13 @@ module Components
 
   class FlashMessagesTest < ActiveSupport::TestCase
 
-    def assigns
-      { flash: flash }
-    end
-
-    def flash
-      {notice: "Message"}
-    end
-
     def helpers
-      view = mock_action_view(assigns)
+      mock_action_view do
+        def flash
+          {notice: "Message"}
+        end
+
+      end
     end
 
     def flashmsg

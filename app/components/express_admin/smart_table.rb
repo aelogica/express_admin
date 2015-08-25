@@ -65,6 +65,10 @@ module ExpressAdmin
       add_class 'table striped'
     }
 
+    def collection
+      self.send(collection_name)
+    end
+
     def scroll_table
       script {
         %Q($('\##{config[:id]}').scrollTableBody())
@@ -101,7 +105,7 @@ module ExpressAdmin
       if config[:row_class].try(:respond_to?, :call)
         config[:row_class].call(item)
       else
-        item.eql?(helpers.resource) ? 'current' : ''
+        item.eql?(resource) ? 'current' : ''
       end
     end
 
