@@ -24,12 +24,15 @@ module ExpressAdmin
       modules.compact!
       modules << controller_name
 
-      resource_class = "#{modules.join("/").classify.pluralize}Controller".constantize.resource_class
-      if resource_class.respond_to?(:commands)
-        resource_class.commands.each do |action|
-          # post :foo, to: "module/controller#foo"
-          mapper.member do
-            mapper.post action.debang, to: "#{controller_name}##{action.debang}"
+      controller_class = "#{modules.join("/").classify.pluralize}Controller".constantize
+      if controller_class.respond_to?(:resource_class)
+        resource_class = controller_class.resource_class
+        if resource_class.respond_to?(:commands)
+          resource_class.commands.each do |action|
+            # post :foo, to: "module/controller#foo"
+            mapper.member do
+              mapper.post action.debang, to: "#{controller_name}##{action.debang}"
+            end
           end
         end
       end

@@ -28,7 +28,7 @@ module ExpressAdmin
         base.class_eval do
 
           class_attribute :resource_class
-          self.resource_class = resource_name.classify.constantize rescue nil
+          self.resource_class = infer_resource_class
 
           if self.resource_class.respond_to?(:commands)
             self.resource_class.commands.each do |command|
@@ -44,6 +44,15 @@ module ExpressAdmin
 
       def resource_name
         self.to_s.demodulize.gsub(/Controller$/, '').singularize.underscore
+      end
+
+      def infer_resource_class
+        klass = nil
+        if self.parent
+          klass = self.parent.const_get(resource_name.classify) rescue nil
+        end
+        klass ||= resource_name.classify.constantize rescue nil
+        klass
       end
 
       protected
