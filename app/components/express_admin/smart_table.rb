@@ -65,10 +65,6 @@ module ExpressAdmin
       add_class 'table striped'
     }
 
-    def collection
-      self.send(collection_name)
-    end
-
     def scroll_table
       script {
         %Q($('\##{config[:id]}').scrollTableBody())
