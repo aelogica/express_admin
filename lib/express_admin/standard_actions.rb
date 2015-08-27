@@ -55,7 +55,7 @@ module ExpressAdmin
               resource.send(command)
               respond_to do |format|
                 format.html { redirect_to :show, layout: defaults[:layout] }
-                format.js { render status: :ok } # maybe we should return enough info
+                format.js { render status: :ok, body: nil } # maybe we should return enough info
                                                  #to alter display of available or enabled commands?
 
               end

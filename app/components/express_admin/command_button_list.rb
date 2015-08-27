@@ -11,7 +11,7 @@ module ExpressAdmin
     contains -> {
       commands.each do |command|
         li {
-          command_button(command, disabled: available?(command))
+          command_button(command, disabled: !available?(command))
         }
       end
     }

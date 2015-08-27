@@ -13,7 +13,7 @@ module ExpressAdmin
     }
 
     contains -> {
-      button_to config[:command], action, button_to_options
+      button_to config[:command].to_s.titleize, action, button_to_options
     }
 
     def resource_name
