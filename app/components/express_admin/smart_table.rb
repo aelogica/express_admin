@@ -45,6 +45,7 @@ module ExpressAdmin
       }
       tbody {
         collection.each do |item|
+          assigns[collection_member_name.to_sym] = item
           tr(id: row_id(item), class: row_class(item)) {
             display_columns.each do |column|
               td(class: column.name) {
@@ -54,6 +55,7 @@ module ExpressAdmin
             actions_column(item) if should_show_actions?
             hidden_column_cell if columns_hidden?
           }
+          assigns[collection_member_name.to_sym] = nil
         end ; nil
       }
 
