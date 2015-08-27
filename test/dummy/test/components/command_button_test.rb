@@ -24,7 +24,7 @@ module Components
 
     test "command button creates a form with a submit button having the correct name" do
       assert_match /form.*action="\/widgets\/\d+\/twiddle"/, command_button(:twiddle, resource_name: :widget)
-      assert_match /input type="submit" value="twiddle"/, command_button(:twiddle, resource_name: :widget)
+      assert_match /input type="submit" value="Twiddle"/, command_button(:twiddle, resource_name: :widget)
     end
 
     def command_button_list(*args)
