@@ -1,0 +1,18 @@
+.command-button
+  input
+    @extend .button
+
+  &.kill, &.destroy, &.delete, &.cancel, &.suspend, &.stop
+    input
+      background-color: $red
+
+  &.start, &.enable, &.go, &.resume
+    input
+      background-color: $green
+
+  input[disabled="disabled"]
+    background-color: $gray
+
+
+.command-button-list
+  list-style-type: none
