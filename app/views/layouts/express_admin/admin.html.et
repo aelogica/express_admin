@@ -16,7 +16,7 @@ html {
           module_sidebar
         }
         div(class: 'page-body') {
-          page_header
+          page_header if content_for?(:page_header) || content_for?(:page_header_lead)
           current_arbre_element.add_child yield
         }
       }
