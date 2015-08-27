@@ -7,9 +7,7 @@ class Widget < ActiveRecord::Base
 
   attr :password
 
-  def self.commands
-    [:twiddle]
-  end
+  exposes_command :twiddle
 
   def twiddle
     update_attributes(column2: "twiddled")
