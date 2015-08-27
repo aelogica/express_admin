@@ -29,7 +29,7 @@ module ExpressAdmin
         resource_class.commands.each do |action|
           # post :foo, to: "module/controller#foo"
           mapper.member do
-            mapper.post action, to: "#{controller_name}##{action}"
+            mapper.post action.debang, to: "#{controller_name}##{action.debang}"
           end
         end
       end

@@ -32,7 +32,7 @@ module ExpressAdmin
 
           if self.resource_class.respond_to?(:commands)
             self.resource_class.commands.each do |command|
-              define_command_method(command.to_s.gsub(/\!\Z/, ''), command)
+              define_command_method(command.debang, command)
             end
           end
         end

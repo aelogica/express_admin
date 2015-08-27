@@ -44,3 +44,9 @@ module ExpressAdmin
 end
 
 ActiveRecord::Base.include(ExpressAdmin::Commands)
+
+class Symbol
+  def debang
+    to_s.gsub(/\!\Z/, '').to_sym
+  end
+end

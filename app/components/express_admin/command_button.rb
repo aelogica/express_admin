@@ -9,6 +9,7 @@ module ExpressAdmin
     has_option :resource_name, "The name of the resource for this command.  Eg. 'person' for like_person_path()"
 
     before_build -> {
+      config[:command] = config[:command].debang
       add_class(config[:command])
     }
 
