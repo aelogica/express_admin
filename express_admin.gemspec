@@ -32,6 +32,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'coffee-script', '~> 2.4'
   s.add_dependency 'dropzonejs-rails'
+  s.add_dependency 'dragonfly'
+  s.add_dependency 'dragonfly-s3_data_store'
 
   s.add_development_dependency 'sqlite3', '~> 1.3'
   s.add_development_dependency 'pry', '~> 0'
