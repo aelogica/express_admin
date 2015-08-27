@@ -111,7 +111,7 @@ module ExpressAdmin
 
     test ".define_command_method defines a command action method on the controller" do
       refute widgets_controller.respond_to?(:foo)
-      widgets_controller.class.send(:define_command_method, :foo)
+      widgets_controller.class.send(:define_command_method, :foo, :foo!)
       assert widgets_controller.respond_to?(:foo)
     end
 
