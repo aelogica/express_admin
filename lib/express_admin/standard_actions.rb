@@ -28,7 +28,7 @@ module ExpressAdmin
         base.class_eval do
 
           class_attribute :resource_class
-          self.resource_class = resource_name.classify.constantize
+          self.resource_class = resource_name.classify.constantize rescue nil
 
           if self.resource_class.respond_to?(:commands)
             self.resource_class.commands.each do |command|
