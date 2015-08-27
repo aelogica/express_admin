@@ -16,12 +16,12 @@ module ExpressAdmin
 
     protected
 
-      def resource_name
+      def resource_title
         config[:id].to_s.titleize
       end
 
       def box_title
-        config[:title] || (resource.persisted? ? "Edit #{resource_name}" : "New #{resource_name}")
+        config[:title] || (resource.persisted? ? "Edit #{resource_title}" : "New #{resource_title}")
       end
 
       def resource
