@@ -19,6 +19,7 @@ module ExpressAdmin
       eigenclass.send(:define_method, :params) do
         ActionController::Parameters.new(params.with_indifferent_access)
       end
+      # hack so we can call the action without all controller stuff
       eigenclass.send(:define_method, :respond_to) do |&block|
         block.call(ActionController::MimeResponds::Collector.new([], 'text/html'))
       end
@@ -107,5 +108,17 @@ module ExpressAdmin
 
     # TODO: Implement later
     # test "for nested resources it should try to expose a current method for parent resources"
+
+    test ".define_command_method defines a command action method on the controller" do
+      refute widgets_controller.respond_to?(:foo)
+      widgets_controller.class.send(:define_command_method, :foo)
+      assert widgets_controller.respond_to?(:foo)
+    end
+
+    test "if a resource exposes commands, the controllers should have an action for the command" do
+      assert widgets_controller.respond_to?(:twiddle), "widgets_controller#twiddle should be there"
+      widgets_controller(id: widgets(:one).id).twiddle
+      assert widgets(:one).reload.column2.eql?("twiddled"), "widgets_controller#twiddle didn't twiddle the widget"
+    end
   end
 end
