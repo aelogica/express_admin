@@ -24,11 +24,53 @@ module ExpressAdmin
             params.require(:#{base.resource_name}).permit!
           end
         RUBY
+
+        base.class_eval do
+
+          class_attribute :resource_class
+          self.resource_class = resource_name.classify.constantize
+
+          if self.resource_class.respond_to?(:commands)
+            self.resource_class.commands.each do |command|
+              define_command_method(command)
+            end
+          end
+        end
+      end
+
+      def manages(a_resource_class)
+        self.resource_class = a_resource_class
       end
 
       def resource_name
         self.to_s.demodulize.gsub(/Controller$/, '').singularize.underscore
       end
+
+      protected
+
+        def define_command_method(command)
+          define_method(command) do
+            load_resource
+            begin
+              resource.send(command)
+              respond_to do |format|
+                format.html { redirect_to :show, layout: defaults[:layout] }
+                format.js { render status: :ok } # maybe we should return enough info
+                                                 #to alter display of available or enabled commands?
+
+              end
+            rescue => e
+              respond_to do |format|
+                format.html {
+                  flash[:error] = e.to_s
+                  redirect_to :show, layout: defaults[:layout]
+                }
+                format.js { render status: :bad_request, body: e.to_s }
+              end
+            end
+          end
+        end
+
     end
 
     module InstanceMethods
@@ -202,10 +244,6 @@ module ExpressAdmin
 
         def resource_ivar
           "@#{resource_name}".to_sym
-        end
-
-        def resource_class
-          self.class.to_s.gsub(/Controller$/, '').singularize.classify.constantize
         end
 
         # Foo::WidgetsController ->  widget
