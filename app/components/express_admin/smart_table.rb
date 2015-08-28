@@ -44,6 +44,7 @@ module ExpressAdmin
         }
       }
       tbody {
+        stored_member_assigns = assigns[collection_member_name.to_sym]
         collection.each do |item|
           assigns[collection_member_name.to_sym] = item
           tr(id: row_id(item), class: row_class(item)) {
@@ -55,7 +56,7 @@ module ExpressAdmin
             actions_column(item) if should_show_actions?
             hidden_column_cell if columns_hidden?
           }
-          assigns[collection_member_name.to_sym] = nil
+          assigns[collection_member_name.to_sym] = stored_member_assigns
         end ; nil
       }
 
