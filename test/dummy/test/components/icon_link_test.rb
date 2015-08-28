@@ -39,7 +39,6 @@ module ExpressAdmin
     end
 
     test "icon-link target set to blank" do
-      # binding.pry
       assert_match /target="_blank"/, rendered_icon_link(target: "#{resource[:target]}")
     end
 
