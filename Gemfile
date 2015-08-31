@@ -16,3 +16,4 @@ gemspec
 gem 'express_templates', path: 'vendor/gems/express_templates'
 gem 'foundation_apps_styles', path: 'vendor/gems/foundation_apps_styles'
 gem 'select2-rails', github: 'frodrigo/select2-rails', branch: 'v4'
+gem 'jquery-validation-rails'
