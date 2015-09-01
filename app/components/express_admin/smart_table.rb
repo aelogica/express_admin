@@ -115,7 +115,7 @@ module ExpressAdmin
     def cell_value(item, accessor)
       value = if accessor.respond_to?(:call)
                 begin
-                  accessor.call(item).html_safe
+                  accessor.call(item).try(:html_safe)
                 rescue
                   'Error: '+$!.to_s
                 end
