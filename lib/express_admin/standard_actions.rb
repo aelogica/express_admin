@@ -87,14 +87,14 @@ module ExpressAdmin
         build_resource
         load_collection
         respond_to do |format|
-          format.html { render :index, layout: defaults[:layout] }
+          format.html { render index_view, layout: defaults[:layout] }
         end
       end
 
       def new
         build_resource
         respond_to do |format|
-          format.html { render :new, layout: defaults[:layout] }
+          format.html { render new_view, layout: defaults[:layout] }
         end
       end
 
@@ -106,7 +106,7 @@ module ExpressAdmin
           end
         else
           respond_to do |format|
-            format.html { render :new, layout: defaults[:layout] }
+            format.html { render new_view, layout: defaults[:layout] }
           end
         end
       end
@@ -115,14 +115,14 @@ module ExpressAdmin
         load_resource
         load_collection
         respond_to do |format|
-          format.html { render :show, layout: defaults[:layout] }
+          format.html { render show_view, layout: defaults[:layout] }
         end
       end
 
       def edit
         load_resource
         respond_to do |format|
-          format.html { render :edit, layout: defaults[:layout] }
+          format.html { render edit_view, layout: defaults[:layout] }
         end
       end
 
@@ -134,7 +134,7 @@ module ExpressAdmin
           end
         else
           respond_to do |format|
-            format.html { render :edit, layout: defaults[:layout] }
+            format.html { render edit_view, layout: defaults[:layout] }
           end
         end
       end
@@ -148,6 +148,23 @@ module ExpressAdmin
       end
 
       protected
+
+        def edit_view
+          :edit
+        end
+
+        def new_view
+          :new
+        end
+
+        def show_view
+          :show
+        end
+
+        def index_view
+          :index
+        end
+
         def resource_path
           proxy = route_proxy
           proxy ||= self
