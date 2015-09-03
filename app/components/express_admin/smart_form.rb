@@ -38,31 +38,20 @@ module ExpressAdmin
           submit(class: 'button')
         }
 
-
-        def form_field_for(attrib)
-          field_type_substitutions = {'text_area'       => 'textarea',
-                                      'datetime_select' => 'datetime',
-                                      'check_box'       => 'checkbox'}
-          field_type = attrib.field_type.to_s.sub(/_field$/,'')
-          field_type = "password" if attrib.name.match(/password/)
-          if relation = attrib.name.match(/(\w+)_id$/).try(:[], 1)
-              # TODO: should allow select2 override
-              select(attrib.name.to_sym, options: config["#{relation}_collection".to_sym], select2: true)
-          else
-            if field_type == 'text_area'
-              if attrib.name == 'definition'
-                # TODO allow other fields aside from layout.definition
-                base_styles = "position: relative; height: 300px;"
-                target = [attributes[:class].to_a.last, attrib.name].join("_")
-                textarea attrib.name.to_sym, rows: 10, class: "hide", hidden: true
-                content_tag(:div, '', id: "ace_#{attrib.name}", class: "ace-input", style: base_styles, data: { target: target })
-              else
-                textarea attrib.name.to_sym, rows: 10
-              end
-            else
-              self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
-            end
-          end
+    def form_field_for(attrib)
+      field_type_substitutions = {'text_area'       => 'textarea',
+                                  'datetime_select' => 'datetime',
+                                  'check_box'       => 'checkbox'}
+      field_type = attrib.field_type.to_s.sub(/_field$/,'')
+      field_type = "password" if attrib.name.match(/password/)
+      if relation = attrib.name.match(/(\w+)_id$/).try(:[], 1)
+          # TODO: should allow select2 override
+          select(attrib.name.to_sym, options: config["#{relation}_collection".to_sym], select2: true)
+      else
+        if field_type == 'text_area'
+          textarea attrib.name.to_sym, rows: 10
+        else
+          self.send((field_type_substitutions[field_type] || field_type), attrib.name.to_sym)
         end
 
         protected
