@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'express_templates', '~> 0.11'
   s.add_dependency 'jquery-rails', '~> 4.0'
   s.add_dependency 'rails-backbone', '~> 1.2'
+  s.add_dependency 'haml_coffee_assets', '~> 1.16'
   s.add_dependency 'foundation_apps_styles', '~> 1.1', '>= 1.1.0'
   s.add_dependency 'tinymce-rails', '~> 4.1', '>= 4.1.6'
   s.add_dependency 'request_store', '~> 1.2'

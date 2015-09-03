@@ -9,6 +9,7 @@
 //= require ace/worker-html
 //= require ace/mode-ruby
 //= require ace/theme-github
+//= require hamlcoffee
 //= require underscore
 //= require backbone
 //= require_tree .
