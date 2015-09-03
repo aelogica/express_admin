@@ -75,5 +75,13 @@ module ActiveSupport
       eigenklass.class_eval &block unless block.nil?
       view
     end
+
+    def resource
+      @resource ||= OpenStruct.new(
+      id: 123,
+      name: 'header',
+      content: 'This is a header')
+    end
+
   end
 end

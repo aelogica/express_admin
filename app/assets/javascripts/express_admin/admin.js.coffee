@@ -56,8 +56,11 @@ $(document).ready ->
     e.preventDefault()
     $('a.close-reveal-modal').trigger 'click'
     return
+
+  editor = []
   $('.ace-input').each (index)->
-    editor = new AceInput(this)
+    editor.push(new AceInput(this))
+    window.editor = editor
 
 String::repeat = (num) ->
   new Array(num + 1).join this
