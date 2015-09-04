@@ -3,6 +3,10 @@ module ExpressAdmin
 
     has_option :style, 'Add inline styles to the element'
 
+    before_build {
+      set_attribute :style, style_attributes
+    }
+
     def style_attributes
       attribs = config[:style] || {}
       attribs.map do |k, v|
