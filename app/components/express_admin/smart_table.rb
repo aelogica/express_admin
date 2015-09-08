@@ -124,8 +124,8 @@ module ExpressAdmin
                 helpers.link_to item.send(attrib), resource_path(item)
               elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
                 if item.send(attrib)
-                  if item.send(attrib) < Date.today
-                    helpers.time_ago_in_words(item.send(attrib))+' ago'
+                  if item.send(attrib) < DateTime.now
+                    "#{helpers.time_ago_in_words(item.send(attrib))} ago"
                   else
                     helpers.time_ago_in_words(item.send(attrib))
                   end
