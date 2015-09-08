@@ -48,6 +48,14 @@ module ExpressAdmin
       end
     end
 
+    def readable_namespace(namespace)
+      namespace.demodulize.gsub(/(?<=[a-z])(?=[A-Z])/, ' ')
+    end
+
+    def amount_in_decimal(amount, currency)
+      humanized_money_with_symbol Money.new(amount, currency)
+    end
+
     def title_content
       content_for?(:title) ? yield(:title) : Rails.application.class.parent_name.underscore.titleize
     end
