@@ -1,14 +1,19 @@
 module ExpressAdmin
-  class Icon < ExpressTemplates::Components::Configurable
+  module Components
+    module Navigation
 
-    tag :i
+      class Icon < ExpressTemplates::Components::Configurable
 
-    has_argument :id, "The name of the ionic icon withouth the ion- prefix. See http://ionicons.com/cheatsheet.html",
-                 as: :name,
-                 type: [:symbol, :string]
+        tag :i
 
-    before_build {
-      add_class("ion-#{config[:name]}")
-    }
+        has_argument :id, "The name of the ionic icon withouth the ion- prefix. See http://ionicons.com/cheatsheet.html",
+                     as: :name,
+                     type: [:symbol, :string]
+
+        before_build {
+          add_class("ion-#{config[:name]}")
+        }
+      end
+    end
   end
 end

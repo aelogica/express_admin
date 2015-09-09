@@ -1,4 +1,8 @@
 module ExpressAdmin
-  class MainRegion < ExpressTemplates::Components::Container
+  module Components
+    module Layout
+      class MainRegion < ExpressTemplates::Components::Container
+      end
+    end
   end
 end

@@ -1,4 +1,8 @@
 module ExpressAdmin
-  class SidebarRegion < LayoutComponent
+  module Components
+    module Layout
+      class SidebarRegion < LayoutComponent
+      end
+    end
   end
 end

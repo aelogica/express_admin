@@ -1,4 +1,8 @@
 module ExpressAdmin
-  class VBox < LayoutComponent
+  module Components
+    module Layout
+      class VBox < LayoutComponent
+      end
+    end
   end
 end

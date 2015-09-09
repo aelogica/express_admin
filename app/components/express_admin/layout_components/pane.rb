@@ -1,29 +1,34 @@
 module ExpressAdmin
-  class Pane < LayoutComponent
+  module Components
+    module Layout
 
-    has_option :title, 'The title of the pane', default: ''
-    has_option :status, 'Status of the pane'
+      class Pane < LayoutComponent
 
-    prepends -> {
-      heading if title || status
-    }
+        has_option :title, 'The title of the pane', default: ''
+        has_option :status, 'Status of the pane'
 
-    def heading
-      h4(class: 'title') {
-        current_arbre_element.add_child title
-        if status
-          span(class: 'status') { status }
+        prepends -> {
+          heading if title || status
+        }
+
+        def heading
+          h4(class: 'title') {
+            current_arbre_element.add_child title
+            if status
+              span(class: 'status') { status }
+            end
+          }
         end
-      }
-    end
 
-    def title
-      config[:title]
-    end
+        def title
+          config[:title]
+        end
 
-    def status
-      config[:status]
-    end
+        def status
+          config[:status]
+        end
 
+      end
+    end
   end
 end
