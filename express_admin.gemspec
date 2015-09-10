@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'request_store', '~> 1.2'
 
   s.add_dependency 'gravatar_image_tag', '~> 1.2'
-  s.add_dependency 'kaminari', '~> 0'
+  s.add_dependency 'kaminari'
   s.add_dependency 'rails', '~> 4.2', '>= 4.2.1'
   s.add_dependency 'responders', '~> 2.1'
   s.add_dependency 'select2-rails', '>= 3.5'

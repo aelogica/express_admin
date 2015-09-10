@@ -56,6 +56,10 @@ module ExpressAdmin
       humanized_money_with_symbol Money.new(amount, currency)
     end
 
+    def get_params
+      params
+    end
+
     def title_content
       content_for?(:title) ? yield(:title) : Rails.application.class.parent_name.underscore.titleize
     end
