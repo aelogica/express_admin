@@ -77,21 +77,24 @@ module ExpressAdmin
         }
 
         def pagination
-          paginate collection, :route_set => express_billing
+          paginate collection, :route_set => route_set
         end
 
         def table_classes
           'table striped'
         end
 
+        def route_set
+          namespace.nil? ? namespace : eval(namespace)
+        end
+
         def collection
-          super.page(index_page).per(specified_rows)
+          collections = super.kind_of?(Array) ? Kaminari.paginate_array(super) : super
+          collections.page(index_page).per(specified_rows)
         end
 
         def index_page
-          # TODO: refactor controller_params variable
-          controller_params = helpers.get_params
-          controller_params[:page] || 1 # Default page is 1
+          helpers.params[:page] || 1 # Default page is 1
         end
 
         def scroll_table
@@ -148,6 +151,8 @@ module ExpressAdmin
                   elsif attrib = accessor.to_s.match(/(\w+)_link$/).try(:[], 1)
                     # TODO: only works with non-namespaced routes
                     helpers.link_to item.send(attrib), resource_path(item)
+                  elsif attrib = accessor.to_s.match(/(\w+)_checkmark/).try(:[], 1)
+                    "<i class='ion-checkmark-round'></i>".html_safe if item.send(attrib)
                   elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
                     if item.send(attrib)
                       if item.send(attrib) < DateTime.now
@@ -202,6 +207,10 @@ module ExpressAdmin
           th(class: 'more-columns-indicator') {
             "..."
           }
+        end
+
+        def hidden_column_cell
+          td(class: 'more-columns-indicator')
         end
 
         def specified_rows
