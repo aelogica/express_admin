@@ -4,9 +4,10 @@ module ExpressAdmin
       class SmartTable < ExpressTemplates::Components::Configurable
         include ExpressTemplates::Components::Capabilities::Resourceful
 
-        tag :table
+        tag :div
 
         MAX_COLS_TO_SHOW_IDX = 5
+        MAX_ROWS_TO_SHOW_IDX = 10
 
         attr :columns
 
@@ -32,43 +33,69 @@ module ExpressAdmin
                                end
                                options = options + resource_class.instance_methods.grep(/_count$/).map(&:to_s)
                              }
+        has_option :rows, 'Specify the number of rows to show', type: :integer
+
+        has_option :pagination, 'Add pagination to the bottom of the table', type: :string, default: 'bottom'
 
         contains -> {
-          thead {
-            tr {
-              display_columns.each do |column|
-                th(class: column.name) {
-                  column.title
-                }
-              end
-              actions_header if should_show_actions?
-              hidden_columns_header_indicator if columns_hidden?
-            }
-          }
-          tbody {
-            stored_member_assigns = assigns[collection_member_name.to_sym]
-            collection.each do |item|
-              assigns[collection_member_name.to_sym] = item
-              tr(id: row_id(item), class: row_class(item)) {
+          pagination if config[:pagination] == 'top'
+          table(class: table_classes) {
+            thead {
+              tr {
                 display_columns.each do |column|
-                  td(class: column.name) {
-                    cell_value(item, column.accessor)
+                  th(class: column.name) {
+                    column.title
                   }
                 end
-                actions_column(item) if should_show_actions?
-                hidden_column_cell if columns_hidden?
+                actions_header if should_show_actions?
+                hidden_columns_header_indicator if columns_hidden?
               }
-              assigns[collection_member_name.to_sym] = stored_member_assigns
-            end ; nil
+            }
+            tbody {
+              stored_member_assigns = assigns[collection_member_name.to_sym]
+              collection.each do |item|
+                assigns[collection_member_name.to_sym] = item
+                tr(id: row_id(item), class: row_class(item)) {
+                  display_columns.each do |column|
+                    td(class: column.name) {
+                      cell_value(item, column.accessor)
+                    }
+                  end
+                  actions_column(item) if should_show_actions?
+                  hidden_column_cell if columns_hidden?
+                }
+                assigns[collection_member_name.to_sym] = stored_member_assigns
+              end; nil
+            }
           }
-
           scroll_table if !!config[:scrollable]
+          pagination if config[:pagination] == 'bottom'
         }
 
         before_build -> {
           _initialize_columns
-          add_class 'table striped'
         }
+
+        def pagination
+          paginate collection, :route_set => route_set
+        end
+
+        def table_classes
+          'table striped'
+        end
+
+        def route_set
+          namespace.nil? ? namespace : eval(namespace)
+        end
+
+        def collection
+          collections = super.kind_of?(Array) ? Kaminari.paginate_array(super) : super
+          collections.page(index_page).per(specified_rows)
+        end
+
+        def index_page
+          helpers.params[:page] || 1 # Default page is 1
+        end
 
         def scroll_table
           script {
@@ -124,12 +151,14 @@ module ExpressAdmin
                   elsif attrib = accessor.to_s.match(/(\w+)_link$/).try(:[], 1)
                     # TODO: only works with non-namespaced routes
                     helpers.link_to item.send(attrib), resource_path(item)
+                  elsif attrib = accessor.to_s.match(/(\w+)_checkmark/).try(:[], 1)
+                    "<i class='ion-checkmark-round'></i>".html_safe if item.send(attrib)
                   elsif attrib = accessor.to_s.match(/(\w+)_in_words/).try(:[], 1)
                     if item.send(attrib)
                       if item.send(attrib) < DateTime.now
                         "#{helpers.time_ago_in_words(item.send(attrib))} ago"
                       else
-                        helpers.time_ago_in_words(item.send(attrib))
+                        "in #{helpers.time_ago_in_words(item.send(attrib))}"
                       end
                     else
                       'never'
@@ -182,6 +211,16 @@ module ExpressAdmin
 
         def hidden_column_cell
           td(class: 'more-columns-indicator')
+        end
+
+        def specified_rows
+          config[:rows] || MAX_ROWS_TO_SHOW_IDX
+        end
+
+        def hidden_columns_header_indicator
+          th(class: 'more-columns-indicator') {
+            "..."
+          }
         end
 
         private

@@ -36,3 +36,44 @@
   tbody
     td
       padding: 0.5rem
+
+.smart-table
+  .ion-checkmark-round
+    color: #1fa67a
+
+  table + nav
+    margin-top: 50px
+    text-align: center
+
+  nav.pagination
+    span
+      transition: background-color 300ms ease-out
+      display: inline-block
+      height: 1.33333rem
+      margin-left: 0.27778rem
+      line-height: 20px
+      font:
+        weight: normal
+        size: 0.77778rem
+
+      &.gap:hover
+        background: inherit
+        border-radius: none
+      &:hover
+        background: #e6e6e6
+        border-radius: 3px
+      a
+        color: #999
+        display: block
+        padding: 0.05556rem 0.55556rem 0.05556rem
+
+
+    .current
+      font-weight: bold
+      background: #008cba
+      border-radius: 3px
+      color: #fff
+      padding: 0.05556rem 0.55556rem 0.05556rem
+      &:hover
+        background: #008cba
+
