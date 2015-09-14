@@ -5,6 +5,8 @@
 //= require tinymce-jquery
 //= require select2
 //= require dropzone
+//= require jquery.validate
+//= require jquery.validate.additional-methods
 //= require ace/ace
 //= require ace/worker-html
 //= require ace/mode-ruby
