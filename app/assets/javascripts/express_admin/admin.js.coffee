@@ -5,6 +5,9 @@ class AceInput
     @session  = @editor.getSession()
     @renderer = @editor.renderer
     @textarea = $("##{$(editor).data('target')}")
+    @selectedMode = $(editor).data('mode')
+    if @selectedMode == "et"
+      @selectedMode = "ruby"
     @setOptions()
     @updateMode()
     @updateTheme()
@@ -20,7 +23,7 @@ class AceInput
     @session.setFoldStyle "markbeginend"
 
   updateMode: =>
-    mode = require("ace/mode/ruby").Mode
+    mode = require("ace/mode/#{@selectedMode}").Mode
     @session.setMode new mode()
 
   updateTheme: =>
@@ -53,8 +56,11 @@ $(document).ready ->
     e.preventDefault()
     $('a.close-reveal-modal').trigger 'click'
     return
+
+  editor = []
   $('.ace-input').each (index)->
-    editor = new AceInput(this)
+    editor.push(new AceInput(this))
+    window.editor = editor
 
 String::repeat = (num) ->
   new Array(num + 1).join this
