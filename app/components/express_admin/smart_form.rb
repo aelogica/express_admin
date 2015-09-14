@@ -12,6 +12,10 @@ module ExpressAdmin
         has_option :only, 'Respects the order the attributes are listed in', type: :array
         has_option :show_timestamps, 'Set to true to show timestamps as labels'
 
+        before_build {
+          add_class 'validate'
+        }
+
         contains {
           # TODO: taken from express_form. should be inherited?
           div(style: 'display:none') {

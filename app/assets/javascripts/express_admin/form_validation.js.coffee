@@ -1,5 +1,5 @@
 $ ->
-  $('form.smart-form').validate
+  $('form.validate').validate
     debug: true
     errorElement: 'span'
 
