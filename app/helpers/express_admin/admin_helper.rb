@@ -75,6 +75,14 @@ module ExpressAdmin
       a.join().html_safe
     end
 
+    def include_theme_assets(theme_name)
+      current_module_path = current_module.to_s.underscore
+      theme_path = "#{current_module_path}/themes/#{theme_name}/application"
+      a = []
+      a << stylesheet_link_tag(theme_path)
+      a.join.html_safe
+    end
+
     def admin_menus
       menus = ExpressAdmin::Engine.all_addons.map do |engine|
         ExpressAdmin::Menu[engine.addon_name.to_s] rescue nil
