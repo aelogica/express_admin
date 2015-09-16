@@ -1,4 +1,4 @@
-#flash-messages
+.flash-messages
   z-index: 999
   position: absolute
   left: 50%
@@ -6,21 +6,52 @@
   transform: translateX(-50%)
   width: 400px
 
+  .success
+    background-color: $success-green
+    border-color: $success-green-alt
+
+  .error
+    background-color: $error-color
+    border-color: $error-color-alt
+
+  .notice
+    background-color: $notice-color
+    border-color: $notice-color-alt
+    color: #4f4f4f
+
+    .close
+      color: #4f4f4f
+
+  .alert
+    background-color: $alert-color
+    border-color: $alert-color-alt
+
 .alert-box
-  font-size: 1rem
+  color: #FFFFFF
+  display: block
+  font-size: .9rem
   line-height: 1.5em
-  margin: 20px 20px 0
   position: relative
-  border-radius: 3px
+  border:
+    radius: 3px
+    style: solid
+    width: 1px
+  margin: 0.5rem 0 1.11111rem 0
+  padding: 0.77778rem 1.33333rem 0.77778rem 0.77778rem
+  transition: opacity 300ms ease-out
+
 
   .close
-    margin-top: 0 !important
-    right: 0 !important
     text-decoration: none !important
     top: 1px !important
+    position: absolute
+    top: 50% !important
+    margin-top: -12.7777px
+    right: 12.4444px
+
 
   a
-    color: #fff !important
+    color: #fff
     opacity: 1 !important
     text-decoration: underline
 
