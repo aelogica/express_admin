@@ -12,10 +12,10 @@ module ExpressAdmin
         }
 
         def heading
-          h4(class: 'title') {
+          h4(class: 'pane-title') {
             current_arbre_element.add_child title
             if status
-              span(class: 'status') { status }
+              span(class: 'pane-status') { status }
             end
           }
         end
