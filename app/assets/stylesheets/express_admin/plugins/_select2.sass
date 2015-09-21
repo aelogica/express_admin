@@ -486,6 +486,26 @@
   display: none
   visibility: hidden
 
+.select2-container--default
+  .select2-selection--single
+    border:
+      radius: 0
+      color: $silver
+      width: 1px
+    padding: .5em
+    min-height: 2.5em
+
+    .select2-selection__rendered
+      line-height: 1.5
+      padding: 0
+
+  .select2-results > .select2-results__options
+    border:
+      top: 1px solid $silver
+
+  .select2-results__option
+    min-height: 2.5em
+
 /* Retina-ize icons
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi)
