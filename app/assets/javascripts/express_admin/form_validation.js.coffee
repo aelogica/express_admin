@@ -1,6 +1,5 @@
 $ ->
   $('form.validate').validate
-    debug: true
     errorElement: 'span'
 
   email = $('[name$="[email]"]')
