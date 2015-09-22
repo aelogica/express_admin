@@ -143,7 +143,7 @@ module ExpressAdmin
         load_resource
         resource.destroy!
         respond_to do |format|
-          format.html { redirect_to :index }
+          format.html { redirect_to collection_path }
         end
       end
 
