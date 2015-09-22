@@ -70,7 +70,7 @@ module ExpressAdmin
       a = []
       a << stylesheet_link_tag("#{admin_path}")
       a << javascript_include_tag("express_admin", 'data-turbolinks-track' => true)
-      a << javascript_include_tag("#{admin_path}/application", 'data-turbolinks-track' => true)
+      a << javascript_include_tag("#{admin_path}", 'data-turbolinks-track' => true)
       a.join().html_safe
     end
 
