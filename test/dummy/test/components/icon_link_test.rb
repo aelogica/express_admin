@@ -43,7 +43,7 @@ module ExpressAdmin
     end
 
     test "delete attribute is true" do
-      assert_match /data-delete="true"/, rendered_icon_link(delete: resource[:delete])
+      assert_match /data-method="delete"/, rendered_icon_link(delete: resource[:delete])
     end
 
     test "confirm attribute is true" do

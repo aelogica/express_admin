@@ -26,7 +26,7 @@ module ExpressAdmin
                              attribute: true
 
         before_build -> {
-          set_attribute 'data-delete', config[:delete] if config[:delete]
+          set_attribute 'data-method', 'delete' if config[:delete]
           set_attribute 'data-confirm', config[:confirm] if config[:confirm]
         }
 
