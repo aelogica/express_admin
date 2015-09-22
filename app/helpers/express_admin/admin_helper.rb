@@ -68,8 +68,7 @@ module ExpressAdmin
       current_module_path = current_module.to_s.underscore
       admin_path ||= current_module_path.eql?('admin') ? "admin" : "#{current_module_path}/admin"
       a = []
-      a << stylesheet_link_tag("#{admin_path}/application")
-      a << stylesheet_link_tag("app_express/admin/application") if defined?(AppExpress)
+      a << stylesheet_link_tag("#{admin_path}")
       a << javascript_include_tag("express_admin", 'data-turbolinks-track' => true)
       a << javascript_include_tag("#{admin_path}/application", 'data-turbolinks-track' => true)
       a.join().html_safe
