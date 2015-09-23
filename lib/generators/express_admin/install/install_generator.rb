@@ -32,15 +32,13 @@ module ExpressAdmin
       end
 
       def create_application_js
-        empty_directory("app/assets/javascripts/#{@project_name}/admin")
         template 'assets/javascripts/application.js',
-          File.join('app/assets/javascripts', @project_name, 'admin', 'application.js')
+          File.join('app/assets/javascripts', @project_name, 'admin.js')
       end
 
       def create_application_css
-        empty_directory("app/assets/stylesheets/#{@project_name}/admin")
         template 'assets/stylesheets/application.css',
-          File.join('app/assets/stylesheets', @project_name, 'admin', 'application.css')
+          File.join('app/assets/stylesheets', @project_name, 'admin.css')
       end
 
       def insert_mount_point
@@ -50,6 +48,12 @@ module ExpressAdmin
           inject_into_file engine_path,
             "    #{@project_class}::Engine.config.#{@project_name}_mount_point = '/'\n",
             after: "class Engine < ::Rails::Engine\n"
+        end
+
+        empty_directory File.join('config', 'initializers')
+        if File.exists?(engine_path)
+          create_file File.join('config', 'initializers', "mount_engine.rb"),
+            "ExpressAdmin::Routes.register do |routes|\n  routes.mount #{@project_class}::Engine, at: #{@project_class}::Engine.config.#{@project_name}_mount_point\nend\n"
         end
       end
 
