@@ -12,10 +12,12 @@ module ExpressAdmin
       content_for(:page_javascript) {
         script {
           %Q(
-            $(function() {
-              $('a.close').on('click', function(e){
-                e.preventDefault()
-                $(this).parents('.flash-messages').parent().remove()
+            window.addEventListener("load", function() {
+              $(function() {
+                $('a.close').on('click', function(e){
+                  e.preventDefault()
+                  $(this).parents('.flash-messages').remove()
+                })
               })
             });
           ).html_safe
