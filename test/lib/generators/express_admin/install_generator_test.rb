@@ -20,11 +20,11 @@ class ExpressAdmin::Generators::InstallGeneratorTest < Rails::Generators::TestCa
       assert_directory 'lib/generators/tmp/install/templates'
       assert_file 'test/lib/generators/tmp/install/install_generator_test.rb'
 
-      assert_file 'app/assets/javascripts/tmp/admin/application.js' do |content|
+      assert_file 'app/assets/javascripts/tmp/admin.js' do |content|
         assert_match /\/\/= require_tree \./, content
       end
 
-      assert_file 'app/assets/stylesheets/tmp/admin/application.css' do |content|
+      assert_file 'app/assets/stylesheets/tmp/admin.css' do |content|
         assert_match /\*= require express_admin/, content
       end
 
@@ -59,9 +59,9 @@ class ExpressAdmin::Generators::InstallGeneratorTest < Rails::Generators::TestCa
       assert_no_directory 'lib/generators/tmp/install/templates'
       assert_no_file 'test/lib/generators/tmp/install/install_generator_test.rb'
 
-      assert_no_file 'app/assets/javascripts/tmp/admin/application.js'
+      assert_no_file 'app/assets/javascripts/tmp/admin.js'
 
-      assert_no_file 'app/assets/stylesheets/tmp/admin/application.css'
+      assert_no_file 'app/assets/stylesheets/tmp/admin.css'
 
       assert_no_file 'config/menu.yml'
     end
